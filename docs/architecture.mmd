@@ -1,0 +1,52 @@
+flowchart TD
+    %% Users and frontend
+    U("fa:fa-user-group Travelers")
+    FE("fa:fa-mobile-screen TravelMind Web App")
+    INPUT("fa:fa-comments Natural Language Input")
+    DASH("fa:fa-calendar-days Itinerary Dashboard")
+    COLLAB("fa:fa-users Collaboration UI")
+
+    %% Backend and AI
+    BE("fa:fa-plug FastAPI Backend")
+    API("fa:fa-code API + WebSockets")
+    AI("fa:fa-brain AI Planning Engine")
+    RECO("fa:fa-filter Recommendations")
+    ROUTE("fa:fa-route Route Optimization")
+
+    %% Data sources
+    DB("fa:fa-database Travel Catalog")
+    MAPS("fa:fa-map Google Maps APIs")
+
+    %% Output
+    OUT("fa:fa-suitcase-rolling Smart Travel Itinerary")
+
+    %% Flow
+    U --> FE
+    FE --> INPUT
+    FE --> DASH
+    FE --> COLLAB
+
+    INPUT --> BE
+    DASH --> BE
+    COLLAB <--> API
+    API <--> BE
+
+    BE --> AI
+    AI --> RECO --> DB
+    AI --> ROUTE --> MAPS
+    AI --> OUT
+    OUT --> DASH
+
+    %% Styling
+    style FE color:#FFFFFF, fill:#0F766E, stroke:#134E4A
+    style INPUT color:#FFFFFF, fill:#0EA5E9, stroke:#0284C7
+    style DASH color:#FFFFFF, fill:#0EA5E9, stroke:#0284C7
+    style COLLAB color:#FFFFFF, fill:#0EA5E9, stroke:#0284C7
+    style BE color:#FFFFFF, fill:#2563EB, stroke:#1D4ED8
+    style API color:#FFFFFF, fill:#2563EB, stroke:#1D4ED8
+    style AI color:#FFFFFF, fill:#7C3AED, stroke:#6D28D9
+    style RECO color:#FFFFFF, fill:#7C3AED, stroke:#6D28D9
+    style ROUTE color:#FFFFFF, fill:#7C3AED, stroke:#6D28D9
+    style DB color:#FFFFFF, fill:#B45309, stroke:#92400E
+    style MAPS color:#FFFFFF, fill:#BE185D, stroke:#9D174D
+    style OUT color:#FFFFFF, fill:#15803D, stroke:#166534

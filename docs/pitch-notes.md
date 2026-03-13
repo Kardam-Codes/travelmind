@@ -1,7 +1,7 @@
 """
 Feature: Pitch
 File Purpose: Notes for hackathon presentation
-Owner: Jay
+Owner: Kardam
 Dependencies: 
 Last Updated: Initial Setup
 """

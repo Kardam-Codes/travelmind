@@ -1,9 +1,9 @@
 """
 Feature: Project Rules
 File Purpose: Team collaboration and architecture rules
-Owner: Kardam
-Dependencies: 
-Last Updated: Initial Setup
+Owner: Jay
+Dependencies:
+Last Updated: 2026-03-13
 """
 # Team Development Rules
 
@@ -12,10 +12,10 @@ We use feature-based architecture.
 
 ## Folder Ownership
 
-Frontend → Kardam  
-Backend → Misha  
-AI Service → Yug  
-Documentation & Dataset → Jay
+Frontend -> Jay
+Backend -> Misha
+AI Service -> Yug
+Documentation & Dataset -> Kardam
 
 ## File Metadata Rule
 
@@ -29,7 +29,7 @@ Last Updated:
 
 ## Git Workflow
 
-main → protected  
+main -> protected
 feature branches for development
 
 ## Communication
