@@ -1,0 +1,45 @@
+city,state,tier,tourism_type,notes
+Goa,Goa,Tier 1,beaches nightlife adventure,High tourist demand with strong domestic and foreign traveler interest
+Jaipur,Rajasthan,Tier 1,heritage culture palace market,Core Rajasthan destination with dense sightseeing clusters
+Delhi,Delhi,Tier 1,heritage food market museum,Major entry point with strong historical and cultural coverage
+Udaipur,Rajasthan,Tier 1,lakes heritage palace romance,Ideal for multi-day itinerary clustering
+Manali,Himachal Pradesh,Tier 1,mountains adventure nature,High demand hill destination for domestic travelers
+Rishikesh,Uttarakhand,Tier 1,adventure wellness spiritual,Good mix of rafting yoga cafes and temples
+Mumbai,Maharashtra,Tier 1,urban entertainment coastal food,Strong city tourism and premium hotel coverage
+Varanasi,Uttar Pradesh,Tier 1,spiritual heritage culture,Internationally recognized religious tourism city
+Kochi,Kerala,Tier 1,heritage coastal culture,Gateway city for Kerala tourism circuits
+Agra,Uttar Pradesh,Tier 2,heritage monument culture,Global tourist draw anchored by Taj Mahal
+Jodhpur,Rajasthan,Tier 2,heritage fort market,Strong fort and old city tourism appeal
+Pushkar,Rajasthan,Tier 2,spiritual culture market,Popular among both backpackers and festival visitors
+Amritsar,Punjab,Tier 2,spiritual heritage food,Golden Temple creates strong year-round appeal
+Mysuru,Karnataka,Tier 2,palace culture heritage,Good South India heritage city for itineraries
+Shimla,Himachal Pradesh,Tier 2,hill station heritage nature,Classic hill destination with broad tourist interest
+Darjeeling,West Bengal,Tier 2,hills tea nature,Strong domestic and foreign interest in Himalayan tourism
+Puducherry,Puducherry,Tier 2,coastal culture cafes,Compact city well suited for walking itineraries
+Hampi,Karnataka,Tier 2,heritage ruins culture,High uniqueness for foreign and domestic travelers
+Srinagar,Jammu and Kashmir,Tier 2,lakes mountains nature,Premium scenic destination with seasonal strength
+Jaisalmer,Rajasthan,Tier 2,desert fort culture,Distinct desert tourism profile
+Leh,Ladakh,Tier 2,adventure mountains landscape,Strong aspirational destination with route planning relevance
+Chennai,Tamil Nadu,Tier 2,urban temple coastal,Useful metro destination with coastal and temple mix
+Bengaluru,Karnataka,Tier 2,urban food garden nightlife,Useful base city with surrounding excursion potential
+Alappuzha,Kerala,Tier 2,backwaters nature wellness,Useful anchor for backwater-focused Kerala itineraries
+Ahmedabad,Gujarat,Tier 3,heritage food culture,Strong domestic tourism and access to Gujarat circuits
+Dwarka,Gujarat,Tier 3,spiritual coastal,Important pilgrimage destination
+Somnath,Gujarat,Tier 3,spiritual coastal heritage,High religious tourism importance
+Madurai,Tamil Nadu,Tier 3,temple heritage culture,Temple-led tourism with dense local attractions
+Ooty,Tamil Nadu,Tier 3,hill station nature,Popular domestic hill destination
+Kodaikanal,Tamil Nadu,Tier 3,hill station lake nature,Good for compact family itineraries
+Hyderabad,Telangana,Tier 3,heritage food urban,Strong city tourism and culinary appeal
+Aurangabad,Maharashtra,Tier 3,heritage caves monument,Ajanta and Ellora access point
+Nashik,Maharashtra,Tier 3,spiritual vineyards culture,Blend of pilgrimage and leisure tourism
+Bhopal,Madhya Pradesh,Tier 3,lakes heritage museum,Useful hub for central India circuits
+Khajuraho,Madhya Pradesh,Tier 3,heritage temple culture,Internationally recognized temple complex
+Gwalior,Madhya Pradesh,Tier 3,fort heritage music,Strong fort-led tourism city
+Bhubaneswar,Odisha,Tier 3,temple heritage culture,Gateway to Odisha tourism
+Puri,Odisha,Tier 3,spiritual beach culture,Unique temple plus beach demand
+Konark,Odisha,Tier 3,heritage monument culture,Pairs well with Puri and Bhubaneswar
+Gangtok,Sikkim,Tier 3,mountains nature culture,Popular eastern Himalayan city
+Shillong,Meghalaya,Tier 3,nature hills waterfalls,Gateway for northeast tourism
+Tawang,Arunachal Pradesh,Tier 3,monastery mountains landscape,High-value scenic and spiritual destination
+Port Blair,Andaman and Nicobar Islands,Tier 3,island beach adventure,Useful for premium island itineraries
+Panaji,Goa,Tier 3,heritage coastal market,Good city-level anchor for North and South Goa splits
