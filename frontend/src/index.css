@@ -1,0 +1,90 @@
+/*
+Feature: Frontend Infrastructure
+File Purpose: Provide Tailwind layers and the concierge visual system
+Owner: Jay
+Dependencies: Tailwind CSS
+Last Updated: 2026-03-13
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-surface font-body text-text transition-colors duration-500 dark:bg-dark-base dark:text-white;
+    background-image:
+      radial-gradient(circle at top left, rgba(0, 83, 91, 0.08), transparent 30%),
+      radial-gradient(circle at bottom right, rgba(140, 37, 0, 0.08), transparent 25%);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headline;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .dark .glass-panel {
+    background: rgba(24, 33, 37, 0.7);
+  }
+
+  .section-shell {
+    @apply rounded-[2rem] bg-surface-container-low/90 p-6 shadow-ambient dark:bg-dark-low/90;
+  }
+
+  .card-surface {
+    @apply rounded-[2rem] bg-surface-container-lowest p-6 shadow-ambient dark:bg-dark-card;
+  }
+
+  .label-md {
+    @apply text-[0.75rem] font-semibold uppercase tracking-label;
+  }
+
+  .primary-pill {
+    @apply rounded-full bg-tertiary px-5 py-3 font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5;
+  }
+
+  .secondary-pill {
+    @apply rounded-full bg-secondary-container px-5 py-3 font-semibold text-[#6d6356] transition-transform duration-300 hover:-translate-y-0.5 dark:bg-white/10 dark:text-white;
+  }
+
+  .soft-focus {
+    @apply focus:outline-none focus:ring-0;
+    box-shadow: 0 0 0 rgba(0, 83, 91, 0);
+    transition: box-shadow 240ms ease, transform 240ms ease, background-color 240ms ease;
+  }
+
+  .soft-focus:focus,
+  .soft-focus:focus-within {
+    box-shadow: 0 0 0 10px rgba(0, 83, 91, 0.12);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
