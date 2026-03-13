@@ -1,0 +1,7 @@
+"""
+Feature: Prompt
+File Purpose: Prompt template for LLM travel parsing
+Owner: Yug
+Dependencies: LLM
+Last Updated: Initial Setup
+"""
