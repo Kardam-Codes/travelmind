@@ -1,1 +1,51 @@
 id,name,city,state,category,tags,price,duration_hours,rating,latitude,longitude,linked_place_id,near_place_name,popularity_score
+A001,Baga Beach Water Sports,Goa,Goa,adventure,"water-sports,jet-ski,parasailing,beach",1800,2.5,4.6,15.5560,73.7525,P001,Baga Beach,94
+A002,Calangute Sunset Beach Walk,Goa,Goa,sightseeing,"beach,sunset,walks,family",0,1.5,4.5,15.5445,73.7560,P002,Calangute Beach,82
+A003,Anjuna Flea Market Browse,Goa,Goa,shopping,"market,shopping,local,bohemian",0,2,4.4,15.5769,73.7403,P003,Anjuna Beach,84
+A004,Vagator Cliff Sunset Session,Goa,Goa,sightseeing,"sunset,cliffs,photography,relaxed",0,1.5,4.5,15.5990,73.7348,P004,Vagator Beach,83
+A005,Dudhsagar Jeep Safari,Goa,Goa,adventure,"jeep-safari,waterfall,nature,day-trip",900,4,4.7,15.3150,74.3148,P005,Dudhsagar Falls,90
+A006,Old Goa Heritage Walk,Goa,Goa,cultural,"heritage,churches,history,guided",500,2,4.6,15.5015,73.9115,P006,Basilica of Bom Jesus,86
+A007,Fort Aguada Sunset Tour,Goa,Goa,sightseeing,"fort,sunset,coastal,heritage",300,1.5,4.4,15.4933,73.7684,P007,Fort Aguada,80
+A008,Chapora Fort Sunrise Hike,Goa,Goa,adventure,"hike,sunrise,fort,viewpoint",250,1.5,4.5,15.5932,73.7348,P008,Chapora Fort,79
+A009,Palolem Kayaking Experience,Goa,Goa,adventure,"kayaking,beach,south-goa,water",1200,2,4.6,15.0105,74.0238,P009,Palolem Beach,88
+A010,Colva Beachside Seafood Crawl,Goa,Goa,food,"seafood,coastal,food-trail,south-goa",1400,2.5,4.5,15.2802,73.9233,P010,Colva Beach,81
+A011,Hawa Mahal Photo Walk,Jaipur,Rajasthan,sightseeing,"photography,heritage,old-city,morning",300,1.5,4.5,26.9241,75.8269,P011,Hawa Mahal,88
+A012,City Palace Museum Circuit,Jaipur,Rajasthan,cultural,"museum,royal,history,heritage",700,2.5,4.7,26.9259,75.8239,P012,City Palace Jaipur,92
+A013,Amber Fort Guided Tour,Jaipur,Rajasthan,cultural,"fort,guide,history,architecture",800,3,4.8,26.9858,75.8516,P013,Amber Fort,95
+A014,Nahargarh Sunrise Viewpoint Ride,Jaipur,Rajasthan,sightseeing,"sunrise,viewpoint,fort,scenic",500,2,4.6,26.9371,75.8155,P014,Nahargarh Fort,86
+A015,Jal Mahal Lakeside Photography Stop,Jaipur,Rajasthan,sightseeing,"lake,photography,short-stop,viewpoint",0,1,4.3,26.9538,75.8471,P015,Jal Mahal,74
+A016,Jantar Mantar Astronomy Tour,Jaipur,Rajasthan,cultural,"astronomy,guide,heritage,learning",400,1.5,4.5,26.9249,75.8248,P016,Jantar Mantar Jaipur,82
+A017,Albert Hall Art and History Tour,Jaipur,Rajasthan,cultural,"museum,art,history,indo-saracenic",350,1.5,4.4,26.9125,75.8198,P017,Albert Hall Museum,78
+A018,Johari Bazaar Shopping Trail,Jaipur,Rajasthan,shopping,"bazaar,jewelry,textiles,local",0,2.5,4.5,26.9232,75.8268,P018,Johari Bazaar,87
+A019,Patrika Gate Photo Session,Jaipur,Rajasthan,sightseeing,"photography,architecture,colorful,quick-stop",0,1,4.4,26.8509,75.8048,P019,Patrika Gate,73
+A020,Jaigarh Fort Cannon Trail,Jaipur,Rajasthan,sightseeing,"fort,history,viewpoint,cannon",300,2,4.4,26.9852,75.8494,P020,Jaigarh Fort,79
+A021,City Palace Royal Gallery Tour,Udaipur,Rajasthan,cultural,"museum,royal,history,palace",600,2.5,4.8,24.5769,73.6837,P021,City Palace Udaipur,94
+A022,Lake Pichola Boat Ride,Udaipur,Rajasthan,sightseeing,"boat-ride,lake,sunset,scenic",500,1.5,4.8,24.5758,73.6810,P022,Lake Pichola,96
+A023,Fateh Sagar Boating,Udaipur,Rajasthan,sightseeing,"boating,lake,family,evening",300,1.5,4.6,24.6017,73.6778,P023,Fateh Sagar Lake,85
+A024,Monsoon Palace Sunset Visit,Udaipur,Rajasthan,sightseeing,"sunset,palace,viewpoint,hills",400,2,4.7,24.5928,73.6674,P024,Sajjangarh Monsoon Palace,89
+A025,Bagore Cultural Dance Show,Udaipur,Rajasthan,cultural,"dance-show,folk,culture,evening",150,1.5,4.6,24.5800,73.6836,P025,Bagore Ki Haveli,88
+A026,Saheliyon Ki Bari Garden Stroll,Udaipur,Rajasthan,sightseeing,"garden,walks,photography,relaxed",50,1,4.3,24.6011,73.6865,P026,Saheliyon Ki Bari,72
+A027,Jagdish Temple Darshan,Udaipur,Rajasthan,cultural,"temple,spiritual,architecture,rituals",0,1,4.7,24.5790,73.6834,P027,Jagdish Temple,83
+A028,Karni Mata Ropeway Ride,Udaipur,Rajasthan,adventure,"ropeway,viewpoint,sunset,hills",160,1,4.5,24.5716,73.6909,P028,Karni Mata Temple Ropeway,80
+A029,Shilpgram Craft Shopping,Udaipur,Rajasthan,shopping,"crafts,market,culture,local-art",200,2,4.4,24.6226,73.6842,P029,Shilpgram,75
+A030,Gangaur Ghat Evening Walk,Udaipur,Rajasthan,sightseeing,"ghat,lake,old-city,evening",0,1,4.5,24.5794,73.6832,P030,Gangaur Ghat,78
+A031,Red Fort History Walk,Delhi,Delhi,cultural,"fort,history,guide,unesco",400,2.5,4.6,28.6564,77.2412,P031,Red Fort,91
+A032,Qutub Minar Heritage Tour,Delhi,Delhi,cultural,"unesco,architecture,history,guide",350,2,4.7,28.5246,77.1857,P032,Qutub Minar,90
+A033,India Gate Evening Stroll,Delhi,Delhi,sightseeing,"monument,evening,family,walks",0,1.5,4.5,28.6131,77.2297,P033,India Gate,86
+A034,Humayun's Tomb Garden Walk,Delhi,Delhi,sightseeing,"heritage,gardens,photography,walks",40,1.5,4.6,28.5935,77.2509,P034,Humayun's Tomb,84
+A035,Lotus Temple Quiet Visit,Delhi,Delhi,wellness,"peaceful,architecture,meditative,spiritual",0,1,4.4,28.5537,77.2590,P035,Lotus Temple,78
+A036,Akshardham Evening Water Show,Delhi,Delhi,entertainment,"temple,show,family,cultural",170,2.5,4.7,28.6129,77.2775,P036,Akshardham,89
+A037,Chandni Chowk Food Trail,Delhi,Delhi,food,"street-food,market,old-delhi,local",1200,3,4.7,28.6508,77.2305,P037,Chandni Chowk,93
+A038,Lodhi Garden Morning Walk,Delhi,Delhi,wellness,"garden,walks,jogging,relaxed",0,1.5,4.5,28.5933,77.2199,P038,Lodhi Garden,76
+A039,National Museum Curated Visit,Delhi,Delhi,cultural,"museum,history,art,learning",100,2,4.4,28.6120,77.2198,P039,National Museum Delhi,73
+A040,Connaught Place Cafe and Shopping Loop,Delhi,Delhi,shopping,"shopping,cafes,central,urban",1000,2.5,4.5,28.6317,77.2169,P040,Connaught Place,85
+A041,Triveni Ghat Ganga Aarti,Rishikesh,Uttarakhand,cultural,"aarti,spiritual,evening,ganges",0,1.5,4.8,30.1086,78.2950,P041,Triveni Ghat,94
+A042,Lakshman Jhula Riverside Walk,Rishikesh,Uttarakhand,sightseeing,"bridge,walks,river,landmark",0,1,4.4,30.1322,78.3305,P042,Lakshman Jhula,80
+A043,Ram Jhula Cafe Walk,Rishikesh,Uttarakhand,sightseeing,"bridge,cafes,river,walks",0,1,4.4,30.1212,78.3211,P043,Ram Jhula,78
+A044,Parmarth Niketan Yoga Session,Rishikesh,Uttarakhand,wellness,"yoga,ashram,wellness,spiritual",500,2,4.8,30.1272,78.3299,P044,Parmarth Niketan,90
+A045,Beatles Ashram Exploration,Rishikesh,Uttarakhand,cultural,"ashram,graffiti,history,walks",200,2,4.5,30.1172,78.3258,P045,Beatles Ashram,82
+A046,Neer Garh Waterfall Trek,Rishikesh,Uttarakhand,adventure,"trekking,waterfall,nature,scenic",150,2.5,4.6,30.1443,78.3329,P046,Neer Garh Waterfall,86
+A047,Trayambakeshwar Temple Visit,Rishikesh,Uttarakhand,cultural,"temple,spiritual,river-view,rituals",0,1,4.5,30.1320,78.3306,P047,Trayambakeshwar Temple,77
+A048,Shivpuri River Rafting,Rishikesh,Uttarakhand,adventure,"rafting,ganges,adventure,group",1800,3,4.8,30.1207,78.3998,P048,Shivpuri Riverside,95
+A049,Vashishta Gufa Meditation Stop,Rishikesh,Uttarakhand,wellness,"meditation,cave,quiet,spiritual",0,1.5,4.6,30.0873,78.3537,P049,Vashishta Gufa,74
+A050,Kunjapuri Sunrise Excursion,Rishikesh,Uttarakhand,sightseeing,"sunrise,viewpoint,temple,hills",600,2.5,4.8,30.1240,78.3638,P050,Kunjapuri Temple,88
