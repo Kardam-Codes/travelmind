@@ -1,1 +1,46 @@
 id,name,city,state,price_per_night,hotel_type,rating,latitude,longitude,budget_category,nearby_area,popularity_score
+H001,Sea Crest Residency,Goa,Goa,2200,budget,4.2,15.5528,73.7540,low,Baga,76
+H002,Calangute Bay Stay,Goa,Goa,3200,standard,4.4,15.5448,73.7564,moderate,Calangute,81
+H003,Anjuna Palm Retreat,Goa,Goa,4100,boutique,4.5,15.5783,73.7395,moderate,Anjuna,84
+H004,Vagator Cliff Resort,Goa,Goa,6200,resort,4.6,15.5994,73.7351,high,Vagator,88
+H005,Old Goa Heritage Inn,Goa,Goa,3500,boutique,4.3,15.5013,73.9114,moderate,Old Goa,74
+H006,Aguada Seaview Hotel,Goa,Goa,7800,premium,4.7,15.4935,73.7687,high,Fort Aguada,90
+H007,Palolem Shoreline Huts,Goa,Goa,2800,budget,4.3,15.0102,74.0236,low,Palolem,79
+H008,Colva Sands Resort,Goa,Goa,4700,resort,4.4,15.2801,73.9237,moderate,Colva,80
+H009,Panaji Riverfront Suites,Goa,Goa,5600,premium,4.5,15.4920,73.8286,high,Panaji,83
+H010,Johari Courtyard Stay,Jaipur,Rajasthan,2400,budget,4.2,26.9234,75.8262,low,Johari Bazaar,77
+H011,Pink City Heritage House,Jaipur,Rajasthan,3600,boutique,4.4,26.9251,75.8242,moderate,City Palace,84
+H012,Hawa Mahal View Inn,Jaipur,Rajasthan,4200,standard,4.4,26.9242,75.8269,moderate,Hawa Mahal,82
+H013,Amber Fort Residency,Jaipur,Rajasthan,5100,standard,4.5,26.9849,75.8506,moderate,Amber Fort Road,80
+H014,Nahargarh Ridge Retreat,Jaipur,Rajasthan,6800,resort,4.6,26.9372,75.8159,high,Nahargarh Foothills,86
+H015,Royal Haveli Jaipur,Jaipur,Rajasthan,8200,premium,4.7,26.9261,75.8235,high,Old City,91
+H016,Albert Hall Garden Hotel,Jaipur,Rajasthan,3300,standard,4.3,26.9126,75.8201,moderate,Ram Niwas Garden,75
+H017,Patrika Urban Stay,Jaipur,Rajasthan,2900,budget,4.1,26.8513,75.8052,low,Jawahar Circle,70
+H018,Jaigarh Palace Resort,Jaipur,Rajasthan,9500,luxury,4.8,26.9854,75.8497,premium,Jaigarh Hills,89
+H019,Lake Pichola View Stay,Udaipur,Rajasthan,3400,standard,4.4,24.5759,73.6813,moderate,Lake Pichola,84
+H020,Old City Haveli Udaipur,Udaipur,Rajasthan,3900,boutique,4.5,24.5790,73.6833,moderate,Gangaur Ghat,86
+H021,City Palace Residency,Udaipur,Rajasthan,5200,standard,4.5,24.5769,73.6838,moderate,City Palace Area,83
+H022,Fateh Sagar Lakefront Hotel,Udaipur,Rajasthan,6100,premium,4.6,24.6018,73.6780,high,Fateh Sagar,87
+H023,Monsoon Palace Hills Resort,Udaipur,Rajasthan,7800,resort,4.6,24.5929,73.6676,high,Sajjangarh Road,85
+H024,Saheli Garden Suites,Udaipur,Rajasthan,4300,boutique,4.4,24.6010,73.6866,moderate,Saheliyon Ki Bari,78
+H025,Shilpgram Retreat,Udaipur,Rajasthan,3000,budget,4.2,24.6223,73.6843,low,Shilpgram,71
+H026,Royal Lake Palace View,Udaipur,Rajasthan,9800,luxury,4.8,24.5760,73.6805,premium,Lake Pichola,92
+H027,Karni Mata Heights,Udaipur,Rajasthan,4700,standard,4.3,24.5717,73.6909,moderate,Doodh Talai,74
+H028,Chandni Chowk Heritage Stay,Delhi,Delhi,2600,budget,4.1,28.6509,77.2306,low,Chandni Chowk,76
+H029,Red Fort Residency,Delhi,Delhi,4100,standard,4.3,28.6560,77.2407,moderate,Red Fort Area,79
+H030,Connaught Place Central Hotel,Delhi,Delhi,5900,premium,4.5,28.6317,77.2165,high,Connaught Place,88
+H031,Lutyens Garden Suites,Delhi,Delhi,7200,boutique,4.6,28.6128,77.2291,high,India Gate,85
+H032,South Delhi Comfort Inn,Delhi,Delhi,3400,standard,4.2,28.5539,77.2592,moderate,Kalkaji,73
+H033,Qutub Heritage Hotel,Delhi,Delhi,4600,boutique,4.4,28.5247,77.1859,moderate,Mehrauli,80
+H034,Akshardham Family Stay,Delhi,Delhi,3800,standard,4.3,28.6128,77.2776,moderate,Akshardham,77
+H035,Lodhi Garden Boutique House,Delhi,Delhi,6400,boutique,4.5,28.5932,77.2200,high,Lodhi Road,82
+H036,Imperial Capital Grand,Delhi,Delhi,11000,luxury,4.8,28.6298,77.2199,premium,Central Delhi,91
+H037,Triveni Riverside Lodge,Rishikesh,Uttarakhand,2100,budget,4.2,30.1087,78.2951,low,Triveni Ghat,79
+H038,Ram Jhula Retreat,Rishikesh,Uttarakhand,3200,standard,4.4,30.1214,78.3212,moderate,Ram Jhula,84
+H039,Lakshman Jhula View Stay,Rishikesh,Uttarakhand,3600,boutique,4.4,30.1323,78.3306,moderate,Lakshman Jhula,83
+H040,Parmarth Wellness Ashram Stay,Rishikesh,Uttarakhand,2900,standard,4.5,30.1273,78.3299,low,Swarg Ashram,81
+H041,Ganga Cliff Resort,Rishikesh,Uttarakhand,5400,resort,4.6,30.1439,78.3328,high,Neer Garh Road,86
+H042,Beatles Forest Retreat,Rishikesh,Uttarakhand,4300,boutique,4.3,30.1173,78.3259,moderate,Tapovan,75
+H043,Shivpuri Rapids Camp,Rishikesh,Uttarakhand,3900,resort,4.5,30.1208,78.3999,moderate,Shivpuri,88
+H044,Kunjapuri Sunrise Lodge,Rishikesh,Uttarakhand,4700,standard,4.4,30.1242,78.3639,moderate,Kunjapuri Road,74
+H045,Himalayan Serene Resort,Rishikesh,Uttarakhand,8200,luxury,4.7,30.1301,78.3318,premium,Tapovan Heights,89
