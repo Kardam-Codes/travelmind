@@ -44,3 +44,48 @@ H042,Beatles Forest Retreat,Rishikesh,Uttarakhand,4300,boutique,4.3,30.1173,78.3
 H043,Shivpuri Rapids Camp,Rishikesh,Uttarakhand,3900,resort,4.5,30.1208,78.3999,moderate,Shivpuri,88
 H044,Kunjapuri Sunrise Lodge,Rishikesh,Uttarakhand,4700,standard,4.4,30.1242,78.3639,moderate,Kunjapuri Road,74
 H045,Himalayan Serene Resort,Rishikesh,Uttarakhand,8200,luxury,4.7,30.1301,78.3318,premium,Tapovan Heights,89
+H046,Cedar Grove Stay,Manali,Himachal Pradesh,2300,budget,4.2,32.2394,77.1885,low,Mall Road,76
+H047,Old Manali Pine Lodge,Manali,Himachal Pradesh,3200,boutique,4.4,32.2441,77.1889,moderate,Old Manali,82
+H048,Hadimba Forest Retreat,Manali,Himachal Pradesh,4100,standard,4.4,32.2433,77.1898,moderate,Hadimba Road,80
+H049,Solang Valley Camp and Stay,Manali,Himachal Pradesh,5200,resort,4.5,32.3174,77.1562,moderate,Solang Valley,86
+H050,Vashisht Wellness Inn,Manali,Himachal Pradesh,3600,standard,4.3,32.2528,77.1876,moderate,Vashisht,74
+H051,Rohtang View Resort,Manali,Himachal Pradesh,6900,resort,4.6,32.2680,77.1814,high,Nehru Kund Road,85
+H052,Manu Temple Boutique House,Manali,Himachal Pradesh,4500,boutique,4.5,32.2462,77.1884,moderate,Old Manali Heights,78
+H053,Himalayan Crown Manali,Manali,Himachal Pradesh,7900,premium,4.7,32.2401,77.1890,high,Central Manali,88
+H054,Peakline Grand Resort,Manali,Himachal Pradesh,9800,luxury,4.8,32.2410,77.1900,premium,Log Huts Area,90
+H055,Colaba Harbour Stay,Mumbai,Maharashtra,3400,budget,4.2,18.9222,72.8350,low,Colaba,79
+H056,Marine Drive Residency,Mumbai,Maharashtra,5200,standard,4.4,18.9432,72.8242,moderate,Marine Drive,86
+H057,Gateway Boutique Suites,Mumbai,Maharashtra,6700,boutique,4.5,18.9224,72.8349,high,Gateway of India,88
+H058,Juhu Beach Resort,Mumbai,Maharashtra,6100,resort,4.4,19.0993,72.8269,high,Juhu,84
+H059,Bandra Bay Hotel,Mumbai,Maharashtra,4800,standard,4.3,19.0418,72.8173,moderate,Bandra,78
+H060,Connex Business Hotel Mumbai,Mumbai,Maharashtra,3900,standard,4.2,18.9405,72.8359,moderate,CST District,74
+H061,Siddhivinayak Family Stay,Mumbai,Maharashtra,3600,budget,4.1,19.0179,72.8303,low,Prabhadevi,71
+H062,The Queen's Necklace Grand,Mumbai,Maharashtra,9400,premium,4.7,18.9434,72.8244,high,Marine Drive,91
+H063,Imperial Arabian Sea Palace,Mumbai,Maharashtra,12000,luxury,4.8,18.9230,72.8352,premium,Colaba Waterfront,93
+H064,Ghat View Guest House,Varanasi,Uttar Pradesh,1900,budget,4.1,25.3068,83.0111,low,Dashashwamedh Ghat,78
+H065,Kashi Temple Stay,Varanasi,Uttar Pradesh,2800,standard,4.3,25.3113,83.0110,low,Kashi Vishwanath Corridor,82
+H066,Assi Riverside Retreat,Varanasi,Uttar Pradesh,4200,boutique,4.5,25.2873,83.0057,moderate,Assi Ghat,85
+H067,Sarnath Heritage Hotel,Varanasi,Uttar Pradesh,3900,standard,4.3,25.3815,83.0221,moderate,Sarnath,74
+H068,Banaras Courtyard Haveli,Varanasi,Uttar Pradesh,4700,boutique,4.4,25.3070,83.0100,moderate,Old City,80
+H069,Ganga Aarti Residency,Varanasi,Uttar Pradesh,5300,premium,4.5,25.3065,83.0112,high,Ghat Belt,87
+H070,BHU Garden Inn,Varanasi,Uttar Pradesh,3500,standard,4.2,25.2681,82.9917,moderate,BHU Area,71
+H071,Ramnagar Fort View Resort,Varanasi,Uttar Pradesh,6200,resort,4.4,25.2711,83.0234,high,Ramnagar,76
+H072,Royal Banaras Palace Hotel,Varanasi,Uttar Pradesh,8900,luxury,4.7,25.3080,83.0105,premium,Central Ghat Zone,90
+H073,Fort Kochi Seaside Stay,Kochi,Kerala,2600,budget,4.2,9.9668,76.2386,low,Fort Kochi,77
+H074,Chinese Nets View Hotel,Kochi,Kerala,3400,standard,4.3,9.9665,76.2406,moderate,Fort Kochi Waterfront,81
+H075,Jew Town Heritage House,Kochi,Kerala,4100,boutique,4.4,9.9573,76.2593,moderate,Jew Town,79
+H076,Mattancherry Palace Inn,Kochi,Kerala,3600,standard,4.2,9.9586,76.2598,moderate,Mattancherry,73
+H077,Marine Drive Business Hotel,Kochi,Kerala,4800,standard,4.4,9.9820,76.2754,moderate,Marine Drive,84
+H078,Cherai Beach Resort,Kochi,Kerala,5900,resort,4.5,10.1432,76.1785,high,Cherai,82
+H079,Folklore Boutique Stay,Kochi,Kerala,4500,boutique,4.4,9.9320,76.2985,moderate,Thevara,75
+H080,Backwater Crown Kochi,Kochi,Kerala,7200,premium,4.6,9.9810,76.2760,high,MG Road Waterfront,87
+H081,Malabar Grand Palace,Kochi,Kerala,9800,luxury,4.8,9.9672,76.2410,premium,Fort Kochi Premium Zone,89
+H082,Taj View Budget Inn,Agra,Uttar Pradesh,2100,budget,4.1,27.1755,78.0424,low,Taj Ganj,77
+H083,Agra Fort Residency,Agra,Uttar Pradesh,3300,standard,4.3,27.1799,78.0215,moderate,Agra Fort Area,80
+H084,Mehtab Garden Stay,Agra,Uttar Pradesh,3900,boutique,4.4,27.1801,78.0420,moderate,Mehtab Bagh Side,76
+H085,Fatehpur Circuit Hotel,Agra,Uttar Pradesh,4600,standard,4.2,27.0949,77.6682,moderate,Fatehpur Sikri Road,71
+H086,Kinari Bazaar Guest House,Agra,Uttar Pradesh,2500,budget,4.0,27.1841,78.0150,low,Kinari Bazaar,68
+H087,Sikandra Heritage Retreat,Agra,Uttar Pradesh,4100,boutique,4.3,27.2210,77.9512,moderate,Sikandra,72
+H088,Taj Sunrise Premium Hotel,Agra,Uttar Pradesh,6100,premium,4.6,27.1757,78.0426,high,Taj East Gate,88
+H089,Mughal Garden Resort,Agra,Uttar Pradesh,5400,resort,4.5,27.1699,78.0484,high,Taj Nature Walk Zone,79
+H090,Imperial Marble Palace,Agra,Uttar Pradesh,8900,luxury,4.7,27.1760,78.0428,premium,Taj Heritage Corridor,91
