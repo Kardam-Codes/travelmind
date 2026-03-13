@@ -1,10 +1,4 @@
-import os
-import subprocess
 
-docs_dir = "docs"
-file_path = os.path.join(docs_dir, "backend-spec.md")
-
-content = """
 # Backend Specification
 
 ## Overview
@@ -155,25 +149,3 @@ Steps:
 2. Calculate travel distances
 3. Optimize order to minimize travel time
 4. Update itinerary schedule
-"""
-
-os.makedirs(docs_dir, exist_ok=True)
-
-with open(file_path, "w", encoding="utf-8") as f:
-    f.write(content)
-
-print("Created docs/backend-spec.md")
-
-# Commit and push
-try:
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(
-        ["git", "commit", "-m", "docs: add backend specification"],
-        check=True
-    )
-    subprocess.run(["git", "push"], check=True)
-
-    print("Committed and pushed successfully.")
-
-except subprocess.CalledProcessError:
-    print("Git commit or push failed. Check git configuration.")
