@@ -51,7 +51,4 @@ function Wishlist() {
 }
 
 export default Wishlist;
-=======
-Last Updated: Initial Setup
-*/
->>>>>>> 638a1aea47b64a810dd39dd868634e645b090689
+
