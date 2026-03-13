@@ -1,1 +1,51 @@
 id,name,city,state,category,tags,rating,price_estimate,duration_hours,latitude,longitude,popularity_score,best_time,family_friendly,foreign_tourist_friendly
+P001,Baga Beach,Goa,Goa,beach,"beach,nightlife,water-sports,north-goa",4.7,0,3,15.5553,73.7517,95,winter,true,true
+P002,Calangute Beach,Goa,Goa,beach,"beach,family,sunset,north-goa",4.5,0,3,15.5439,73.7553,92,winter,true,true
+P003,Anjuna Beach,Goa,Goa,beach,"beach,nightlife,flea-market,north-goa",4.6,0,3,15.5777,73.7391,90,winter,true,true
+P004,Vagator Beach,Goa,Goa,beach,"beach,cliffs,sunset,north-goa",4.6,0,2.5,15.5986,73.7346,89,winter,true,true
+P005,Dudhsagar Falls,Goa,Goa,nature,"waterfall,nature,scenic,day-trip",4.8,400,4,15.3144,74.3143,93,monsoon,true,true
+P006,Basilica of Bom Jesus,Goa,Goa,heritage,"church,heritage,unesco,old-goa",4.7,0,1.5,15.5009,73.9110,88,winter,true,true
+P007,Fort Aguada,Goa,Goa,fort,"fort,heritage,sunset,coastal",4.5,0,1.5,15.4929,73.7681,85,winter,true,true
+P008,Chapora Fort,Goa,Goa,fort,"fort,viewpoint,sunset,clifftop",4.5,0,1.5,15.5928,73.7343,84,winter,true,true
+P009,Palolem Beach,Goa,Goa,beach,"beach,relaxed,south-goa,kayaking",4.7,0,3,15.0099,74.0232,91,winter,true,true
+P010,Colva Beach,Goa,Goa,beach,"beach,family,south-goa,waterfront",4.4,0,2.5,15.2797,73.9228,80,winter,true,true
+P011,Hawa Mahal,Jaipur,Rajasthan,palace,"palace,heritage,photography,old-city",4.6,200,1.5,26.9239,75.8267,96,winter,true,true
+P012,City Palace Jaipur,Jaipur,Rajasthan,palace,"palace,museum,heritage,royal",4.7,700,2.5,26.9258,75.8237,95,winter,true,true
+P013,Amber Fort,Jaipur,Rajasthan,fort,"fort,heritage,viewpoint,architecture",4.7,500,3,26.9855,75.8513,97,winter,true,true
+P014,Nahargarh Fort,Jaipur,Rajasthan,fort,"fort,sunrise,viewpoint,heritage",4.6,200,2,26.9368,75.8153,90,winter,true,true
+P015,Jal Mahal,Jaipur,Rajasthan,lake,"lake,photography,viewpoint,heritage",4.4,0,1,26.9536,75.8468,82,winter,true,true
+P016,Jantar Mantar Jaipur,Jaipur,Rajasthan,museum,"museum,heritage,unesco,astronomy",4.6,200,1.5,26.9248,75.8246,87,winter,true,true
+P017,Albert Hall Museum,Jaipur,Rajasthan,museum,"museum,heritage,art,history",4.5,150,1.5,26.9124,75.8196,83,winter,true,true
+P018,Johari Bazaar,Jaipur,Rajasthan,market,"market,shopping,jewelry,street-food",4.5,0,2,26.9230,75.8266,88,winter,true,true
+P019,Patrika Gate,Jaipur,Rajasthan,heritage,"architecture,photography,heritage,colorful",4.6,0,1,26.8508,75.8046,78,winter,true,true
+P020,Jaigarh Fort,Jaipur,Rajasthan,fort,"fort,heritage,cannon,viewpoint",4.5,150,2.5,26.9850,75.8491,84,winter,true,true
+P021,City Palace Udaipur,Udaipur,Rajasthan,palace,"palace,heritage,museum,royal",4.8,400,3,24.5767,73.6835,97,winter,true,true
+P022,Lake Pichola,Udaipur,Rajasthan,lake,"lake,boat-ride,sunset,scenic",4.8,400,2.5,24.5755,73.6807,98,winter,true,true
+P023,Fateh Sagar Lake,Udaipur,Rajasthan,lake,"lake,sunset,boating,viewpoint",4.7,0,2,24.6015,73.6776,91,winter,true,true
+P024,Sajjangarh Monsoon Palace,Udaipur,Rajasthan,palace,"palace,sunset,viewpoint,hills",4.6,350,2,24.5925,73.6671,89,winter,true,true
+P025,Bagore Ki Haveli,Udaipur,Rajasthan,heritage,"heritage,museum,cultural-show,old-city",4.6,150,2,24.5798,73.6834,87,winter,true,true
+P026,Saheliyon Ki Bari,Udaipur,Rajasthan,nature,"garden,heritage,family,photography",4.4,50,1.5,24.6009,73.6863,79,winter,true,true
+P027,Jagdish Temple,Udaipur,Rajasthan,temple,"temple,heritage,spiritual,architecture",4.7,0,1,24.5788,73.6832,85,winter,true,true
+P028,Karni Mata Temple Ropeway,Udaipur,Rajasthan,viewpoint,"viewpoint,ropeway,sunset,hills",4.5,160,1.5,24.5714,73.6907,81,winter,true,true
+P029,Shilpgram,Udaipur,Rajasthan,market,"crafts,culture,market,village-experience",4.4,50,2,24.6224,73.6840,76,winter,true,true
+P030,Gangaur Ghat,Udaipur,Rajasthan,heritage,"ghat,lake,old-city,photography",4.6,0,1,24.5792,73.6830,83,winter,true,true
+P031,Red Fort,Delhi,Delhi,fort,"fort,heritage,unesco,history",4.6,35,2.5,28.6562,77.2410,96,winter,true,true
+P032,Qutub Minar,Delhi,Delhi,heritage,"heritage,unesco,architecture,history",4.7,35,2,28.5244,77.1855,95,winter,true,true
+P033,India Gate,Delhi,Delhi,heritage,"monument,heritage,evening,family",4.6,0,1.5,28.6129,77.2295,94,winter,true,true
+P034,Humayun's Tomb,Delhi,Delhi,heritage,"heritage,unesco,gardens,architecture",4.6,40,2,28.5933,77.2507,90,winter,true,true
+P035,Lotus Temple,Delhi,Delhi,heritage,"architecture,spiritual,peaceful,landmark",4.5,0,1.5,28.5535,77.2588,88,winter,true,true
+P036,Akshardham,Delhi,Delhi,temple,"temple,cultural,architecture,family",4.7,0,3,28.6127,77.2773,93,winter,true,true
+P037,Chandni Chowk,Delhi,Delhi,market,"market,street-food,heritage,bazaar",4.5,0,3,28.6506,77.2303,91,winter,true,true
+P038,Lodhi Garden,Delhi,Delhi,nature,"garden,walks,heritage,relaxed",4.6,0,1.5,28.5931,77.2197,82,winter,true,true
+P039,National Museum Delhi,Delhi,Delhi,museum,"museum,history,culture,art",4.4,20,2,28.6118,77.2196,78,winter,true,true
+P040,Connaught Place,Delhi,Delhi,market,"market,shopping,food,central",4.6,0,2.5,28.6315,77.2167,89,winter,true,true
+P041,Triveni Ghat,Rishikesh,Uttarakhand,heritage,"ghat,spiritual,evening-aarti,ganges",4.7,0,1.5,30.1084,78.2948,92,all,true,true
+P042,Lakshman Jhula,Rishikesh,Uttarakhand,heritage,"bridge,landmark,viewpoint,spiritual",4.4,0,1,30.1320,78.3303,86,all,true,true
+P043,Ram Jhula,Rishikesh,Uttarakhand,heritage,"bridge,landmark,walks,ganges",4.5,0,1,30.1210,78.3209,84,all,true,true
+P044,Parmarth Niketan,Rishikesh,Uttarakhand,temple,"ashram,spiritual,yoga,ganges",4.7,0,2,30.1270,78.3297,89,all,true,true
+P045,Beatles Ashram,Rishikesh,Uttarakhand,heritage,"ashram,graffiti,culture,forest",4.4,200,2,30.1170,78.3256,83,all,true,true
+P046,Neer Garh Waterfall,Rishikesh,Uttarakhand,nature,"waterfall,trekking,nature,scenic",4.5,30,2.5,30.1441,78.3327,85,all,true,true
+P047,Trayambakeshwar Temple,Rishikesh,Uttarakhand,temple,"temple,spiritual,landmark,river-view",4.6,0,1,30.1318,78.3304,80,all,true,true
+P048,Shivpuri Riverside,Rishikesh,Uttarakhand,nature,"riverside,camping,rafting,scenic",4.7,0,3,30.1205,78.3996,88,all,true,true
+P049,Vashishta Gufa,Rishikesh,Uttarakhand,temple,"cave,spiritual,meditation,quiet",4.6,0,1.5,30.0871,78.3535,76,all,true,true
+P050,Kunjapuri Temple,Rishikesh,Uttarakhand,viewpoint,"sunrise,temple,hills,viewpoint",4.8,0,2.5,30.1238,78.3636,87,winter,true,true

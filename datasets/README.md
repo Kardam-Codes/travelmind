@@ -20,11 +20,29 @@ and itinerary generation.
 
 ## Files
 
-- `city_master_list.csv`: approved Indian tourist cities grouped by tier
+- `city_master_list.csv`: approved Indian tourist cities grouped by tier with coordinates, best season, and city-level popularity score
 - `places.csv`: tourist places and landmarks
 - `activities.csv`: activities near places or city clusters
 - `hotels.csv`: hotels mapped to city areas and budget levels
 - `wishlist.csv`: optional user-saved items
+
+## City Master List Fields
+
+- `city`
+- `state`
+- `tier`
+- `tourism_type`
+- `latitude`
+- `longitude`
+- `best_season`
+- `popularity_score`
+- `notes`
+
+Why these fields matter:
+
+- coordinates support route-aware planning and future map features
+- best season improves recommendation quality
+- popularity score helps ranking cities before place-level scoring is applied
 
 ## Population Order
 

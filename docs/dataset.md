@@ -29,6 +29,20 @@ itinerary generation.
 - `datasets/hotels.csv`
 - `datasets/wishlist.csv` optional
 
+### `city_master_list.csv`
+
+| Field | Type | Description |
+|------|------|-------------|
+| city | string | approved city or destination anchor |
+| state | string | state or union territory |
+| tier | string | Tier 1, Tier 2, or Tier 3 |
+| tourism_type | string | short tourism profile tags |
+| latitude | float | anchor coordinate latitude |
+| longitude | float | anchor coordinate longitude |
+| best_season | enum | recommended season such as winter, summer, monsoon, or all |
+| popularity_score | integer | city-level ranking score on a 1 to 10 scale |
+| notes | string | short curation note |
+
 ## Locked Schemas
 
 ### `places.csv`
