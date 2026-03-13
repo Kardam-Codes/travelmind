@@ -1,10 +1,4 @@
-import os
-import subprocess
 
-docs_dir = "docs"
-file_path = os.path.join(docs_dir, "service-contract.md")
-
-content = """
 # Service Communication Contract
 
 This document defines communication between:
@@ -140,21 +134,3 @@ UPDATE_ITINERARY
 VOTE_ACTIVITY
 
 SYNC_STATE
-"""
-
-os.makedirs(docs_dir, exist_ok=True)
-
-with open(file_path, "w", encoding="utf-8") as f:
-    f.write(content)
-
-print("Created docs/service-contract.md")
-
-# Git commit & push
-try:
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", "docs: add service communication contract"], check=True)
-    subprocess.run(["git", "push"], check=True)
-    print("Committed and pushed successfully.")
-except:
-    print("Git commit/push failed. Check git setup.")
-    
