@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 Feature: API Client
 File Purpose: Provide lightweight helpers for frontend API integration
@@ -27,3 +28,12 @@ export function buildTripWebSocketUrl(tripId) {
   const base = API_BASE_URL.replace(/^http/, "ws");
   return `${base}/ws/trip/${tripId}`;
 }
+=======
+"""
+Feature: API Client
+File Purpose: Handles frontend API requests
+Owner: Jay
+Dependencies: Fetch/Axios
+Last Updated: Initial Setup
+"""
+>>>>>>> 638a1aea47b64a810dd39dd868634e645b090689

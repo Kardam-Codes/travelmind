@@ -3,6 +3,7 @@ Feature: Itinerary
 File Purpose: Display generated itinerary
 Owner: Jay
 Dependencies: React
+<<<<<<< HEAD
 Last Updated: 2026-03-13
 */
 import { itineraryDays } from "../../data/mockData";
@@ -72,3 +73,7 @@ function ItineraryView({ compact = false }) {
 }
 
 export default ItineraryView;
+=======
+Last Updated: Initial Setup
+*/
+>>>>>>> 638a1aea47b64a810dd39dd868634e645b090689
