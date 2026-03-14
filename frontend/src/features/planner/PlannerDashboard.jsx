@@ -14,7 +14,6 @@ import PlannerMapStage from "./components/PlannerMapStage";
 import PlannerTimeline from "./components/PlannerTimeline";
 import PlannerChatPanel from "./components/PlannerChatPanel";
 import PlannerSummaryPanel from "./components/PlannerSummaryPanel";
-import { getDemoLabel, getDemoMode } from "../../utils/demo";
 
 function PlannerDashboard() {
   const [searchParams] = useSearchParams();
@@ -38,7 +37,6 @@ function PlannerDashboard() {
   const [collapsedDays, setCollapsedDays] = useState({});
   const [websocketReady, setWebsocketReady] = useState(false);
   const [shareNotice, setShareNotice] = useState("");
-  const demoMode = getDemoMode();
   const tripId = searchParams.get("tripId") || getActiveTripId();
   const user = getStoredUser();
   const userId = String(user?.user_id || "guest");
@@ -375,16 +373,6 @@ function PlannerDashboard() {
     dashboard?.itinerary?.days
       ?.flatMap((day) => day.items)
       .find((item) => item.id === selectedStopId) || null;
-  const selectedRouteLeg = useMemo(() => {
-    if (!selectedStopId || !mapRoute?.stops?.length) {
-      return null;
-    }
-    const stopIndex = mapRoute.stops.findIndex((stop) => stop.item_id === selectedStopId);
-    if (stopIndex < 0) {
-      return null;
-    }
-    return mapRoute.legs?.[stopIndex] || null;
-  }, [mapRoute, selectedStopId]);
   const sidebarMessages = chatMessages.slice(-12);
 
   function handleShare() {
@@ -404,22 +392,11 @@ function PlannerDashboard() {
   return (
     <main className="mx-auto max-w-[1600px] px-4 pb-12 pt-8 md:px-6">
       <div className="space-y-6">
-        {demoMode ? (
-          <div className="rounded-[1.25rem] bg-secondary-container/70 px-4 py-3 text-sm text-text/70 shadow-ambient dark:bg-white/10 dark:text-white/70">
-            {getDemoLabel()}
-          </div>
-        ) : null}
         <PlannerHeader onShare={handleShare} onStartGroup={handleStartGroup} trip={dashboard?.trip} />
         {shareNotice ? <p className="text-sm text-primary">{shareNotice}</p> : null}
 
         <section className="grid gap-6 xl:grid-cols-[20rem,minmax(0,1fr),22rem]">
-          <PlannerSummaryPanel
-            inviteStatus={inviteStatus}
-            onInvite={handleInvite}
-            places={dashboard?.places || []}
-            trip={dashboard?.trip}
-            tripRole={dashboard?.trip_role}
-          />
+          <PlannerSummaryPanel inviteStatus={inviteStatus} onInvite={handleInvite} trip={dashboard?.trip} tripRole={dashboard?.trip_role} />
           <div className="space-y-4">
             {isLoading ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-primary shadow-ambient">Loading planner...</p> : null}
             {error ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-tertiary shadow-ambient">{error}</p> : null}
@@ -428,7 +405,6 @@ function PlannerDashboard() {
               onSelectDay={setSelectedDay}
               onSelectStop={handleSelectStop}
               places={dashboard?.places || []}
-              routeLeg={selectedRouteLeg}
               selectedDay={selectedDay}
               selectedStop={selectedStop}
               trip={dashboard?.trip}

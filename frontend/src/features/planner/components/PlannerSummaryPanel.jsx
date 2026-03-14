@@ -1,10 +1,8 @@
 import Icon from "../../../components/Icon";
 
-function PlannerSummaryPanel({ inviteStatus, onInvite, places = [], trip, tripRole }) {
+function PlannerSummaryPanel({ inviteStatus, onInvite, trip, tripRole }) {
   const canInvite = tripRole === "owner";
   const tripBudget = trip?.budget_total ? `Rs ${trip.budget_total}` : "Flexible";
-  const hasUnverified = places.some((place) => place?.verified === false || place?.source === "ai");
-  const catalogLabel = hasUnverified ? "Catalog: mixed sources" : "Catalog: verified inventory";
 
   function handleInvite(event) {
     event.preventDefault();
@@ -39,10 +37,6 @@ function PlannerSummaryPanel({ inviteStatus, onInvite, places = [], trip, tripRo
           <p className="label-md text-text/45 dark:text-white/45">Traveler</p>
           <p className="mt-1 font-semibold capitalize">{trip?.traveler_type || "curated"}</p>
         </div>
-      </div>
-
-      <div className="rounded-[1.25rem] bg-surface-container-lowest px-4 py-3 text-xs font-semibold text-text/65 dark:bg-dark-card dark:text-white/70">
-        {catalogLabel}
       </div>
 
       <div className="mt-2">

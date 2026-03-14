@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { apiRequest } from "../../utils/apiClient";
 import { getActiveOrgId, getStoredUser } from "../../utils/session";
-import { getDemoMode } from "../../utils/demo";
 
 const DEMO_REPORT = {
   kpis: {
@@ -40,7 +39,6 @@ function AgencyDashboard() {
   const [requests, setRequests] = useState([]);
   const [report, setReport] = useState(null);
   const [error, setError] = useState("");
-  const demoMode = getDemoMode();
 
   useEffect(() => {
     if (!activeOrgId) {
@@ -48,12 +46,6 @@ function AgencyDashboard() {
     }
 
     async function loadAgencyData() {
-      if (demoMode) {
-        setMembers(DEMO_MEMBERS);
-        setRequests(DEMO_REQUESTS);
-        setReport(DEMO_REPORT);
-        return;
-      }
       try {
         const [membersResponse, requestsResponse, reportResponse] = await Promise.all([
           apiRequest(`/orgs/${activeOrgId}/members`),
@@ -82,7 +74,7 @@ function AgencyDashboard() {
     }
 
     loadAgencyData();
-  }, [activeOrgId, demoMode]);
+  }, [activeOrgId]);
 
   async function updateRequest(requestId, status, assignedAgentId) {
     try {

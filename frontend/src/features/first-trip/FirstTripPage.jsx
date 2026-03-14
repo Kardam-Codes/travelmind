@@ -5,27 +5,19 @@ Owner: Jay
 Dependencies: TripInput, Icon, apiClient
 Last Updated: 2026-03-15
 */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon";
 import TripInput from "../trip-input/TripInput";
 import { apiRequest } from "../../utils/apiClient";
 import { getStoredUser, setActiveTripId } from "../../utils/session";
-import { DEMO_PROMPT, getDemoLabel, getDemoMode, setDemoMode } from "../../utils/demo";
 
 function FirstTripPage() {
   const navigate = useNavigate();
   const [tripQuery, setTripQuery] = useState("");
-  const [demoMode, setDemoModeState] = useState(() => getDemoMode());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const user = getStoredUser();
-
-  useEffect(() => {
-    if (demoMode && !tripQuery.trim()) {
-      setTripQuery(DEMO_PROMPT);
-    }
-  }, [demoMode, tripQuery]);
 
   async function handlePlanTrip() {
     if (!tripQuery.trim()) {
@@ -90,22 +82,6 @@ function FirstTripPage() {
                 submitLabel={isSubmitting ? "Planning..." : "Plan my trip"}
                 value={tripQuery}
               />
-            </div>
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-white/70">
-              <button
-                className={`rounded-full px-4 py-2 font-semibold transition ${
-                  demoMode ? "bg-white/25 text-white" : "bg-white/10 text-white/70 hover:bg-white/20"
-                }`}
-                onClick={() => {
-                  const next = !demoMode;
-                  setDemoModeState(next);
-                  setDemoMode(next);
-                }}
-                type="button"
-              >
-                {demoMode ? "Demo mode on" : "Enable demo mode"}
-              </button>
-              {demoMode ? <span>{getDemoLabel()}</span> : null}
             </div>
             {!user?.access_token ? (
               <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/70">

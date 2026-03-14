@@ -55,7 +55,6 @@ function PlannerTimeline({
           <p className="label-md text-primary/65 dark:text-white/55">Day-wise itinerary</p>
           <h2 className="mt-2 text-2xl font-bold">{trip ? `${trip.destination_city} plan` : "Trip timeline"}</h2>
         </div>
-        <p className="text-xs text-text/55 dark:text-white/55">Route: {route?.provider_status?.replaceAll("_", " ") || "Pending"}</p>
       </div>
 
       <div className="hide-scrollbar flex-1 space-y-5 overflow-y-auto pr-2">

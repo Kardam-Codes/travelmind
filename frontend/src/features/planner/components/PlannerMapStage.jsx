@@ -1,4 +1,3 @@
-import Icon from "../../../components/Icon";
 import TripMap from "../../../components/TripMap";
 
 function PlannerMapStage({
@@ -6,18 +5,11 @@ function PlannerMapStage({
   onSelectDay,
   onSelectStop,
   places,
-  routeLeg,
   selectedDay,
   selectedStop,
   trip,
 }) {
   const dayNumbers = Array.from(new Set((mapRoute?.stops || []).map((stop) => stop.day_number))).sort((left, right) => left - right);
-  const routeMessage =
-    mapRoute?.provider_status === "ok"
-      ? "Route synced to the confirmed itinerary."
-      : mapRoute?.warning || "Marker view is active while the route is loading.";
-  const hasUnverified = (places || []).some((place) => place?.verified === false || place?.source === "ai");
-  const catalogLabel = hasUnverified ? "Catalog: mixed sources" : "Catalog: verified inventory";
 
   return (
     <section className="section-shell relative min-h-[48rem] overflow-hidden p-0">
@@ -53,26 +45,9 @@ function PlannerMapStage({
             ))}
           </div>
         </div>
-
-        <div className="glass-panel max-w-md rounded-[1.5rem] px-5 py-4 shadow-ambient">
-          <div className="flex items-center gap-2">
-            <Icon className="h-4 w-4 text-primary" name="route" />
-            <p className="label-md text-primary/70 dark:text-white/55">Route status</p>
-          </div>
-          <p className="mt-3 text-sm leading-7 text-text/75 dark:text-white/75">{routeMessage}</p>
-          {routeLeg ? (
-            <p className="mt-3 rounded-full bg-surface-container-lowest px-4 py-3 text-sm font-semibold text-text/70 dark:bg-dark-card dark:text-white/75">
-              Next leg: {routeLeg.distance_text || "Distance pending"} - {routeLeg.duration_text || "Duration pending"}
-            </p>
-          ) : null}
-          <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-surface-container-lowest px-4 py-2 text-xs font-semibold text-text/60 dark:bg-dark-card dark:text-white/70">
-            <Icon className="h-4 w-4" name="shield" />
-            {catalogLabel}
-          </p>
-        </div>
       </div>
 
-      <div className="absolute bottom-8 left-8 right-8 grid gap-4 xl:grid-cols-[minmax(0,1fr),22rem]">
+      <div className="absolute bottom-8 left-8 right-8">
         <div className="glass-panel rounded-[1.75rem] px-5 py-5 shadow-float">
           <p className="label-md text-primary/70 dark:text-white/55">Highlighted stop</p>
           <h2 className="mt-2 text-2xl font-bold">{selectedStop?.title || trip?.destination_city || "Planner route"}</h2>
@@ -80,14 +55,6 @@ function PlannerMapStage({
             {selectedStop?.description ||
               "Select a stop from the itinerary or the map to inspect how it fits into the route and the pacing of the day."}
           </p>
-        </div>
-        <div className="glass-panel rounded-[1.75rem] px-5 py-5 shadow-float">
-          <p className="label-md text-primary/70 dark:text-white/55">Trip posture</p>
-          <div className="mt-3 space-y-3 text-sm text-text/75 dark:text-white/75">
-            <p>{mapRoute?.stops?.length || 0} mapped stops</p>
-            <p>{mapRoute?.legs?.length || 0} routed legs</p>
-            <p>{selectedDay == null ? "Viewing the full route." : `Focused on day ${selectedDay}.`}</p>
-          </div>
         </div>
       </div>
     </section>
