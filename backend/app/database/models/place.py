@@ -18,3 +18,5 @@ class Place(SQLModel, table=True):
     best_time: Optional[str] = None
     family_friendly: bool = False
     foreign_tourist_friendly: bool = False
+    source: str = Field(default="seed", nullable=False)
+    verified: bool = Field(default=True, nullable=False)

@@ -1,33 +1,31 @@
-"""
-Feature: Prompt
-File Purpose: Prompt template for local LLM travel parsing
-Owner: Yug
-Dependencies: Local LLM
-Last Updated: 2026-03-14
-"""
-You are a travel intent extraction engine.
+Extract fields from the query into exactly one JSON object.
 
-Rules:
-- Extract intent only. Do not invent hotels, places, or activities.
-- Use only the supported cities, preference tags, and traveler types provided below.
-- If a field is unclear, return null and add it to missing_fields.
-- Return valid JSON only.
+Hard rules:
+- Output JSON only.
+- No markdown.
+- No prose before or after JSON.
+- Do not invent cities, hotels, places, or activities.
+- `destination_city` must be one of the supported cities or null.
+- `preferences` must contain only allowed preference tags.
+- `traveler_type` must be one of the allowed traveler types or null.
+- If a field is unclear, return null and include its field name in `missing_fields`.
+- Keep `raw_reasoning_summary` short.
 
-User Query: "{UserQuery}"
-Supported Cities: {SupportedCities}
-Allowed Preference Tags: {AllowedPreferenceTags}
-Allowed Traveler Types: {AllowedTravelerTypes}
+Query: "{UserQuery}"
+Supported cities: {SupportedCities}
+Allowed preference tags: {AllowedPreferenceTags}
+Allowed traveler types: {AllowedTravelerTypes}
 
-Return JSON Only:
+Return this exact key set:
 {
-  "destination_city": "string | null",
-  "duration_days": "integer | null",
-  "budget_total": "number | null",
-  "budget_level": "low | moderate | high | null",
-  "preferences": ["string"],
-  "traveler_type": "solo | family | couple | friends | null",
-  "confidence": "number between 0 and 1",
-  "missing_fields": ["string"],
-  "raw_reasoning_summary": "string",
-  "normalized_query": "string"
+  "destination_city": null,
+  "duration_days": null,
+  "budget_total": null,
+  "budget_level": null,
+  "preferences": [],
+  "traveler_type": null,
+  "confidence": 0.0,
+  "missing_fields": [],
+  "raw_reasoning_summary": "",
+  "normalized_query": ""
 }

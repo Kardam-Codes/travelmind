@@ -13,4 +13,4 @@ __pycache__/
 .pytest_cache/
 full_project.py
 full_project.txt
-repo_for_ai.txt
+full_project.txt

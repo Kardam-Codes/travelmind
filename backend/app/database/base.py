@@ -12,6 +12,38 @@ def _apply_runtime_migrations():
     inspector = inspect(engine)
 
     _ensure_columns(
+        table_name="city",
+        expected_columns={
+            "source": "VARCHAR NOT NULL DEFAULT 'seed'",
+            "verified": "BOOLEAN NOT NULL DEFAULT 1",
+        },
+        inspector=inspector,
+    )
+    _ensure_columns(
+        table_name="place",
+        expected_columns={
+            "source": "VARCHAR NOT NULL DEFAULT 'seed'",
+            "verified": "BOOLEAN NOT NULL DEFAULT 1",
+        },
+        inspector=inspector,
+    )
+    _ensure_columns(
+        table_name="hotel",
+        expected_columns={
+            "source": "VARCHAR NOT NULL DEFAULT 'seed'",
+            "verified": "BOOLEAN NOT NULL DEFAULT 1",
+        },
+        inspector=inspector,
+    )
+    _ensure_columns(
+        table_name="activity",
+        expected_columns={
+            "source": "VARCHAR NOT NULL DEFAULT 'seed'",
+            "verified": "BOOLEAN NOT NULL DEFAULT 1",
+        },
+        inspector=inspector,
+    )
+    _ensure_columns(
         table_name="trip",
         expected_columns={
             "version": "INTEGER NOT NULL DEFAULT 1",

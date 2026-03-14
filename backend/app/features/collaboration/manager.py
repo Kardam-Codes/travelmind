@@ -1,5 +1,6 @@
 from collections import defaultdict
 from fastapi import WebSocket
+from starlette.websockets import WebSocketState
 
 
 class ConnectionManager:
@@ -20,8 +21,19 @@ class ConnectionManager:
             self.active_users[trip_id].remove(user_id)
 
     async def broadcast(self, trip_id: int, message: dict):
-        for connection in self.active_connections[trip_id]:
-            await connection.send_json(message)
+        stale_connections = []
+        for connection in list(self.active_connections[trip_id]):
+            try:
+                if connection.client_state != WebSocketState.CONNECTED:
+                    stale_connections.append(connection)
+                    continue
+                await connection.send_json(message)
+            except Exception:
+                stale_connections.append(connection)
+
+        for connection in stale_connections:
+            if connection in self.active_connections[trip_id]:
+                self.active_connections[trip_id].remove(connection)
 
     def list_users(self, trip_id: int) -> list[str]:
         return sorted(self.active_users[trip_id])

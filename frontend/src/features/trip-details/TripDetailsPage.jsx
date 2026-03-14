@@ -7,9 +7,9 @@ Last Updated: 2026-03-13
 */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import TripMap from "../../components/TripMap";
 import { apiRequest } from "../../utils/apiClient";
 import { getStoredUser } from "../../utils/session";
-import { buildMapPlaces } from "../../utils/tripPresentation";
 
 const tabs = ["Overview", "Itinerary", "Map", "Budget"];
 
@@ -17,6 +17,7 @@ function TripDetailsPage() {
   const { tripId } = useParams();
   const [activeTab, setActiveTab] = useState("Overview");
   const [dashboard, setDashboard] = useState(null);
+  const [mapRoute, setMapRoute] = useState(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -29,7 +30,22 @@ function TripDetailsPage() {
       }
     }
 
+    async function loadMapRoute() {
+      try {
+        const response = await apiRequest(`/maps/trips/${tripId}/route`);
+        setMapRoute(response);
+      } catch (requestError) {
+        setMapRoute({
+          provider_status: "unavailable",
+          warning: requestError.message,
+          path: [],
+          stops: [],
+        });
+      }
+    }
+
     loadDashboard();
+    loadMapRoute();
   }, [tripId]);
 
   async function addToWishlist(itemId, itemType) {
@@ -55,7 +71,6 @@ function TripDetailsPage() {
   }
 
   const trip = dashboard?.trip;
-  const mapPlaces = buildMapPlaces(dashboard?.places || []);
   const budgetBreakdown = [
     { label: "Budget", value: trip?.budget_total ? `Rs ${trip.budget_total}` : "Flexible" },
     { label: "Hotels", value: String(dashboard?.hotels?.length || 0) },
@@ -163,13 +178,8 @@ function TripDetailsPage() {
         ) : null}
 
         {activeTab === "Map" ? (
-          <div className="section-shell relative min-h-[34rem] overflow-hidden">
-            <div className="absolute inset-4 rounded-[2rem] bg-[radial-gradient(circle_at_top_left,rgba(0,109,119,0.16),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(140,37,0,0.12),transparent_25%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(0,109,119,0.25),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(140,37,0,0.20),transparent_25%)]" />
-            {mapPlaces.map((place) => (
-              <div key={place.id} className="absolute" style={{ left: place.x, top: place.y }}>
-                <div className="glass-panel rounded-full px-4 py-3 text-sm font-semibold shadow-ambient">{place.name}</div>
-              </div>
-            ))}
+          <div className="section-shell">
+            <TripMap className="min-h-[34rem]" fallbackMessage={mapRoute?.warning || ""} places={dashboard?.places || []} route={mapRoute} />
           </div>
         ) : null}
 

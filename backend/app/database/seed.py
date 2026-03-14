@@ -62,6 +62,8 @@ def seed_reference_data() -> None:
                         best_season=row.get("best_season"),
                         popularity_score=_parse_int(row.get("popularity_score")),
                         notes=row.get("notes"),
+                        source="seed",
+                        verified=True,
                     )
                     session.add(city)
             session.commit()
@@ -84,6 +86,8 @@ def seed_reference_data() -> None:
                         best_time=row.get("best_time"),
                         family_friendly=_parse_bool(row.get("family_friendly")),
                         foreign_tourist_friendly=_parse_bool(row.get("foreign_tourist_friendly")),
+                        source="seed",
+                        verified=True,
                     )
                     session.add(place)
                     session.flush()
@@ -111,6 +115,8 @@ def seed_reference_data() -> None:
                         budget_category=row.get("budget_category"),
                         nearby_area=row.get("nearby_area"),
                         popularity_score=_parse_int(row.get("popularity_score")),
+                        source="seed",
+                        verified=True,
                     )
                     session.add(hotel)
             session.commit()
@@ -132,6 +138,8 @@ def seed_reference_data() -> None:
                         linked_place_id=place_external_ids.get(row.get("linked_place_id", "").strip()),
                         near_place_name=row.get("near_place_name"),
                         popularity_score=_parse_int(row.get("popularity_score")),
+                        source="seed",
+                        verified=True,
                     )
                     session.add(activity)
             session.commit()

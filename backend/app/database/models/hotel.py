@@ -15,3 +15,5 @@ class Hotel(SQLModel, table=True):
     budget_category: Optional[str] = Field(default=None, index=True)
     nearby_area: Optional[str] = None
     popularity_score: Optional[int] = None
+    source: str = Field(default="seed", nullable=False)
+    verified: bool = Field(default=True, nullable=False)

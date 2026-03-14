@@ -15,7 +15,7 @@ const suggestedPrompts = [
   "Add a market stop before dinner",
 ];
 
-function CollaborationPanel({ messages, onSendMessage, trip, tripId, websocketReady }) {
+function CollaborationPanel({ errorMessage = "", messages, onSendMessage, trip, tripId, websocketReady }) {
   const [draft, setDraft] = useState("");
   const [history, setHistory] = useState([]);
   const [error, setError] = useState("");
@@ -50,6 +50,18 @@ function CollaborationPanel({ messages, onSendMessage, trip, tripId, websocketRe
   }, [tripId]);
 
   const mergedMessages = [...history, ...messages];
+  const canSend = websocketReady && draft.trim().length > 0;
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const message = draft.trim();
+    if (!message || !websocketReady) {
+      return;
+    }
+
+    onSendMessage?.(message);
+    setDraft("");
+  }
 
   return (
     <aside className="section-shell flex h-full min-h-[700px] flex-col gap-8 lg:w-[22rem]">
@@ -58,6 +70,9 @@ function CollaborationPanel({ messages, onSendMessage, trip, tripId, websocketRe
         <h1 className="text-3xl font-bold text-balance">{trip ? `${trip.destination_city} Curations` : "Trip collaboration"}</h1>
         <p className="max-w-sm text-sm leading-7 text-text/65 dark:text-white/65">
           The AI layer stays focused on curation, route logic, and collaborative planning prompts.
+        </p>
+        <p className="text-xs text-text/55 dark:text-white/55">
+          {websocketReady ? "Live collaboration connected" : "Connecting live collaboration..."}
         </p>
       </div>
 
@@ -89,6 +104,7 @@ function CollaborationPanel({ messages, onSendMessage, trip, tripId, websocketRe
           </div>
         ) : null}
         {error ? <p className="text-sm text-tertiary">{error}</p> : null}
+        {errorMessage ? <p className="text-sm text-tertiary">{errorMessage}</p> : null}
       </div>
 
       <div className="space-y-3">
@@ -108,7 +124,7 @@ function CollaborationPanel({ messages, onSendMessage, trip, tripId, websocketRe
         </div>
       </div>
 
-      <div className="mt-auto flex items-center gap-3 rounded-full bg-surface-container-lowest/85 px-5 py-4 shadow-ambient dark:bg-dark-card/85">
+      <form className="mt-auto flex items-center gap-3 rounded-full bg-surface-container-lowest/85 px-5 py-4 shadow-ambient dark:bg-dark-card/85" onSubmit={handleSubmit}>
         <input
           className="flex-1 bg-transparent text-sm text-text placeholder:text-text/35 focus:outline-none dark:text-white dark:placeholder:text-white/35"
           onChange={(event) => setDraft(event.target.value)}
@@ -117,17 +133,13 @@ function CollaborationPanel({ messages, onSendMessage, trip, tripId, websocketRe
           value={draft}
         />
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white"
-          disabled={!websocketReady}
-          onClick={() => {
-            onSendMessage?.(draft);
-            setDraft("");
-          }}
-          type="button"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white disabled:cursor-not-allowed disabled:opacity-60"
+          disabled={!canSend}
+          type="submit"
         >
           <Icon className="h-4 w-4" name="send" />
         </button>
-      </div>
+      </form>
     </aside>
   );
 }

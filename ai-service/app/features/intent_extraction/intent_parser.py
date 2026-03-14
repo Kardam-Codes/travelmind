@@ -16,6 +16,7 @@ from providers.local_provider import LocalLLMProvider
 
 class ExtractIntentResponse(BaseModel):
     destination_city: str | None = None
+    unsupported_city: str | None = None
     duration_days: int | None = None
     budget_total: float | None = None
     budget_level: str | None = None
@@ -58,7 +59,7 @@ class IntentParser:
                 parsed = ExtractIntentResponse.model_validate(json.loads(raw_response))
                 parsed.provider = provider.provider_name
                 return _post_process(parsed, supported_cities, allowed_preference_tags, allowed_traveler_types)
-            except (RuntimeError, json.JSONDecodeError, ValidationError):
+            except (RuntimeError, TimeoutError, OSError, json.JSONDecodeError, ValidationError):
                 continue
 
         fallback = ExtractIntentResponse(
@@ -75,7 +76,8 @@ def _post_process(
     allowed_preference_tags: list[str],
     allowed_traveler_types: list[str],
 ) -> ExtractIntentResponse:
-    if parsed.destination_city not in supported_cities:
+    if parsed.destination_city and parsed.destination_city not in supported_cities:
+        parsed.unsupported_city = parsed.destination_city
         parsed.destination_city = None
     parsed.preferences = [tag for tag in parsed.preferences if tag in allowed_preference_tags]
     if parsed.traveler_type not in allowed_traveler_types:

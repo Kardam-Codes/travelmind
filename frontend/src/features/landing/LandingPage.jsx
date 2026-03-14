@@ -94,7 +94,11 @@ function LandingPage() {
       }
 
       setActiveTripId(response.trip.id);
-      navigate(`/planner?tripId=${response.trip.id}`);
+      navigate(`/planner?tripId=${response.trip.id}`, {
+        state: {
+          dashboard: response,
+        },
+      });
     } catch (requestError) {
       setError(requestError.message);
     } finally {

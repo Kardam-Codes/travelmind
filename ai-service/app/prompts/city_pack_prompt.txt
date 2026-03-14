@@ -1,0 +1,78 @@
+Generate a travel inventory pack for one city as exactly one JSON object.
+
+Hard rules:
+- Output JSON only.
+- No markdown.
+- No prose before or after JSON.
+- Use the given city name exactly.
+- Create realistic but concise travel inventory for planning.
+- Return at least 5 places, 3 hotels, and 4 activities.
+- Keep descriptions short.
+
+City name: {CityName}
+User query: {UserQuery}
+Traveler type: {TravelerType}
+Preferences: {Preferences}
+Budget total: {BudgetTotal}
+
+Return this exact shape:
+{
+  "city": {
+    "city": "",
+    "state": "",
+    "tier": "Tier 3",
+    "tourism_type": "",
+    "latitude": 0,
+    "longitude": 0,
+    "best_season": "",
+    "popularity_score": 60,
+    "notes": ""
+  },
+  "places": [
+    {
+      "name": "",
+      "category": "",
+      "tags": "",
+      "rating": 4.2,
+      "price_estimate": 0,
+      "duration_hours": 2,
+      "latitude": 0,
+      "longitude": 0,
+      "popularity_score": 70,
+      "best_time": "",
+      "family_friendly": true,
+      "foreign_tourist_friendly": true,
+      "description": "",
+      "image_url": ""
+    }
+  ],
+  "hotels": [
+    {
+      "name": "",
+      "price_per_night": 2500,
+      "hotel_type": "budget",
+      "rating": 4.1,
+      "latitude": 0,
+      "longitude": 0,
+      "budget_category": "low",
+      "nearby_area": "",
+      "popularity_score": 70,
+      "tags": "",
+      "image_url": ""
+    }
+  ],
+  "activities": [
+    {
+      "name": "",
+      "category": "",
+      "tags": "",
+      "price": 600,
+      "duration_hours": 2,
+      "rating": 4.0,
+      "latitude": 0,
+      "longitude": 0,
+      "near_place_name": "",
+      "popularity_score": 70
+    }
+  ]
+}

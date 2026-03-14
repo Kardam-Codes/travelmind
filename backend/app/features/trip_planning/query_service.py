@@ -4,9 +4,10 @@ from fastapi import HTTPException
 from sqlmodel import Session
 
 from app.database.models.trip import Trip
-from app.features.ai.client import AIServiceUnavailableError, extract_trip_intent_from_ai
+from app.features.ai.client import AIServiceUnavailableError, extract_trip_intent_from_ai, generate_city_pack_from_ai
 from app.features.itinerary.service import fetch_trip_itinerary, generate_trip_itinerary
 from app.features.recommendation.service import get_recommendations
+from app.features.trip_planning.generated_inventory import persist_generated_city_pack
 from app.features.trip_planning.service import create_trip_plan
 from app.repositories.city_repository import get_all_cities
 from app.repositories.itinerary_repository import get_itinerary_by_trip_id
@@ -42,17 +43,32 @@ def create_trip_from_query(session: Session, query: str) -> TripGenerationRespon
             allowed_preference_tags=ALLOWED_PREFERENCE_TAGS,
             allowed_traveler_types=ALLOWED_TRAVELER_TYPES,
         )
-        if ai_intent.missing_fields or ai_intent.confidence < 0.45:
+        blocking_missing_fields = [
+            field for field in ai_intent.missing_fields if not (field == "destination_city" and ai_intent.unsupported_city)
+        ]
+        if blocking_missing_fields or (ai_intent.confidence < 0.45 and not ai_intent.unsupported_city):
             return TripGenerationResponse(
                 status="clarification_needed",
-                missing_fields=ai_intent.missing_fields,
-                suggested_questions=_suggest_questions(ai_intent.missing_fields),
+                missing_fields=blocking_missing_fields,
+                suggested_questions=_suggest_questions(blocking_missing_fields),
                 normalized_query=ai_intent.normalized_query,
                 ai_provider=ai_intent.provider,
             )
 
+        destination_city = ai_intent.destination_city
+        if not destination_city and ai_intent.unsupported_city:
+            city_pack = _generate_unknown_city_pack(
+                query=query,
+                city_name=ai_intent.unsupported_city,
+                traveler_type=ai_intent.traveler_type,
+                preferences=ai_intent.preferences,
+                budget_total=ai_intent.budget_total,
+            )
+            persist_generated_city_pack(session, city_pack)
+            destination_city = city_pack.city.city
+
         trip_request = TripCreate(
-            destination_city=ai_intent.destination_city or "",
+            destination_city=destination_city or "",
             duration_days=ai_intent.duration_days or DEFAULT_DURATION_DAYS,
             budget_total=ai_intent.budget_total or DEFAULT_BUDGET_TOTAL,
             preferences=", ".join(ai_intent.preferences) if ai_intent.preferences else None,
@@ -119,7 +135,19 @@ def parse_trip_query_fallback(session: Session, query: str) -> TripCreate:
     city_names = [city.city for city in get_all_cities(session)]
     destination_city = next((city for city in city_names if city.lower() in normalized_query), None)
     if not destination_city:
-        raise HTTPException(status_code=404, detail="No supported destination found in the query.")
+        unsupported_city = _extract_unknown_city_name(cleaned_query)
+        if unsupported_city:
+            city_pack = _generate_unknown_city_pack(
+                query=query,
+                city_name=unsupported_city,
+                traveler_type=_extract_traveler_type(normalized_query),
+                preferences=_extract_preferences(normalized_query, unsupported_city),
+                budget_total=None,
+            )
+            persist_generated_city_pack(session, city_pack)
+            destination_city = city_pack.city.city
+        else:
+            raise HTTPException(status_code=404, detail="No supported destination found in the query.")
 
     duration_match = re.search(r"(\d+)\s*(day|days|night|nights)", normalized_query)
     budget_match = re.search(r"(?:under|below|budget|within)\s*(?:rs\.?|inr)?\s*([\d,]+(?:\.\d+)?)\s*([kK]?)", normalized_query)
@@ -184,3 +212,37 @@ def _suggest_questions(missing_fields: list[str]) -> list[str]:
         "traveler_type": "Who is traveling: solo, couple, family, or friends?",
     }
     return [question_map[field] for field in missing_fields if field in question_map]
+
+
+def _extract_unknown_city_name(query: str) -> str | None:
+    patterns = [
+        r"\btrip\s+(?:to|for)\s+([A-Za-z][A-Za-z\s]+?)(?:\s+for\s+\d+\s*(?:day|days|night|nights)|\s+under|\s+with|\s+within|$)",
+        r"\bvisit\s+([A-Za-z][A-Za-z\s]+?)(?:\s+for\s+\d+\s*(?:day|days|night|nights)|\s+under|\s+with|\s+within|$)",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, query, re.IGNORECASE)
+        if match:
+            return match.group(1).strip().title()
+    return None
+
+
+def _generate_unknown_city_pack(
+    query: str,
+    city_name: str,
+    traveler_type: str | None,
+    preferences: list[str],
+    budget_total: float | None,
+):
+    try:
+        return generate_city_pack_from_ai(
+            city_name=city_name,
+            user_query=query,
+            traveler_type=traveler_type,
+            preferences=preferences,
+            budget_total=budget_total,
+        )
+    except AIServiceUnavailableError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=f"Unable to generate travel data for {city_name} right now. {exc}",
+        ) from exc

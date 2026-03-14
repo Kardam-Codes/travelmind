@@ -10,8 +10,9 @@ class Settings(BaseSettings):
     database_url: str
     google_maps_api_key: str = ""
     llm_api_key: str = ""
+    routing_base_url: str = "https://router.project-osrm.org"
     ai_service_base_url: str = "http://127.0.0.1:8001"
-    ai_service_timeout_seconds: float = 8.0
+    ai_service_timeout_seconds: float = 120.0
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")

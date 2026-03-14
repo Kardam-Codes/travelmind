@@ -8,10 +8,10 @@ class HeuristicProvider(LLMProvider):
     provider_name = "heuristic-fallback"
 
     def generate_json(self, prompt: str) -> str:
-        user_query_match = re.search(r"User Query:\s*\"(.+?)\"", prompt, re.DOTALL)
-        city_match = re.search(r"Supported Cities:\s*(.+?)\nAllowed Preference Tags:", prompt, re.DOTALL)
-        tags_match = re.search(r"Allowed Preference Tags:\s*(.+?)\nAllowed Traveler Types:", prompt, re.DOTALL)
-        traveler_types_match = re.search(r"Allowed Traveler Types:\s*(.+?)\nReturn JSON Only:", prompt, re.DOTALL)
+        user_query_match = re.search(r'(?:User Query|Query):\s*"(.+?)"', prompt, re.DOTALL | re.IGNORECASE)
+        city_match = re.search(r"Supported cities:\s*(.+?)\nAllowed preference tags:", prompt, re.DOTALL | re.IGNORECASE)
+        tags_match = re.search(r"Allowed preference tags:\s*(.+?)\nAllowed traveler types:", prompt, re.DOTALL | re.IGNORECASE)
+        traveler_types_match = re.search(r"Allowed traveler types:\s*(.+?)\nReturn this exact key set:", prompt, re.DOTALL | re.IGNORECASE)
 
         user_query = user_query_match.group(1) if user_query_match else prompt
         normalized_query = user_query.strip().lower()
@@ -20,6 +20,7 @@ class HeuristicProvider(LLMProvider):
         allowed_travelers = [traveler.strip() for traveler in traveler_types_match.group(1).split(",")] if traveler_types_match else []
 
         destination_city = next((city for city in supported_cities if city.lower() in normalized_query), None)
+        unsupported_city = None if destination_city else _extract_unknown_city_name(user_query)
         duration_match = re.search(r"(\d+)\s*(day|days|night|nights)", normalized_query)
         budget_match = re.search(r"(?:under|below|budget|within)\s*(?:rs\.?|inr)?\s*([\d,]+(?:\.\d+)?)\s*([kK]?)", normalized_query)
         duration_days = int(duration_match.group(1)) if duration_match else None
@@ -42,6 +43,7 @@ class HeuristicProvider(LLMProvider):
         return json.dumps(
             {
                 "destination_city": destination_city,
+                "unsupported_city": unsupported_city,
                 "duration_days": duration_days,
                 "budget_total": budget_total,
                 "budget_level": _infer_budget_level(budget_total),
@@ -53,6 +55,18 @@ class HeuristicProvider(LLMProvider):
                 "normalized_query": user_query.strip(),
             }
         )
+
+
+def _extract_unknown_city_name(query: str) -> str | None:
+    patterns = [
+        r"\btrip\s+(?:to|for)\s+([A-Za-z][A-Za-z\s]+?)(?:\s+for\s+\d+\s*(?:day|days|night|nights)|\s+under|\s+with|\s+within|$)",
+        r"\bvisit\s+([A-Za-z][A-Za-z\s]+?)(?:\s+for\s+\d+\s*(?:day|days|night|nights)|\s+under|\s+with|\s+within|$)",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, query, re.IGNORECASE)
+        if match:
+            return match.group(1).strip().title()
+    return None
 
 
 def _infer_budget_level(budget_total: float | None) -> str | None:

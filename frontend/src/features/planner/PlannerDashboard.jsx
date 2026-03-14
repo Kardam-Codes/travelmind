@@ -1,26 +1,36 @@
 /*
 Feature: Planner Dashboard
-File Purpose: Render the AI-first trip planner with chat, map, and itinerary builder
+File Purpose: Render the premium map-first planner studio with live route and itinerary editing
 Owner: Jay
-Dependencies: CollaborationPanel, ItineraryView, Icon, Fetch
-Last Updated: 2026-03-13
+Dependencies: PlannerHeader, PlannerSidebar, PlannerMapStage, PlannerTimeline, Fetch
+Last Updated: 2026-03-14
 */
-import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import CollaborationPanel from "../collaboration/CollaborationPanel";
-import ItineraryView from "../itinerary/ItineraryView";
-import Icon from "../../components/Icon";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { apiRequest, buildTripWebSocketUrl } from "../../utils/apiClient";
 import { getActiveTripId, getStoredUser, setActiveTripId } from "../../utils/session";
-import { buildMapPlaces } from "../../utils/tripPresentation";
+import PlannerHeader from "./components/PlannerHeader";
+import PlannerMapStage from "./components/PlannerMapStage";
+import PlannerSidebar from "./components/PlannerSidebar";
+import PlannerTimeline from "./components/PlannerTimeline";
 
 function PlannerDashboard() {
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const socketRef = useRef(null);
-  const [dashboard, setDashboard] = useState(null);
+  const [dashboard, setDashboard] = useState(() => {
+    const navigationDashboard = location.state?.dashboard;
+    return navigationDashboard?.trip ? navigationDashboard : null;
+  });
   const [error, setError] = useState("");
   const [operationError, setOperationError] = useState("");
+  const [chatError, setChatError] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [mapRoute, setMapRoute] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedStopId, setSelectedStopId] = useState(null);
+  const [collapsedDays, setCollapsedDays] = useState({});
   const [websocketReady, setWebsocketReady] = useState(false);
   const tripId = searchParams.get("tripId") || getActiveTripId();
   const user = getStoredUser();
@@ -31,18 +41,63 @@ function PlannerDashboard() {
       return;
     }
 
+    setIsLoading(true);
     try {
       const response = await apiRequest(`/trips/${tripId}/dashboard`);
       setDashboard(response);
       setActiveTripId(response.trip.id);
+      setError("");
     } catch (requestError) {
       setError(requestError.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function loadRoute() {
+    if (!tripId) {
+      return;
+    }
+
+    try {
+      const response = await apiRequest(`/maps/trips/${tripId}/route`);
+      setMapRoute(response);
+    } catch (requestError) {
+      setMapRoute({
+        provider_status: "unavailable",
+        warning: requestError.message,
+        path: [],
+        stops: [],
+        legs: [],
+      });
     }
   }
 
   useEffect(() => {
+    const navigationDashboard = location.state?.dashboard;
+    if (navigationDashboard?.trip && String(navigationDashboard.trip.id) === String(tripId)) {
+      setDashboard(navigationDashboard);
+      setActiveTripId(navigationDashboard.trip.id);
+      setError("");
+    }
+  }, [location.state, tripId]);
+
+  useEffect(() => {
     loadDashboard();
   }, [tripId]);
+
+  useEffect(() => {
+    if (tripId) {
+      loadRoute();
+    }
+  }, [tripId, dashboard?.trip?.version]);
+
+  useEffect(() => {
+    const firstItem = dashboard?.itinerary?.days?.[0]?.items?.[0];
+    if (firstItem && !selectedStopId) {
+      setSelectedStopId(firstItem.id);
+    }
+  }, [dashboard, selectedStopId]);
 
   useEffect(() => {
     if (!tripId) {
@@ -54,6 +109,7 @@ function PlannerDashboard() {
 
     socket.addEventListener("open", () => {
       setWebsocketReady(true);
+      setChatError("");
     });
 
     socket.addEventListener("message", (event) => {
@@ -103,10 +159,12 @@ function PlannerDashboard() {
     socket.addEventListener("error", () => {
       setWebsocketReady(false);
       setOperationError("Live collaboration is unavailable.");
+      setChatError("Chat is temporarily unavailable.");
     });
 
     socket.addEventListener("close", () => {
       setWebsocketReady(false);
+      setChatError("Live collaboration disconnected.");
     });
 
     return () => {
@@ -116,7 +174,12 @@ function PlannerDashboard() {
   }, [tripId, userId]);
 
   function sendChatMessage(text) {
-    if (!text.trim() || !socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) {
+    if (!text.trim()) {
+      return;
+    }
+
+    if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) {
+      setChatError("Live collaboration is still connecting. Try again in a moment.");
       return;
     }
 
@@ -126,6 +189,7 @@ function PlannerDashboard() {
         payload: { message: text.trim() },
       }),
     );
+    setChatError("");
   }
 
   function sendOperation(type, payload) {
@@ -194,92 +258,85 @@ function PlannerDashboard() {
     sendOperation("UNLOCK_DAY", { day_number: dayNumber });
   }
 
-  const mapPlaces = buildMapPlaces(dashboard?.places || []);
-  const topHotel = dashboard?.hotels?.[0];
+  function handleSelectStop(itemId) {
+    setSelectedStopId(itemId);
+    const day = dashboard?.itinerary?.days?.find((entry) => entry.items.some((item) => item.id === itemId));
+    if (day) {
+      setSelectedDay(day.day_number);
+      setCollapsedDays((current) => ({ ...current, [day.day_number]: false }));
+    }
+  }
+
+  function handleToggleDay(dayNumber) {
+    setCollapsedDays((current) => ({ ...current, [dayNumber]: !current[dayNumber] }));
+  }
+
+  const selectedStop =
+    dashboard?.itinerary?.days
+      ?.flatMap((day) => day.items)
+      .find((item) => item.id === selectedStopId) || null;
+  const selectedRouteLeg = useMemo(() => {
+    if (!selectedStopId || !mapRoute?.stops?.length) {
+      return null;
+    }
+    const stopIndex = mapRoute.stops.findIndex((stop) => stop.item_id === selectedStopId);
+    if (stopIndex < 0) {
+      return null;
+    }
+    return mapRoute.legs?.[stopIndex] || null;
+  }, [mapRoute, selectedStopId]);
+  const sidebarMessages = chatMessages.slice(-8);
 
   return (
-    <main className="mx-auto max-w-[1500px] px-4 pb-12 pt-8 md:px-6">
-      <section className="grid gap-6 xl:grid-cols-[22rem,minmax(0,1fr),25rem]">
-        <CollaborationPanel
-          messages={chatMessages}
-          onSendMessage={sendChatMessage}
-          trip={dashboard?.trip}
-          tripId={dashboard?.trip?.id}
-          websocketReady={websocketReady}
-        />
+    <main className="mx-auto max-w-[1600px] px-4 pb-12 pt-8 md:px-6">
+      <div className="space-y-6">
+        <PlannerHeader onConfirm={() => {}} route={mapRoute} trip={dashboard?.trip} websocketReady={websocketReady} />
 
-        <div className="section-shell relative min-h-[700px] overflow-hidden p-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,109,119,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(140,37,0,0.14),transparent_26%)]" />
-          <div className="absolute inset-4 rounded-[2rem] bg-[url('https://commons.wikimedia.org/wiki/Special:Redirect/file/Amber%20Fort-Jaipur-India0010.JPG')] bg-cover bg-center opacity-40 dark:opacity-25" />
-          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 900 700">
-            <path
-              d="M170 420 C 260 280, 460 260, 590 350 S 760 460, 810 220"
-              fill="none"
-              stroke="rgba(0,83,91,0.45)"
-              strokeDasharray="10 12"
-              strokeWidth="4"
+        <section className="grid gap-6 xl:grid-cols-[23rem,minmax(0,1fr),27rem]">
+          <PlannerSidebar
+            chatError={chatError}
+            messages={sidebarMessages}
+            onSendMessage={sendChatMessage}
+            route={mapRoute}
+            trip={dashboard?.trip}
+            websocketReady={websocketReady}
+          />
+
+          <div className="space-y-4">
+            {isLoading ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-primary shadow-ambient">Loading planner...</p> : null}
+            {error ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-tertiary shadow-ambient">{error}</p> : null}
+            <PlannerMapStage
+              mapRoute={mapRoute}
+              onSelectDay={setSelectedDay}
+              onSelectStop={handleSelectStop}
+              places={dashboard?.places || []}
+              routeLeg={selectedRouteLeg}
+              selectedDay={selectedDay}
+              selectedStop={selectedStop}
+              trip={dashboard?.trip}
             />
-          </svg>
-
-          <div className="absolute left-8 top-8 flex gap-3">
-            {["map", "route", "pin"].map((control) => (
-              <button
-                key={control}
-                className="glass-panel flex h-12 w-12 items-center justify-center rounded-full text-text shadow-ambient dark:text-white"
-                type="button"
-              >
-                <Icon name={control} />
-              </button>
-            ))}
           </div>
 
-          <div className="glass-panel absolute bottom-8 left-8 max-w-sm rounded-[1.75rem] p-5 shadow-float">
-            <p className="label-md text-primary/70 dark:text-white/55">Pinned highlight</p>
-            <h2 className="mt-2 text-2xl font-bold">{topHotel?.name || dashboard?.places?.[0]?.name || "Waiting for a trip"}</h2>
-            <p className="mt-3 text-sm leading-7 text-text/70 dark:text-white/70">
-              {topHotel
-                ? `Top stay near ${topHotel.nearby_area || topHotel.city}, budget category ${topHotel.budget_category || "curated"}.`
-                : "Generate a trip from the landing page to pin a recommendation here."}
-            </p>
-            <div className="mt-4 flex items-center gap-4 text-sm">
-              <span className="rounded-full bg-secondary-container px-3 py-2 text-tertiary dark:bg-white/10 dark:text-white">
-                Top choice
-              </span>
-              <span className="text-primary dark:text-white">{dashboard?.trip?.destination_city || "No destination selected"}</span>
-            </div>
-          </div>
-
-          {mapPlaces.map((place) => (
-            <div key={place.id} className="absolute" style={{ left: place.x, top: place.y }}>
-              <div className="group relative">
-                <button
-                  className={`flex h-12 w-12 items-center justify-center rounded-full ${place.accent} text-sm font-semibold text-white shadow-float transition-transform hover:scale-105`}
-                  type="button"
-                >
-                  {place.id}
-                </button>
-                <div className="glass-panel pointer-events-none absolute left-1/2 top-14 w-48 -translate-x-1/2 rounded-full px-4 py-3 text-center text-xs font-semibold opacity-0 shadow-ambient transition-opacity group-hover:opacity-100">
-                  {place.name}
-                </div>
-              </div>
-            </div>
-          ))}
-          {error ? <p className="absolute right-8 top-24 rounded-full bg-white/80 px-4 py-3 text-sm text-tertiary">{error}</p> : null}
-        </div>
-
-        <ItineraryView
-          currentUserId={userId}
-          itinerary={dashboard?.itinerary}
-          operationError={operationError}
-          onAddItem={handleAddItem}
-          onLockDay={handleLockDay}
-          onMoveItem={handleMoveItem}
-          onRemoveItem={handleRemoveItem}
-          onUnlockDay={handleUnlockDay}
-          onUpdateItem={handleUpdateItem}
-          trip={dashboard?.trip}
-        />
-      </section>
+          <PlannerTimeline
+            collapsedDays={collapsedDays}
+            currentUserId={userId}
+            itinerary={dashboard?.itinerary}
+            onAddItem={handleAddItem}
+            onLockDay={handleLockDay}
+            onMoveItem={handleMoveItem}
+            onRemoveItem={handleRemoveItem}
+            onSelectStop={handleSelectStop}
+            onToggleDay={handleToggleDay}
+            onUnlockDay={handleUnlockDay}
+            onUpdateItem={handleUpdateItem}
+            operationError={operationError}
+            route={mapRoute}
+            selectedDay={selectedDay}
+            selectedStopId={selectedStopId}
+            trip={dashboard?.trip}
+          />
+        </section>
+      </div>
     </main>
   );
 }

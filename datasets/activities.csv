@@ -99,3 +99,7 @@ A097,Akbar's Tomb Heritage Visit,Agra,Uttar Pradesh,cultural,"tomb,history,garde
 A098,Jama Masjid Old City Stop,Agra,Uttar Pradesh,cultural,"mosque,old-city,heritage,spiritual",0,1,4.3,27.1831,78.0152,P098,Jama Masjid Agra,64
 A099,Taj Nature Walk Birding Trail,Agra,Uttar Pradesh,wellness,"nature,walks,birding,quiet",50,1.5,4.2,27.1697,78.0482,P099,Taj Nature Walk,61
 A100,Anguri Bagh Garden Stroll,Agra,Uttar Pradesh,sightseeing,"garden,fort,quiet,heritage",0,1,4.1,27.1792,78.0219,P100,Anguri Bagh,58
+A101,Vadodara Food Walk,Vadodara,Generated Region,food,"food,street,local",900.0,2.0,4.2,32.52,77.81,P321,Vadodara Heritage Quarter,75
+A102,Vadodara Guided City Tour,Vadodara,Generated Region,sightseeing,"culture,city-tour,local",1200.0,3.0,4.3,32.532,77.816,P322,Vadodara Central Market,80
+A103,Vadodara Evening Market Stroll,Vadodara,Generated Region,shopping,"market,shopping,evening",0.0,1.5,4.5,32.544,77.822,P323,Vadodara City Lakefront,85
+A104,Vadodara Cultural Performance,Vadodara,Generated Region,culture,"culture,music,evening",1500.0,2.5,4.6,32.556,77.828,P324,Vadodara Museum of Local Culture,90

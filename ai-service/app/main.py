@@ -8,11 +8,13 @@ Last Updated: 2026-03-14
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
+from features.city_generation.generator import CityPackGenerator, GenerateCityPackResponse
 from features.intent_extraction.intent_parser import ExtractIntentResponse, IntentParser
 
 
 app = FastAPI(title="TravelMind AI Service")
 intent_parser = IntentParser()
+city_pack_generator = CityPackGenerator()
 
 
 class ExtractIntentRequest(BaseModel):
@@ -20,6 +22,14 @@ class ExtractIntentRequest(BaseModel):
     supported_cities: list[str] = Field(default_factory=list)
     allowed_preference_tags: list[str] = Field(default_factory=list)
     allowed_traveler_types: list[str] = Field(default_factory=list)
+
+
+class GenerateCityPackRequest(BaseModel):
+    city_name: str
+    user_query: str
+    traveler_type: str | None = None
+    preferences: list[str] = Field(default_factory=list)
+    budget_total: float | None = None
 
 
 @app.get("/health")
@@ -34,6 +44,17 @@ async def extract_intent(request: ExtractIntentRequest):
         supported_cities=request.supported_cities,
         allowed_preference_tags=request.allowed_preference_tags,
         allowed_traveler_types=request.allowed_traveler_types,
+    )
+
+
+@app.post("/ai/generate-city-pack", response_model=GenerateCityPackResponse)
+async def generate_city_pack(request: GenerateCityPackRequest):
+    return city_pack_generator.generate(
+        city_name=request.city_name,
+        user_query=request.user_query,
+        traveler_type=request.traveler_type,
+        preferences=request.preferences,
+        budget_total=request.budget_total,
     )
 
 
