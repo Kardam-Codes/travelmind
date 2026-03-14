@@ -1,13 +1,4 @@
-"""
-Feature: Place Model
-File Purpose: Store city-scoped tourist places used for recommendations
-Owner: Misha
-Dependencies: sqlmodel
-Last Updated: 2026-03-14
-"""
-
 from typing import Optional
-
 from sqlmodel import Field, SQLModel
 
 

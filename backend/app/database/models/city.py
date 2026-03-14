@@ -1,13 +1,4 @@
-"""
-Feature: City Model
-File Purpose: Store approved destination cities from the master city dataset
-Owner: Misha
-Dependencies: sqlmodel
-Last Updated: 2026-03-14
-"""
-
 from typing import Optional
-
 from sqlmodel import Field, SQLModel
 
 

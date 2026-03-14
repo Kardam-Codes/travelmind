@@ -1,13 +1,4 @@
-"""
-Feature: Itinerary Model
-File Purpose: Store generated itinerary items for each trip by day and order
-Owner: Misha
-Dependencies: sqlmodel
-Last Updated: 2026-03-14
-"""
-
 from typing import Optional
-
 from sqlmodel import Field, SQLModel
 
 

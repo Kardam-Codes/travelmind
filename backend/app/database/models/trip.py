@@ -1,13 +1,4 @@
-"""
-Feature: Trip Model
-File Purpose: Store user trip requests and basic planning preferences
-Owner: Misha
-Dependencies: sqlmodel
-Last Updated: 2026-03-14
-"""
-
 from typing import Optional
-
 from sqlmodel import Field, SQLModel
 
 

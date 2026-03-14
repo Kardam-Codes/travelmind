@@ -1,13 +1,4 @@
-"""
-Feature: Wishlist Model
-File Purpose: Store user-saved places, activities, or hotels
-Owner: Misha
-Dependencies: sqlmodel
-Last Updated: 2026-03-14
-"""
-
 from typing import Optional
-
 from sqlmodel import Field, SQLModel
 
 

@@ -1,13 +1,4 @@
-"""
-Feature: Hotel Model
-File Purpose: Store hotel records used for city and cluster-based stay recommendations
-Owner: Misha
-Dependencies: sqlmodel
-Last Updated: 2026-03-14
-"""
-
 from typing import Optional
-
 from sqlmodel import Field, SQLModel
 
 
