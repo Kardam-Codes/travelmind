@@ -3,7 +3,6 @@ Feature: Wishlist
 File Purpose: Display and manage saved travel items
 Owner: Jay
 Dependencies: React
-<<<<<<< HEAD
 Last Updated: 2026-03-13
 */
 import { profileTrips } from "../../data/mockData";
@@ -51,4 +50,3 @@ function Wishlist() {
 }
 
 export default Wishlist;
-
