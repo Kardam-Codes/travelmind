@@ -3,7 +3,6 @@ Feature: Trip Input
 File Purpose: UI component to capture user travel request
 Owner: Jay
 Dependencies: React
-<<<<<<< HEAD
 Last Updated: 2026-03-13
 */
 import Icon from "../../components/Icon";
@@ -34,7 +33,3 @@ function TripInput({ compact = false, placeholder = "Plan a 4 day trip to Jaipur
 }
 
 export default TripInput;
-=======
-Last Updated: Initial Setup
-*/
->>>>>>> 638a1aea47b64a810dd39dd868634e645b090689

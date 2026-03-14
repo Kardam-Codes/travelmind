@@ -3,7 +3,6 @@ Feature: Collaboration
 File Purpose: Real-time trip collaboration UI
 Owner: Jay
 Dependencies: WebSockets
-<<<<<<< HEAD
 Last Updated: 2026-03-13
 */
 import { plannerChat, suggestedPrompts } from "../../data/mockData";
@@ -75,7 +74,3 @@ function CollaborationPanel() {
 }
 
 export default CollaborationPanel;
-=======
-Last Updated: Initial Setup
-*/
->>>>>>> 638a1aea47b64a810dd39dd868634e645b090689
