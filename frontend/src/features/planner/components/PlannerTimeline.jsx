@@ -130,7 +130,7 @@ function PlannerTimeline({
                         key={`${day.day_number}-${item.id}`}
                         className={`w-full rounded-[1.5rem] border px-4 py-4 text-left transition ${
                           isSelected
-                            ? "border-tertiary bg-secondary-container/70 shadow-ambient dark:border-white/20 dark:bg-white/10"
+                            ? "border-tertiary bg-secondary-container/80 shadow-ambient dark:border-white/20 dark:bg-white/10"
                             : "border-transparent bg-surface-container-low/80 hover:border-primary/20 dark:bg-dark-low/80"
                         }`}
                         onClick={() => onSelectStop?.(item.id)}

@@ -17,7 +17,7 @@ function PlannerSummaryPanel({ inviteStatus, onInvite, trip, tripRole }) {
   }
 
   return (
-    <section className="section-shell flex min-h-[36rem] flex-col gap-5">
+    <section className="section-shell travel-panel flex min-h-[36rem] flex-col gap-5">
       <div>
         <p className="label-md text-tertiary">Trip summary</p>
         <h2 className="mt-2 text-2xl font-semibold">{trip ? `${trip.destination_city} plan` : "Trip overview"}</h2>

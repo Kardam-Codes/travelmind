@@ -17,7 +17,7 @@ function PlannerChatPanel({ messages = [], onSendMessage, websocketReady }) {
   }
 
   return (
-    <section className="section-shell flex h-full min-h-[36rem] flex-col gap-4">
+    <section className="section-shell travel-panel flex h-full min-h-[36rem] flex-col gap-4">
       <div className="flex items-center justify-between">
         <div>
           <p className="label-md text-tertiary">Planning chat</p>
