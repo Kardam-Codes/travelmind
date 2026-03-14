@@ -99,3 +99,223 @@ P097,Akbar's Tomb Sikandra,Agra,Uttar Pradesh,heritage,"tomb,gardens,history,arc
 P098,Jama Masjid Agra,Agra,Uttar Pradesh,temple,"mosque,heritage,old-city,spiritual",4.4,0,1,27.1829,78.0150,69,winter,true,true
 P099,Taj Nature Walk,Agra,Uttar Pradesh,nature,"walks,greenery,taj-view,birding",4.3,50,1.5,27.1695,78.0480,67,winter,true,true
 P100,Anguri Bagh,Agra,Uttar Pradesh,nature,"garden,fort,heritage,quiet",4.2,0,1,27.1790,78.0217,64,winter,true,true
+P101,Mehrangarh Fort,Jodhpur,Rajasthan,fort,"fort,heritage,viewpoint,history",4.8,200,3,26.2489,73.0343,95,winter,true,true
+P102,Jaswant Thada,Jodhpur,Rajasthan,heritage,"marble,heritage,quiet,photography",4.6,50,1.5,26.2539,73.0293,84,winter,true,true
+P103,Umaid Bhawan Palace,Jodhpur,Rajasthan,palace,"palace,royal,heritage,museum",4.7,100,2.5,26.2309,73.0363,90,winter,true,true
+P104,Clock Tower Market,Jodhpur,Rajasthan,market,"market,shopping,spices,old-city",4.4,0,2,26.2449,73.0153,78,winter,true,true
+P105,Mandore Garden,Jodhpur,Rajasthan,nature,"garden,heritage,relaxed,family",4.3,0,1.5,26.2269,73.0183,72,winter,true,true
+P106,Brahma Temple,Pushkar,Rajasthan,temple,"temple,spiritual,heritage,pilgrimage",4.7,0,1.5,26.4998,74.5611,92,winter,true,true
+P107,Pushkar Lake,Pushkar,Rajasthan,lake,"lake,ghat,spiritual,heritage",4.6,0,1.5,26.5048,74.5561,88,winter,true,true
+P108,Savitri Temple,Pushkar,Rajasthan,viewpoint,"ropeway,viewpoint,sunset,hills",4.5,150,2,26.4818,74.5631,80,winter,true,true
+P109,Pushkar Bazaar,Pushkar,Rajasthan,market,"market,shopping,street,local",4.4,0,2,26.4958,74.5421,76,winter,true,true
+P110,Rangji Temple,Pushkar,Rajasthan,temple,"temple,heritage,architecture,spiritual",4.4,0,1,26.4778,74.5451,70,winter,true,true
+P111,Golden Temple,Amritsar,Punjab,temple,"temple,spiritual,iconic,pilgrimage",4.9,0,2.5,31.6440,74.8823,99,winter,true,true
+P112,Jallianwala Bagh,Amritsar,Punjab,heritage,"history,memorial,heritage,freedom",4.7,0,1.5,31.6490,74.8773,90,winter,true,true
+P113,Partition Museum,Amritsar,Punjab,museum,"museum,history,culture,learning",4.6,25,2,31.6260,74.8843,84,winter,true,true
+P114,Wagah Border Ceremony,Amritsar,Punjab,viewpoint,"ceremony,border,patriotic,evening",4.7,0,3,31.6400,74.8633,92,winter,true,true
+P115,Durgiana Temple,Amritsar,Punjab,temple,"temple,spiritual,heritage,calm",4.4,0,1.5,31.6220,74.8663,74,winter,true,true
+P116,Mysore Palace,Mysuru,Karnataka,palace,"palace,royal,heritage,iconic",4.8,100,2.5,12.3058,76.6494,97,winter,true,true
+P117,Chamundi Hills,Mysuru,Karnataka,viewpoint,"hills,temple,viewpoint,scenic",4.6,0,2,12.3108,76.6444,86,winter,true,true
+P118,St. Philomena Cathedral,Mysuru,Karnataka,heritage,"church,heritage,architecture,quiet",4.5,0,1,12.2878,76.6514,76,winter,true,true
+P119,Devaraja Market,Mysuru,Karnataka,market,"market,flowers,shopping,local",4.4,0,1.5,12.3018,76.6304,73,winter,true,true
+P120,Brindavan Gardens,Mysuru,Karnataka,nature,"garden,fountains,evening,family",4.4,50,2,12.2838,76.6334,78,winter,true,true
+P121,Mall Road Shimla,Shimla,Himachal Pradesh,market,"market,walks,shopping,central",4.6,0,2,31.1148,77.1834,88,summer,true,true
+P122,The Ridge,Shimla,Himachal Pradesh,viewpoint,"viewpoint,walks,heritage,photography",4.6,0,1.5,31.1198,77.1784,85,summer,true,true
+P123,Jakhoo Temple,Shimla,Himachal Pradesh,temple,"temple,hills,monkeys,viewpoint",4.5,0,2,31.0968,77.1854,79,summer,true,true
+P124,Christ Church Shimla,Shimla,Himachal Pradesh,heritage,"church,heritage,architecture,landmark",4.5,0,1,31.1108,77.1644,74,summer,true,true
+P125,Kufri Viewpoint,Shimla,Himachal Pradesh,nature,"hills,scenic,day-trip,family",4.4,0,2.5,31.0928,77.1674,80,summer,true,true
+P126,Tiger Hill,Darjeeling,West Bengal,viewpoint,"sunrise,viewpoint,himalaya,scenic",4.7,50,2.5,27.0510,88.2763,93,summer,true,true
+P127,Batasia Loop,Darjeeling,West Bengal,heritage,"railway,heritage,viewpoint,photography",4.6,20,1.5,27.0560,88.2713,84,summer,true,true
+P128,Peace Pagoda,Darjeeling,West Bengal,heritage,"peaceful,monument,heritage,quiet",4.5,0,1,27.0330,88.2783,75,summer,true,true
+P129,Darjeeling Mall,Darjeeling,West Bengal,market,"market,walks,cafes,shopping",4.4,0,2,27.0470,88.2573,78,summer,true,true
+P130,Himalayan Mountaineering Institute,Darjeeling,West Bengal,museum,"museum,mountains,history,learning",4.6,60,2,27.0290,88.2603,80,summer,true,true
+P131,Promenade Beach,Puducherry,Puducherry,beach,"beach,walks,coastal,sunrise",4.5,0,1.5,11.9516,79.8183,85,winter,true,true
+P132,Sri Aurobindo Ashram,Puducherry,Puducherry,heritage,"ashram,spiritual,calm,heritage",4.6,0,1,11.9566,79.8133,82,winter,true,true
+P133,French Quarter,Puducherry,Puducherry,heritage,"colonial,heritage,walks,photography",4.7,0,2,11.9336,79.8203,88,winter,true,true
+P134,Paradise Beach,Puducherry,Puducherry,beach,"beach,boat-ride,relaxed,scenic",4.5,150,3,11.9476,79.7993,84,winter,true,true
+P135,Goubert Market,Puducherry,Puducherry,market,"market,local,shopping,food",4.2,0,1.5,11.9296,79.8023,68,winter,true,true
+P136,Virupaksha Temple,Hampi,Karnataka,temple,"temple,heritage,unesco,spiritual",4.8,0,2,15.3450,76.4700,94,winter,true,true
+P137,Vittala Temple,Hampi,Karnataka,heritage,"heritage,stone-chariot,unesco,history",4.8,40,3,15.3500,76.4650,96,winter,true,true
+P138,Hemakuta Hill,Hampi,Karnataka,viewpoint,"sunrise,viewpoint,ruins,scenic",4.6,0,1.5,15.3270,76.4720,83,winter,true,true
+P139,Hampi Bazaar,Hampi,Karnataka,market,"market,ruins,shopping,local",4.3,0,1.5,15.3410,76.4510,70,winter,true,true
+P140,Lotus Mahal,Hampi,Karnataka,palace,"heritage,palace,architecture,ruins",4.5,40,1.5,15.3230,76.4540,79,winter,true,true
+P141,Dal Lake,Srinagar,Jammu and Kashmir,lake,"lake,shikara,scenic,iconic",4.8,0,2.5,34.0937,74.8073,98,summer,true,true
+P142,Shalimar Bagh,Srinagar,Jammu and Kashmir,nature,"garden,mughal,heritage,walks",4.6,25,1.5,34.0987,74.8023,84,summer,true,true
+P143,Nishat Bagh,Srinagar,Jammu and Kashmir,nature,"garden,lake-view,mughal,family",4.6,25,1.5,34.0757,74.8093,82,summer,true,true
+P144,Shankaracharya Temple,Srinagar,Jammu and Kashmir,temple,"temple,viewpoint,hills,spiritual",4.6,0,2,34.0897,74.7883,80,summer,true,true
+P145,Pari Mahal,Srinagar,Jammu and Kashmir,viewpoint,"viewpoint,heritage,sunset,photography",4.5,0,1.5,34.0717,74.7913,76,summer,true,true
+P146,Jaisalmer Fort,Jaisalmer,Rajasthan,fort,"fort,heritage,unesco,old-city",4.8,50,3,26.9257,70.9183,96,winter,true,true
+P147,Patwon Ki Haveli,Jaisalmer,Rajasthan,heritage,"haveli,architecture,history,photography",4.6,100,1.5,26.9307,70.9133,84,winter,true,true
+P148,Gadisar Lake,Jaisalmer,Rajasthan,lake,"lake,boats,sunset,heritage",4.5,0,1.5,26.9077,70.9203,80,winter,true,true
+P149,Sam Sand Dunes,Jaisalmer,Rajasthan,viewpoint,"desert,sunset,camel,scenic",4.7,0,3,26.9217,70.8993,92,winter,true,true
+P150,Bada Bagh,Jaisalmer,Rajasthan,heritage,"cenotaphs,heritage,sunset,photography",4.4,100,1.5,26.9037,70.9023,73,winter,true,true
+P151,Shanti Stupa,Leh,Ladakh,viewpoint,"stupa,viewpoint,sunset,peaceful",4.7,0,1.5,34.1626,77.5870,89,summer,true,true
+P152,Leh Palace,Leh,Ladakh,palace,"palace,heritage,viewpoint,history",4.6,20,1.5,34.1676,77.5820,83,summer,true,true
+P153,Magnetic Hill,Leh,Ladakh,viewpoint,"road-trip,viewpoint,scenic,quirky",4.3,0,1,34.1446,77.5890,70,summer,true,true
+P154,Thiksey Monastery,Leh,Ladakh,heritage,"monastery,heritage,spiritual,architecture",4.8,30,2,34.1586,77.5680,90,summer,true,true
+P155,Hall of Fame Museum,Leh,Ladakh,museum,"museum,army,history,learning",4.6,125,1.5,34.1406,77.5710,78,summer,true,true
+P156,Marina Beach,Chennai,Tamil Nadu,beach,"beach,walks,sunrise,city",4.4,0,2,13.0927,80.2807,90,winter,true,true
+P157,Kapaleeshwarar Temple,Chennai,Tamil Nadu,temple,"temple,heritage,spiritual,architecture",4.7,0,1.5,13.0977,80.2757,88,winter,true,true
+P158,Fort St. George,Chennai,Tamil Nadu,heritage,"fort,history,museum,colonial",4.4,25,2,13.0747,80.2827,76,winter,true,true
+P159,Government Museum Chennai,Chennai,Tamil Nadu,museum,"museum,art,history,culture",4.5,15,2,13.0887,80.2617,74,winter,true,true
+P160,T Nagar Market,Chennai,Tamil Nadu,market,"market,shopping,textiles,jewelry",4.3,0,2.5,13.0707,80.2647,80,winter,true,true
+P161,Lalbagh Botanical Garden,Bengaluru,Karnataka,nature,"garden,nature,walks,flowers",4.7,30,2,12.9816,77.6046,89,winter,true,true
+P162,Bangalore Palace,Bengaluru,Karnataka,palace,"palace,heritage,architecture,royal",4.4,240,1.5,12.9866,77.5996,78,winter,true,true
+P163,Cubbon Park,Bengaluru,Karnataka,nature,"park,walks,greenery,relaxed",4.6,0,1.5,12.9636,77.6066,82,winter,true,true
+P164,ISKCON Temple Bengaluru,Bengaluru,Karnataka,temple,"temple,spiritual,city,landmark",4.7,0,1.5,12.9776,77.5856,85,winter,true,true
+P165,Commercial Street,Bengaluru,Karnataka,market,"shopping,market,food,urban",4.4,0,2.5,12.9596,77.5886,79,winter,true,true
+P166,Alappuzha Beach,Alappuzha,Kerala,beach,"beach,sunset,coastal,family",4.4,0,2,9.5081,76.3488,81,winter,true,true
+P167,Alleppey Backwaters,Alappuzha,Kerala,lake,"backwaters,boat-ride,scenic,relaxed",4.8,0,3,9.5131,76.3438,96,winter,true,true
+P168,Alappuzha Lighthouse,Alappuzha,Kerala,heritage,"lighthouse,heritage,viewpoint,coastal",4.4,20,1,9.4901,76.3508,73,winter,true,true
+P169,Mullakkal Temple,Alappuzha,Kerala,temple,"temple,spiritual,local,culture",4.3,0,1,9.5041,76.3298,67,winter,true,true
+P170,Boat Jetty Market,Alappuzha,Kerala,market,"market,local,waterfront,food",4.2,0,1.5,9.4861,76.3328,64,winter,true,true
+P171,Sabarmati Ashram,Ahmedabad,Gujarat,heritage,"ashram,history,heritage,freedom",4.7,0,2,23.0325,72.5814,90,winter,true,true
+P172,Adalaj Stepwell,Ahmedabad,Gujarat,heritage,"stepwell,architecture,heritage,photography",4.7,0,1.5,23.0375,72.5764,86,winter,true,true
+P173,Kankaria Lake,Ahmedabad,Gujarat,lake,"lake,family,evening,walks",4.5,25,2,23.0145,72.5834,80,winter,true,true
+P174,Sidi Saiyyed Mosque,Ahmedabad,Gujarat,heritage,"mosque,architecture,heritage,landmark",4.5,0,1,23.0285,72.5624,72,winter,true,true
+P175,Law Garden Market,Ahmedabad,Gujarat,market,"market,shopping,street,crafts",4.3,0,2,23.0105,72.5654,74,winter,true,true
+P176,Dwarkadhish Temple,Dwarka,Gujarat,temple,"temple,spiritual,pilgrimage,heritage",4.8,0,1.5,22.2542,68.9785,95,winter,true,true
+P177,Gomti Ghat,Dwarka,Gujarat,heritage,"ghat,spiritual,walks,heritage",4.5,0,1,22.2592,68.9735,76,winter,true,true
+P178,Rukmini Temple,Dwarka,Gujarat,temple,"temple,heritage,spiritual,architecture",4.4,0,1,22.2362,68.9805,72,winter,true,true
+P179,Dwarka Beach,Dwarka,Gujarat,beach,"beach,coastal,sunset,relaxed",4.3,0,1.5,22.2502,68.9595,68,winter,true,true
+P180,Sudama Setu,Dwarka,Gujarat,viewpoint,"bridge,viewpoint,river,walks",4.3,10,1,22.2322,68.9625,66,winter,true,true
+P181,Somnath Temple,Somnath,Gujarat,temple,"temple,spiritual,iconic,pilgrimage",4.8,0,1.5,20.8980,70.4112,97,winter,true,true
+P182,Triveni Sangam,Somnath,Gujarat,heritage,"confluence,spiritual,heritage,rituals",4.4,0,1,20.9030,70.4062,70,winter,true,true
+P183,Bhalka Tirth,Somnath,Gujarat,temple,"temple,spiritual,heritage,quiet",4.4,0,1,20.8800,70.4132,68,winter,true,true
+P184,Somnath Beach,Somnath,Gujarat,beach,"beach,coastal,sunset,relaxed",4.3,0,1.5,20.8940,70.3922,72,winter,true,true
+P185,Prabhas Patan Museum,Somnath,Gujarat,museum,"museum,history,temple-artifacts,culture",4.2,20,1.5,20.8760,70.3952,61,winter,true,true
+P186,Meenakshi Amman Temple,Madurai,Tamil Nadu,temple,"temple,heritage,iconic,spiritual",4.8,0,2.5,9.9352,78.1298,97,winter,true,true
+P187,Thirumalai Nayakkar Palace,Madurai,Tamil Nadu,palace,"palace,heritage,architecture,history",4.6,50,1.5,9.9402,78.1248,82,winter,true,true
+P188,Gandhi Memorial Museum,Madurai,Tamil Nadu,museum,"museum,history,learning,culture",4.4,0,1.5,9.9172,78.1318,70,winter,true,true
+P189,Pudhu Mandapam Market,Madurai,Tamil Nadu,market,"market,textiles,shopping,heritage",4.3,0,1.5,9.9312,78.1108,68,winter,true,true
+P190,Vandiyur Mariamman Teppakulam,Madurai,Tamil Nadu,lake,"lake,temple,walks,photography",4.3,0,1.5,9.9132,78.1138,66,winter,true,true
+P191,Ooty Lake,Ooty,Tamil Nadu,lake,"lake,boating,family,scenic",4.5,20,2,11.4164,76.7032,88,summer,true,true
+P192,Botanical Garden Ooty,Ooty,Tamil Nadu,nature,"garden,flowers,family,walks",4.5,50,1.5,11.4214,76.6982,80,summer,true,true
+P193,Doddabetta Peak,Ooty,Tamil Nadu,viewpoint,"viewpoint,hills,scenic,photography",4.6,10,1.5,11.3984,76.7052,84,summer,true,true
+P194,Rose Garden,Ooty,Tamil Nadu,nature,"garden,flowers,photography,relaxed",4.4,40,1.5,11.4124,76.6842,74,summer,true,true
+P195,Charing Cross Market,Ooty,Tamil Nadu,market,"market,shopping,food,central",4.2,0,1.5,11.3944,76.6872,65,summer,true,true
+P196,Kodaikanal Lake,Kodaikanal,Tamil Nadu,lake,"lake,boating,cycling,scenic",4.6,0,2,10.2481,77.4992,90,summer,true,true
+P197,Coakers Walk,Kodaikanal,Tamil Nadu,viewpoint,"viewpoint,walks,mist,scenic",4.5,30,1.5,10.2531,77.4942,82,summer,true,true
+P198,Bryant Park,Kodaikanal,Tamil Nadu,nature,"garden,flowers,relaxed,family",4.4,50,1,10.2301,77.5012,72,summer,true,true
+P199,Pillar Rocks,Kodaikanal,Tamil Nadu,viewpoint,"viewpoint,cliffs,photography,scenic",4.5,0,1.5,10.2441,77.4802,78,summer,true,true
+P200,Kurinji Andavar Temple,Kodaikanal,Tamil Nadu,temple,"temple,viewpoint,spiritual,quiet",4.3,0,1,10.2261,77.4832,64,summer,true,true
+P201,Charminar,Hyderabad,Telangana,heritage,"monument,heritage,iconic,old-city",4.6,25,1.5,17.3950,78.4967,95,winter,true,true
+P202,Golconda Fort,Hyderabad,Telangana,fort,"fort,history,viewpoint,architecture",4.7,25,2.5,17.4000,78.4917,90,winter,true,true
+P203,Hussain Sagar,Hyderabad,Telangana,lake,"lake,boating,evening,cityscape",4.4,0,2,17.3770,78.4987,78,winter,true,true
+P204,Salar Jung Museum,Hyderabad,Telangana,museum,"museum,art,history,culture",4.5,20,2,17.3910,78.4777,80,winter,true,true
+P205,Laad Bazaar,Hyderabad,Telangana,market,"market,shopping,bangles,old-city",4.4,0,2,17.3730,78.4807,79,winter,true,true
+P206,Ajanta Caves,Aurangabad,Maharashtra,heritage,"caves,unesco,history,art",4.8,40,4,19.8862,75.3533,96,winter,true,true
+P207,Ellora Caves,Aurangabad,Maharashtra,heritage,"caves,unesco,architecture,history",4.8,40,4,19.8912,75.3483,97,winter,true,true
+P208,Bibi Ka Maqbara,Aurangabad,Maharashtra,heritage,"monument,heritage,photography,history",4.5,25,1.5,19.8682,75.3553,82,winter,true,true
+P209,Daulatabad Fort,Aurangabad,Maharashtra,fort,"fort,history,climb,viewpoint",4.5,25,2.5,19.8822,75.3343,79,winter,true,true
+P210,Panchakki,Aurangabad,Maharashtra,heritage,"heritage,watermill,old-city,history",4.2,20,1,19.8642,75.3373,62,winter,true,true
+P211,Trimbakeshwar Temple,Nashik,Maharashtra,temple,"temple,spiritual,pilgrimage,heritage",4.7,0,1.5,20.0075,73.7998,89,winter,true,true
+P212,Sula Vineyards,Nashik,Maharashtra,nature,"vineyard,scenic,leisure,food",4.5,600,2.5,20.0125,73.7948,81,winter,true,true
+P213,Panchavati,Nashik,Maharashtra,heritage,"heritage,ghat,temple,spiritual",4.4,0,1.5,19.9895,73.8018,72,winter,true,true
+P214,Ramkund,Nashik,Maharashtra,heritage,"ghat,spiritual,heritage,rituals",4.4,0,1,20.0035,73.7808,70,winter,true,true
+P215,Pandavleni Caves,Nashik,Maharashtra,heritage,"caves,history,trek,viewpoint",4.5,20,2,19.9855,73.7838,74,winter,true,true
+P216,Upper Lake,Bhopal,Madhya Pradesh,lake,"lake,boating,sunset,cityscape",4.6,0,2,23.2699,77.4226,86,winter,true,true
+P217,Van Vihar,Bhopal,Madhya Pradesh,nature,"nature,zoo,walks,family",4.4,30,2,23.2749,77.4176,75,winter,true,true
+P218,Taj-ul-Masajid,Bhopal,Madhya Pradesh,heritage,"mosque,heritage,architecture,landmark",4.6,0,1.5,23.2519,77.4246,80,winter,true,true
+P219,State Museum Bhopal,Bhopal,Madhya Pradesh,museum,"museum,history,culture,art",4.3,20,1.5,23.2659,77.4036,66,winter,true,true
+P220,Bharat Bhavan,Bhopal,Madhya Pradesh,museum,"art,culture,museum,performing-arts",4.4,0,1.5,23.2479,77.4066,68,winter,true,true
+P221,Western Group of Temples,Khajuraho,Madhya Pradesh,heritage,"unesco,temples,architecture,iconic",4.8,40,3,24.8418,79.9299,96,winter,true,true
+P222,Eastern Group of Temples,Khajuraho,Madhya Pradesh,heritage,"temples,heritage,history,quiet",4.5,40,2,24.8468,79.9249,76,winter,true,true
+P223,Southern Group of Temples,Khajuraho,Madhya Pradesh,heritage,"temples,heritage,history,walks",4.3,40,1.5,24.8238,79.9319,66,winter,true,true
+P224,Raneh Falls,Khajuraho,Madhya Pradesh,nature,"waterfall,canyon,nature,day-trip",4.5,100,2.5,24.8378,79.9109,74,winter,true,true
+P225,Khajuraho Archaeological Museum,Khajuraho,Madhya Pradesh,museum,"museum,history,artifacts,culture",4.2,20,1.5,24.8198,79.9139,60,winter,true,true
+P226,Gwalior Fort,Gwalior,Madhya Pradesh,fort,"fort,heritage,viewpoint,history",4.8,75,3,26.2283,78.1928,95,winter,true,true
+P227,Jai Vilas Palace,Gwalior,Madhya Pradesh,palace,"palace,museum,royal,heritage",4.6,300,2,26.2333,78.1878,82,winter,true,true
+P228,Sun Temple Gwalior,Gwalior,Madhya Pradesh,temple,"temple,architecture,quiet,landmark",4.4,0,1,26.2103,78.1948,68,winter,true,true
+P229,Tansen Tomb,Gwalior,Madhya Pradesh,heritage,"heritage,music,history,calm",4.3,0,1,26.2243,78.1738,61,winter,true,true
+P230,Sarafa Bazaar,Gwalior,Madhya Pradesh,market,"market,shopping,food,local",4.2,0,1.5,26.2063,78.1768,64,winter,true,true
+P231,Lingaraj Temple,Bhubaneswar,Odisha,temple,"temple,heritage,spiritual,iconic",4.7,0,1.5,20.3061,85.8345,92,winter,true,true
+P232,Mukteshwar Temple,Bhubaneswar,Odisha,temple,"temple,architecture,heritage,quiet",4.6,0,1,20.3111,85.8295,78,winter,true,true
+P233,Udayagiri Khandagiri Caves,Bhubaneswar,Odisha,heritage,"caves,history,heritage,viewpoint",4.5,25,2,20.2881,85.8365,80,winter,true,true
+P234,Odisha State Museum,Bhubaneswar,Odisha,museum,"museum,history,culture,artifacts",4.3,20,1.5,20.3021,85.8155,66,winter,true,true
+P235,Ekamra Haat,Bhubaneswar,Odisha,market,"market,crafts,shopping,culture",4.4,0,1.5,20.2841,85.8185,70,winter,true,true
+P236,Jagannath Temple,Puri,Odisha,temple,"temple,spiritual,pilgrimage,heritage",4.8,0,2,19.8235,85.8412,98,winter,true,true
+P237,Puri Beach,Puri,Odisha,beach,"beach,sunrise,coastal,relaxed",4.5,0,2.5,19.8285,85.8362,84,winter,true,true
+P238,Narendra Tank,Puri,Odisha,lake,"lake,temple,heritage,calm",4.3,0,1,19.8055,85.8432,64,winter,true,true
+P239,Sudarshan Crafts Museum,Puri,Odisha,museum,"museum,crafts,culture,art",4.2,20,1.5,19.8195,85.8222,60,winter,true,true
+P240,Swargadwar,Puri,Odisha,heritage,"ghat,beach,spiritual,rituals",4.3,0,1,19.8015,85.8252,67,winter,true,true
+P241,Konark Sun Temple,Konark,Odisha,heritage,"unesco,temple,architecture,iconic",4.8,40,2.5,19.8976,86.1045,96,winter,true,true
+P242,Chandrabhaga Beach,Konark,Odisha,beach,"beach,sunrise,coastal,scenic",4.5,0,2,19.9026,86.0995,79,winter,true,true
+P243,ASI Museum Konark,Konark,Odisha,museum,"museum,history,artifacts,heritage",4.2,10,1.5,19.8796,86.1065,61,winter,true,true
+P244,Ramachandi Temple,Konark,Odisha,temple,"temple,coastal,spiritual,quiet",4.3,0,1,19.8936,86.0855,58,winter,true,true
+P245,Konark Bazaar,Konark,Odisha,market,"market,crafts,shopping,local",4.1,0,1,19.8756,86.0885,55,winter,true,true
+P246,MG Marg,Gangtok,Sikkim,market,"market,walks,cafes,shopping",4.7,0,2,27.3489,88.6165,90,summer,true,true
+P247,Rumtek Monastery,Gangtok,Sikkim,heritage,"monastery,heritage,spiritual,architecture",4.7,10,2,27.3539,88.6115,86,summer,true,true
+P248,Tashi View Point,Gangtok,Sikkim,viewpoint,"viewpoint,himalaya,sunrise,scenic",4.5,0,1.5,27.3309,88.6185,78,summer,true,true
+P249,Enchey Monastery,Gangtok,Sikkim,heritage,"monastery,spiritual,quiet,heritage",4.4,0,1,27.3449,88.5975,68,summer,true,true
+P250,Tsomgo Lake,Gangtok,Sikkim,lake,"lake,scenic,day-trip,mountains",4.8,0,3,27.3269,88.6005,92,summer,true,true
+P251,Shillong Peak,Shillong,Meghalaya,viewpoint,"viewpoint,hills,city-view,scenic",4.6,30,1.5,25.5888,91.9033,86,summer,true,true
+P252,Umiam Lake,Shillong,Meghalaya,lake,"lake,boating,scenic,relaxed",4.7,0,2,25.5938,91.8983,90,summer,true,true
+P253,Elephant Falls,Shillong,Meghalaya,nature,"waterfall,nature,photography,family",4.5,20,1.5,25.5708,91.9053,82,summer,true,true
+P254,Police Bazaar,Shillong,Meghalaya,market,"market,shopping,food,central",4.3,0,2,25.5848,91.8843,74,summer,true,true
+P255,Ward's Lake,Shillong,Meghalaya,nature,"lake,garden,walks,relaxed",4.4,10,1.5,25.5668,91.8873,71,summer,true,true
+P256,Tawang Monastery,Tawang,Arunachal Pradesh,heritage,"monastery,spiritual,iconic,heritage",4.8,0,2.5,27.5966,91.8733,94,summer,true,true
+P257,Sela Pass Viewpoint,Tawang,Arunachal Pradesh,viewpoint,"pass,mountains,scenic,road-trip",4.7,0,2,27.6016,91.8683,88,summer,true,true
+P258,Madhuri Lake,Tawang,Arunachal Pradesh,lake,"lake,scenic,high-altitude,photography",4.7,0,2,27.5786,91.8753,85,summer,true,true
+P259,Tawang War Memorial,Tawang,Arunachal Pradesh,heritage,"memorial,history,patriotic,quiet",4.5,0,1.5,27.5926,91.8543,76,summer,true,true
+P260,Urgelling Monastery,Tawang,Arunachal Pradesh,heritage,"monastery,spiritual,quiet,heritage",4.3,0,1,27.5746,91.8573,66,summer,true,true
+P261,Cellular Jail,Port Blair,Andaman and Nicobar Islands,heritage,"history,freedom,heritage,iconic",4.7,30,2.5,11.6734,92.7365,95,winter,true,true
+P262,Corbyn's Cove Beach,Port Blair,Andaman and Nicobar Islands,beach,"beach,relaxed,coastal,family",4.4,0,2,11.6784,92.7315,80,winter,true,true
+P263,Ross Island Ruins,Port Blair,Andaman and Nicobar Islands,heritage,"island,ruins,history,boat-ride",4.6,0,3,11.6554,92.7385,84,winter,true,true
+P264,Samudrika Naval Marine Museum,Port Blair,Andaman and Nicobar Islands,museum,"museum,marine,learning,family",4.5,50,1.5,11.6694,92.7175,73,winter,true,true
+P265,Chidiya Tapu Sunset Point,Port Blair,Andaman and Nicobar Islands,viewpoint,"sunset,viewpoint,birding,scenic",4.6,0,2,11.6114,92.7205,79,winter,true,true
+P266,Fontainhas Latin Quarter,Panaji,Goa,heritage,"heritage,colonial,walks,photography",4.6,0,1.5,15.5009,73.8378,82,winter,true,true
+P267,Our Lady of the Immaculate Conception Church,Panaji,Goa,heritage,"church,heritage,landmark,city",4.6,0,1,15.5059,73.8328,78,winter,true,true
+P268,Miramar Beach,Panaji,Goa,beach,"beach,sunset,city,coastal",4.4,0,2,15.4829,73.8398,74,winter,true,true
+P269,Goa State Museum,Panaji,Goa,museum,"museum,history,culture,learning",4.2,0,1.5,15.4969,73.8188,62,winter,true,true
+P270,Panjim Market,Panaji,Goa,market,"market,shopping,local,food",4.3,0,1.5,15.4789,73.8218,66,winter,true,true
+P271,Sri Venkateswara Temple,Tirupati,Andhra Pradesh,temple,"temple,spiritual,pilgrimage,iconic",4.9,0,3,13.6388,79.4292,99,winter,true,true
+P272,Akasa Ganga,Tirupati,Andhra Pradesh,nature,"waterfall,spiritual,scenic,hills",4.5,0,1.5,13.6438,79.4242,76,winter,true,true
+P273,Silathoranam,Tirupati,Andhra Pradesh,heritage,"rock-arch,heritage,nature,viewpoint",4.4,0,1,13.6208,79.4312,69,winter,true,true
+P274,Kapila Theertham,Tirupati,Andhra Pradesh,temple,"temple,waterfall,spiritual,quiet",4.5,0,1.5,13.6348,79.4102,74,winter,true,true
+P275,Chandragiri Fort,Tirupati,Andhra Pradesh,fort,"fort,history,heritage,architecture",4.3,20,1.5,13.6168,79.4132,67,winter,true,true
+P276,Varkala Cliff,Varkala,Kerala,viewpoint,"cliff,coastal,sunset,cafes",4.8,0,2.5,8.7479,76.7263,94,winter,true,true
+P277,Papanasam Beach,Varkala,Kerala,beach,"beach,relaxed,spiritual,coastal",4.6,0,2,8.7529,76.7213,87,winter,true,true
+P278,Janardanaswamy Temple,Varkala,Kerala,temple,"temple,heritage,spiritual,local",4.4,0,1,8.7299,76.7283,70,winter,true,true
+P279,Kappil Beach,Varkala,Kerala,beach,"beach,backwaters,scenic,quiet",4.6,0,2.5,8.7439,76.7073,82,winter,true,true
+P280,Varkala Aquarium,Varkala,Kerala,museum,"aquarium,family,marine,learning",4.1,120,1,8.7259,76.7103,58,winter,true,true
+P281,Shore Temple,Mahabalipuram,Tamil Nadu,heritage,"temple,unesco,coastal,iconic",4.7,40,1.5,12.6369,80.2027,94,winter,true,true
+P282,Five Rathas,Mahabalipuram,Tamil Nadu,heritage,"unesco,monolith,heritage,architecture",4.7,40,1.5,12.6419,80.1977,88,winter,true,true
+P283,Arjuna's Penance,Mahabalipuram,Tamil Nadu,heritage,"rock-carving,heritage,art,history",4.6,0,1,12.6189,80.2047,80,winter,true,true
+P284,Mahabalipuram Beach,Mahabalipuram,Tamil Nadu,beach,"beach,coastal,walks,relaxed",4.3,0,2,12.6329,80.1837,72,winter,true,true
+P285,Krishna's Butter Ball,Mahabalipuram,Tamil Nadu,heritage,"rock-formation,photography,quirky,heritage",4.4,0,1,12.6149,80.1867,68,winter,true,true
+P286,Nakki Lake,Mount Abu,Rajasthan,lake,"lake,boating,sunset,scenic",4.5,0,2,24.6026,72.7256,84,winter,true,true
+P287,Dilwara Temples,Mount Abu,Rajasthan,temple,"temple,marble,heritage,architecture",4.8,0,2,24.6076,72.7206,92,winter,true,true
+P288,Guru Shikhar,Mount Abu,Rajasthan,viewpoint,"peak,viewpoint,scenic,road-trip",4.6,0,2,24.5846,72.7276,80,winter,true,true
+P289,Sunset Point Mount Abu,Mount Abu,Rajasthan,viewpoint,"sunset,viewpoint,hills,photography",4.5,0,1.5,24.5986,72.7066,76,winter,true,true
+P290,Mount Abu Market,Mount Abu,Rajasthan,market,"market,shopping,food,local",4.2,0,1.5,24.5806,72.7096,62,winter,true,true
+P291,Ajmer Sharif Dargah,Ajmer,Rajasthan,heritage,"dargah,spiritual,pilgrimage,iconic",4.8,0,1.5,26.4599,74.6499,96,winter,true,true
+P292,Ana Sagar Lake,Ajmer,Rajasthan,lake,"lake,walks,sunset,relaxed",4.4,0,1.5,26.4649,74.6449,74,winter,true,true
+P293,Adhai Din Ka Jhonpra,Ajmer,Rajasthan,heritage,"heritage,architecture,history,monument",4.5,0,1,26.4419,74.6519,72,winter,true,true
+P294,Akbari Fort and Museum,Ajmer,Rajasthan,fort,"fort,museum,history,heritage",4.3,20,1.5,26.4559,74.6309,64,winter,true,true
+P295,Ajmer Market,Ajmer,Rajasthan,market,"market,shopping,food,local",4.2,0,1.5,26.4379,74.6339,60,winter,true,true
+P296,Raja Mahal,Orchha,Madhya Pradesh,palace,"palace,heritage,history,architecture",4.7,40,2,25.3610,78.6500,86,winter,true,true
+P297,Jahangir Mahal,Orchha,Madhya Pradesh,palace,"palace,heritage,photography,history",4.8,40,2,25.3660,78.6450,90,winter,true,true
+P298,Chaturbhuj Temple,Orchha,Madhya Pradesh,temple,"temple,heritage,architecture,viewpoint",4.5,0,1.5,25.3430,78.6520,74,winter,true,true
+P299,Orchha Fort Complex,Orchha,Madhya Pradesh,fort,"fort,heritage,history,river-view",4.7,50,2.5,25.3570,78.6310,82,winter,true,true
+P300,Betwa Riverside Cenotaphs,Orchha,Madhya Pradesh,heritage,"cenotaphs,river,photography,sunset",4.5,0,1.5,25.3390,78.6340,70,winter,true,true
+P301,Namgyal Monastery,McLeod Ganj,Himachal Pradesh,heritage,"monastery,spiritual,tibetan,culture",4.7,0,1.5,32.2526,76.3319,84,summer,true,true
+P302,Bhagsu Waterfall,McLeod Ganj,Himachal Pradesh,nature,"waterfall,trekking,nature,scenic",4.4,0,2,32.2576,76.3269,78,summer,true,true
+P303,Dalai Lama Temple Complex,McLeod Ganj,Himachal Pradesh,temple,"temple,spiritual,peaceful,tibetan",4.8,0,2,32.2346,76.3339,92,summer,true,true
+P304,Naddi View Point,McLeod Ganj,Himachal Pradesh,viewpoint,"viewpoint,himalaya,sunset,scenic",4.6,0,1.5,32.2486,76.3129,80,summer,true,true
+P305,McLeod Square Market,McLeod Ganj,Himachal Pradesh,market,"market,cafes,shopping,local",4.3,0,1.5,32.2306,76.3159,66,summer,true,true
+P306,Vivekananda Rock Memorial,Kanyakumari,Tamil Nadu,heritage,"monument,sea,iconic,history",4.8,50,2,8.0983,77.5485,95,winter,true,true
+P307,Thiruvalluvar Statue,Kanyakumari,Tamil Nadu,heritage,"statue,sea,photography,landmark",4.6,0,1.5,8.1033,77.5435,82,winter,true,true
+P308,Kanyakumari Beach,Kanyakumari,Tamil Nadu,beach,"beach,sunrise,coastal,iconic",4.5,0,2,8.0803,77.5505,84,winter,true,true
+P309,Gandhi Memorial,Kanyakumari,Tamil Nadu,heritage,"memorial,history,landmark,quiet",4.4,0,1,8.0943,77.5295,70,winter,true,true
+P310,Our Lady of Ransom Church,Kanyakumari,Tamil Nadu,heritage,"church,coastal,architecture,heritage",4.4,0,1,8.0763,77.5325,68,winter,true,true
+P311,Mahakaleshwar Temple,Ujjain,Madhya Pradesh,temple,"temple,spiritual,pilgrimage,iconic",4.8,0,2,23.1865,75.7985,97,winter,true,true
+P312,Ram Ghat,Ujjain,Madhya Pradesh,heritage,"ghat,spiritual,rituals,heritage",4.5,0,1.5,23.1915,75.7935,76,winter,true,true
+P313,Kal Bhairav Temple,Ujjain,Madhya Pradesh,temple,"temple,spiritual,local,heritage",4.6,0,1,23.1685,75.8005,78,winter,true,true
+P314,Sandipani Ashram,Ujjain,Madhya Pradesh,heritage,"ashram,spiritual,quiet,history",4.4,0,1,23.1825,75.7795,66,winter,true,true
+P315,Harsiddhi Temple,Ujjain,Madhya Pradesh,temple,"temple,spiritual,heritage,landmark",4.6,0,1,23.1645,75.7825,72,winter,true,true
+P316,Kozhikode Beach,Kozhikode,Kerala,beach,"beach,sunset,coastal,relaxed",4.4,0,2,11.2688,75.7904,80,winter,true,true
+P317,SM Street,Kozhikode,Kerala,market,"market,shopping,food,local",4.4,0,2,11.2738,75.7854,76,winter,true,true
+P318,Thusharagiri Falls,Kozhikode,Kerala,nature,"waterfall,nature,trekking,scenic",4.6,30,2.5,11.2508,75.7924,82,winter,true,true
+P319,Beypore Beach,Kozhikode,Kerala,beach,"beach,harbour,coastal,walks",4.3,0,2,11.2648,75.7714,68,winter,true,true
+P320,Kappad Beach,Kozhikode,Kerala,beach,"beach,history,sunset,coastal",4.5,0,2,11.2468,75.7744,74,winter,true,true
