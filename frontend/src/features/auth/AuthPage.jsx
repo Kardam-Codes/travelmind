@@ -43,7 +43,7 @@ function AuthPage() {
       if (response.default_org_id) {
         setActiveOrgId(response.default_org_id);
       }
-      navigate("/my-trips");
+      navigate(mode === "signup" ? "/start" : "/my-trips");
     } catch (requestError) {
       setError(requestError.message);
     } finally {
