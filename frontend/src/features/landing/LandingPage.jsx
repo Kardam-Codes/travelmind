@@ -2,13 +2,57 @@
 Feature: Landing Page
 File Purpose: Introduce TravelMind with an editorial digital concierge experience
 Owner: Jay
-Dependencies: TripInput, mockData, Icon
+Dependencies: TripInput, Icon
 Last Updated: 2026-03-13
 */
-import { features, inspirationCards } from "../../data/mockData";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon";
 import TripInput from "../trip-input/TripInput";
-import { Link } from "react-router-dom";
+import { apiRequest } from "../../utils/apiClient";
+import { setActiveTripId } from "../../utils/session";
+
+const inspirationCards = [
+  {
+    title: "Jaipur at First Light",
+    eyebrow: "Royal heritage",
+    summary: "Palace courtyards, old-city bazaars, and sunrise fort views shaped into a composed Rajasthan escape.",
+    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Hawa%20Mahal-Jaipur-Rajasthan.jpg",
+    size: "large",
+  },
+  {
+    title: "Goa by Monsoon Tide",
+    eyebrow: "Coastal editorial",
+    summary: "Beach clubs, Portuguese lanes, and late golden-hour drives along the Konkan edge.",
+    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Goa%20beautiful%20beach.JPG",
+    size: "tall",
+  },
+  {
+    title: "Munnar in Cloud Mist",
+    eyebrow: "Highland calm",
+    summary: "Tea hills, cool weather, and long scenic drives with a quieter, slower rhythm.",
+    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Munnar%20%28Kerala%29%20Tea%20Gardens.jpg",
+    size: "square",
+  },
+];
+
+const features = [
+  {
+    title: "AI itinerary generation",
+    description: "Natural-language requests become day-by-day plans with pacing, dining, stay, and activity logic.",
+    icon: "sparkles",
+  },
+  {
+    title: "Map-based trip planning",
+    description: "Pins, routes, and travel-time context stay central so the itinerary always reflects geography.",
+    icon: "map",
+  },
+  {
+    title: "Smart recommendations",
+    description: "Recommendations adapt to budget, group style, and destination mood without turning the UI into a dashboard.",
+    icon: "compass",
+  },
+];
 
 function imageShape(size) {
   if (size === "large") {
@@ -21,6 +65,34 @@ function imageShape(size) {
 }
 
 function LandingPage() {
+  const navigate = useNavigate();
+  const [tripQuery, setTripQuery] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handlePlanTrip() {
+    if (!tripQuery.trim()) {
+      setError("Enter a trip request with a city, duration, or budget.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const dashboard = await apiRequest("/trips/generate-from-query", {
+        method: "POST",
+        body: JSON.stringify({ query: tripQuery }),
+      });
+      setActiveTripId(dashboard.trip.id);
+      navigate(`/planner?tripId=${dashboard.trip.id}`);
+    } catch (requestError) {
+      setError(requestError.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <main className="mx-auto flex max-w-7xl flex-col gap-24 px-4 pb-20 pt-12 md:px-6 md:pt-16">
       <section className="relative overflow-hidden rounded-[2.5rem] bg-brand-gradient px-6 py-16 text-white shadow-float md:px-12 md:py-24">
@@ -34,7 +106,14 @@ function LandingPage() {
             TravelMind combines editorial calm with AI-assisted planning so every destination feels considered, mapped, and personal.
           </p>
           <div className="mt-10">
-            <TripInput />
+            <TripInput
+              disabled={isSubmitting}
+              error={error}
+              onChange={setTripQuery}
+              onSubmit={handlePlanTrip}
+              submitLabel={isSubmitting ? "Planning..." : "Plan"}
+              value={tripQuery}
+            />
           </div>
         </div>
       </section>
@@ -71,10 +150,7 @@ function LandingPage() {
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {features.map((feature, index) => (
-            <article
-              key={feature.title}
-              className={`card-surface ${index === 1 ? "md:translate-y-8" : ""}`}
-            >
+            <article key={feature.title} className={`card-surface ${index === 1 ? "md:translate-y-8" : ""}`}>
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-secondary-container text-primary dark:bg-white/10 dark:text-white">
                 <Icon name={feature.icon} />
               </div>

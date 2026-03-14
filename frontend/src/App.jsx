@@ -23,7 +23,7 @@ function App() {
         <Route path="/login" element={<AuthPage />} />
         <Route path="/planner" element={<PlannerDashboard />} />
         <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/trip/jaipur-curation" element={<TripDetailsPage />} />
+        <Route path="/trip/:tripId" element={<TripDetailsPage />} />
         <Route path="/my-trips" element={<ProfileTripsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

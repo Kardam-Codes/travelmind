@@ -3,6 +3,11 @@ from sqlmodel import Session, select
 from app.database.models.hotel import Hotel
 
 
+def get_hotel_by_id(session: Session, hotel_id: int) -> Optional[Hotel]:
+    statement = select(Hotel).where(Hotel.id == hotel_id)
+    return session.exec(statement).first()
+
+
 def get_hotels_by_city(session: Session, city_name: str) -> List[Hotel]:
     statement = select(Hotel).where(Hotel.city == city_name).order_by(Hotel.rating.desc())
     return list(session.exec(statement).all())

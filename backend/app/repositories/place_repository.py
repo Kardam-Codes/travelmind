@@ -3,6 +3,11 @@ from sqlmodel import Session, select
 from app.database.models.place import Place
 
 
+def get_place_by_id(session: Session, place_id: int) -> Optional[Place]:
+    statement = select(Place).where(Place.id == place_id)
+    return session.exec(statement).first()
+
+
 def get_places_by_city(session: Session, city_name: str) -> List[Place]:
     statement = select(Place).where(Place.city == city_name).order_by(Place.rating.desc())
     return list(session.exec(statement).all())

@@ -19,6 +19,7 @@ class WishlistRead(SQLModel):
     user_id: str
     item_id: int
     item_type: str
+    item_name: str
 
 
 router = APIRouter(prefix="/wishlist", tags=["Wishlist"])

@@ -2,19 +2,49 @@
 Feature: Planner Dashboard
 File Purpose: Render the AI-first trip planner with chat, map, and itinerary builder
 Owner: Jay
-Dependencies: CollaborationPanel, ItineraryView, mockData, Icon
+Dependencies: CollaborationPanel, ItineraryView, Icon, Fetch
 Last Updated: 2026-03-13
 */
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import CollaborationPanel from "../collaboration/CollaborationPanel";
 import ItineraryView from "../itinerary/ItineraryView";
-import { mapPlaces } from "../../data/mockData";
 import Icon from "../../components/Icon";
+import { apiRequest } from "../../utils/apiClient";
+import { getActiveTripId, setActiveTripId } from "../../utils/session";
+import { buildMapPlaces } from "../../utils/tripPresentation";
 
 function PlannerDashboard() {
+  const [searchParams] = useSearchParams();
+  const [dashboard, setDashboard] = useState(null);
+  const [error, setError] = useState("");
+  const tripId = searchParams.get("tripId") || getActiveTripId();
+
+  useEffect(() => {
+    async function loadDashboard() {
+      if (!tripId) {
+        return;
+      }
+
+      try {
+        const response = await apiRequest(`/trips/${tripId}/dashboard`);
+        setDashboard(response);
+        setActiveTripId(response.trip.id);
+      } catch (requestError) {
+        setError(requestError.message);
+      }
+    }
+
+    loadDashboard();
+  }, [tripId]);
+
+  const mapPlaces = buildMapPlaces(dashboard?.places || []);
+  const topHotel = dashboard?.hotels?.[0];
+
   return (
     <main className="mx-auto max-w-[1500px] px-4 pb-12 pt-8 md:px-6">
       <section className="grid gap-6 xl:grid-cols-[22rem,minmax(0,1fr),25rem]">
-        <CollaborationPanel />
+        <CollaborationPanel trip={dashboard?.trip} tripId={dashboard?.trip?.id} />
 
         <div className="section-shell relative min-h-[700px] overflow-hidden p-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,109,119,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(140,37,0,0.14),transparent_26%)]" />
@@ -43,15 +73,17 @@ function PlannerDashboard() {
 
           <div className="glass-panel absolute bottom-8 left-8 max-w-sm rounded-[1.75rem] p-5 shadow-float">
             <p className="label-md text-primary/70 dark:text-white/55">Pinned highlight</p>
-            <h2 className="mt-2 text-2xl font-bold">Samode Haveli</h2>
+            <h2 className="mt-2 text-2xl font-bold">{topHotel?.name || dashboard?.places?.[0]?.name || "Waiting for a trip"}</h2>
             <p className="mt-3 text-sm leading-7 text-text/70 dark:text-white/70">
-              Riverside arrival, private boat access, and an easy transition into a quieter first evening.
+              {topHotel
+                ? `Top stay near ${topHotel.nearby_area || topHotel.city}, budget category ${topHotel.budget_category || "curated"}.`
+                : "Generate a trip from the landing page to pin a recommendation here."}
             </p>
             <div className="mt-4 flex items-center gap-4 text-sm">
               <span className="rounded-full bg-secondary-container px-3 py-2 text-tertiary dark:bg-white/10 dark:text-white">
                 Top choice
               </span>
-              <span className="text-primary dark:text-white">20 min from airport</span>
+              <span className="text-primary dark:text-white">{dashboard?.trip?.destination_city || "No destination selected"}</span>
             </div>
           </div>
 
@@ -65,14 +97,15 @@ function PlannerDashboard() {
                   {place.id}
                 </button>
                 <div className="glass-panel pointer-events-none absolute left-1/2 top-14 w-48 -translate-x-1/2 rounded-full px-4 py-3 text-center text-xs font-semibold opacity-0 shadow-ambient transition-opacity group-hover:opacity-100">
-                  {place.title}
+                  {place.name}
                 </div>
               </div>
             </div>
           ))}
+          {error ? <p className="absolute right-8 top-24 rounded-full bg-white/80 px-4 py-3 text-sm text-tertiary">{error}</p> : null}
         </div>
 
-        <ItineraryView />
+        <ItineraryView itinerary={dashboard?.itinerary} trip={dashboard?.trip} />
       </section>
     </main>
   );
