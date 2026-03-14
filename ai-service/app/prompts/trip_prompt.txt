@@ -5,3 +5,13 @@ Owner: Yug
 Dependencies: LLM
 Last Updated: Initial Setup
 """
+User Query: "{UserQuery}"
+
+Required Format:
+{
+  "destinationCity": "string",
+  "durationDays": integer,
+  "budgetLevel": "low" | "moderate" | "high",
+  "travelInterests": ["string"],
+  "travelerGroup": "solo" | "family" | "couple" | "friends"
+}
