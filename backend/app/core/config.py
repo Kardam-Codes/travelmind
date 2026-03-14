@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     ai_service_base_url: str = "http://127.0.0.1:8001"
     ai_service_timeout_seconds: float = 120.0
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
+    cors_origin_regex: str = r"https://.*\.vercel\.app"
     jwt_secret: str = "dev-secret-change-me"
     jwt_algorithm: str = "HS256"
     jwt_exp_minutes: int = 720
