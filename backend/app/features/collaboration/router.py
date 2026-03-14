@@ -20,8 +20,12 @@ def get_trip_collaboration_events(trip_id: int, session: Session = Depends(get_s
             id=event.id,
             trip_id=event.trip_id,
             user_id=event.user_id,
+            operation_id=event.operation_id,
+            base_version=event.base_version,
             event_type=event.event_type,
+            status=event.status,
             payload=json.dumps(json.loads(event.payload)) if event.payload else None,
+            created_at=event.created_at.isoformat(),
         )
         for event in events
     ]

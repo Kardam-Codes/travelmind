@@ -5,7 +5,7 @@ from sqlmodel import Session
 from app.database.session import get_session
 from app.features.trip_planning.query_service import build_trip_dashboard, create_trip_from_query
 from app.features.trip_planning.service import create_trip_plan, fetch_all_trips, fetch_trip
-from app.schemas.trip import TripCreate, TripDashboardResponse, TripQueryRequest, TripRead
+from app.schemas.trip import TripCreate, TripDashboardResponse, TripGenerationResponse, TripQueryRequest, TripRead
 
 
 router = APIRouter(prefix="/trips", tags=["Trip Planning"])
@@ -16,7 +16,7 @@ def create_trip_endpoint(trip_data: TripCreate, session: Session = Depends(get_s
     return create_trip_plan(session, trip_data)
 
 
-@router.post("/generate-from-query", response_model=TripDashboardResponse)
+@router.post("/generate-from-query", response_model=TripGenerationResponse)
 def create_trip_from_query_endpoint(payload: TripQueryRequest, session: Session = Depends(get_session)):
     return create_trip_from_query(session, payload.query)
 

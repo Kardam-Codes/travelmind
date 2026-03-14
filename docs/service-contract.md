@@ -1,17 +1,16 @@
-
 # Service Communication Contract
 
 This document defines communication between:
 
-Frontend → Backend → AI Service
+Frontend -> Backend -> AI Service
 
 ---
 
-# 1. Frontend → Backend APIs
+# 1. Frontend -> Backend APIs
 
 ## Generate Trip
 
-POST /api/trip/generate
+POST /trips/generate-from-query
 
 Request:
 
@@ -19,118 +18,107 @@ Request:
   "query": "Plan a 3 day Goa trip under 20k"
 }
 
-Response:
+Response when ready:
 
 {
-  "destination": "Goa",
-  "duration": 3,
-  "budget": 20000,
-  "itinerary": [...]
+  "status": "ready",
+  "trip": {...},
+  "places": [...],
+  "activities": [...],
+  "hotels": [...],
+  "itinerary": {...},
+  "ai_provider": "ollama-local"
 }
+
+Response when clarification is needed:
+
+{
+  "status": "clarification_needed",
+  "missing_fields": ["destination_city"],
+  "suggested_questions": ["Which supported city do you want to visit?"]
+}
+
+---
+
+## Fetch Dashboard
+
+GET /trips/{trip_id}/dashboard
+
+Returns the canonical trip, recommendation, and itinerary state from PostgreSQL.
 
 ---
 
 ## Save Wishlist
 
-POST /api/wishlist
+POST /wishlist/
 
-Request
+Request:
 
 {
-  "item_id": "hotel_101"
+  "user_id": "12",
+  "item_id": 101,
+  "item_type": "place"
 }
 
 ---
 
-## Fetch Recommendations
+# 2. Backend -> AI Service
 
-GET /api/recommendations?location=goa
+Base URL:
 
-Response
+http://localhost:8001
+
+---
+
+## Extract Intent
+
+POST /ai/extract-intent
+
+Request:
 
 {
-  "hotels": [...],
-  "activities": [...]
+  "query": "3 day Goa trip under 20k",
+  "supported_cities": ["Goa", "Jaipur"],
+  "allowed_preference_tags": ["beach", "food", "heritage"],
+  "allowed_traveler_types": ["solo", "family", "couple", "friends"]
+}
+
+Response:
+
+{
+  "destination_city": "Goa",
+  "duration_days": 3,
+  "budget_total": 20000,
+  "budget_level": "moderate",
+  "preferences": ["beach"],
+  "traveler_type": "friends",
+  "confidence": 0.82,
+  "missing_fields": [],
+  "raw_reasoning_summary": "...",
+  "normalized_query": "Plan a 3 day Goa trip under 20k",
+  "provider": "ollama-local"
 }
 
 ---
 
-# 2. Backend → AI Service
+# 3. Real-Time Collaboration
 
-Base URL
+WebSocket endpoint:
 
-http://localhost:8000
+/ws/trip/{trip_id}?user_id={user_id}
 
----
+Supported messages:
 
-## Parse Intent
-
-POST /ai/parse-intent
-
-Request
-
-{
-  "query": "3 day Goa trip under 20k"
-}
-
-Response
-
-{
-  "destination": "Goa",
-  "duration": 3,
-  "budget": 20000
-}
-
----
-
-## Generate Itinerary
-
-POST /ai/generate-itinerary
-
-Request
-
-{
-  "destination": "Goa",
-  "duration": 3,
-  "preferences": ["beaches", "nightlife"]
-}
-
-Response
-
-{
-  "itinerary": [...]
-}
-
----
-
-# 3. Backend → Google Maps
-
-## Route Optimization
-
-POST /maps/optimize-route
-
-Request
-
-{
-  "locations": ["Hotel", "Beach", "Market"]
-}
-
-Response
-
-{
-  "optimized_route": [...]
-}
-
----
-
-# 4. Real-Time Collaboration
-
-Socket.io Events
-
-JOIN_TRIP
-
-UPDATE_ITINERARY
-
-VOTE_ACTIVITY
-
-SYNC_STATE
+- CHAT_MESSAGE
+- SYNC_SNAPSHOT
+- ADD_ITEM
+- REMOVE_ITEM
+- MOVE_ITEM
+- UPDATE_ITEM
+- REORDER_DAY
+- LOCK_DAY
+- UNLOCK_DAY
+- ITINERARY_APPLIED
+- ITINERARY_REJECTED
+- DAY_LOCK_CHANGED
+- USER_PRESENCE

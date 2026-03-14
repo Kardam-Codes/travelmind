@@ -5,6 +5,13 @@ from sqlmodel import Session, select
 from app.database.models.collaboration import CollaborationEvent
 
 
+def create_event(session: Session, event: CollaborationEvent) -> CollaborationEvent:
+    session.add(event)
+    session.commit()
+    session.refresh(event)
+    return event
+
+
 def get_events_by_trip_id(session: Session, trip_id: int) -> List[CollaborationEvent]:
     statement = (
         select(CollaborationEvent)

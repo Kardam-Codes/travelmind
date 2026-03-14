@@ -80,12 +80,21 @@ function LandingPage() {
     setError("");
 
     try {
-      const dashboard = await apiRequest("/trips/generate-from-query", {
+      const response = await apiRequest("/trips/generate-from-query", {
         method: "POST",
         body: JSON.stringify({ query: tripQuery }),
       });
-      setActiveTripId(dashboard.trip.id);
-      navigate(`/planner?tripId=${dashboard.trip.id}`);
+
+      if (response.status === "clarification_needed") {
+        const promptText = response.suggested_questions?.length
+          ? response.suggested_questions.join(" ")
+          : "I need a few more details before I can generate the trip.";
+        setError(promptText);
+        return;
+      }
+
+      setActiveTripId(response.trip.id);
+      navigate(`/planner?tripId=${response.trip.id}`);
     } catch (requestError) {
       setError(requestError.message);
     } finally {

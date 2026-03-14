@@ -1,24 +1,23 @@
-
 # Backend Specification
 
 ## Overview
 
-The backend is implemented using **FastAPI** and combines both backend API logic and AI services.
+The backend is implemented using FastAPI and keeps PostgreSQL as the source of truth for travel inventory, trips, itinerary state, and collaboration events.
 
 Responsibilities:
 
 - Handle frontend API requests
-- Perform intent extraction
-- Generate travel itineraries
-- Query travel catalog database
-- Manage WebSocket collaboration
-- Integrate Google Maps route optimization
+- Call the local AI service for trip intent extraction
+- Validate extracted intent against supported cities and known tags
+- Generate recommendations and itineraries from PostgreSQL-backed data
+- Manage WebSocket collaboration with versioned itinerary edits
 
 ---
 
 # System Architecture
 
-Frontend → FastAPI Backend → PostgreSQL / Google Maps API
+Frontend -> FastAPI Backend -> PostgreSQL
+Frontend -> FastAPI Backend -> Local AI Service
 
 The backend also provides WebSocket endpoints for real-time collaboration.
 
@@ -27,125 +26,34 @@ The backend also provides WebSocket endpoints for real-time collaboration.
 # AI Processing Flow
 
 1. User submits natural language trip request
-2. LLM extracts trip parameters:
-   - destination
-   - duration
-   - budget
-   - preferences
-3. Python recommendation engine filters catalog data
-4. Itinerary generator builds structured travel plan
-5. Route optimization organizes travel order
+2. Backend calls the AI service for structured intent extraction
+3. Backend validates or requests clarification
+4. Recommendation engine filters catalog data
+5. Itinerary generator builds a structured travel plan
 
 ---
 
-# REST API Endpoints
+# Collaboration Flow
 
-## Generate Trip
-
-POST /api/trip/generate
-
-Request
-
-{
-  "query": "Plan a 3 day Goa trip under 20000"
-}
-
-Response
-
-{
-  "destination": "Goa",
-  "duration": 3,
-  "budget": 20000,
-  "itinerary": [...]
-}
+1. Client loads the canonical dashboard through REST
+2. Client connects to `/ws/trip/{trip_id}?user_id={user_id}`
+3. Client sends versioned itinerary operations
+4. Server validates version and lock state
+5. Server applies accepted changes in PostgreSQL and broadcasts canonical results
 
 ---
 
-## Recommendations
+# Current Collaboration Events
 
-GET /api/recommendations?location=goa
-
-Response
-
-{
-  "hotels": [...],
-  "activities": [...]
-}
-
----
-
-## Wishlist
-
-POST /api/wishlist/add
-
-Request
-
-{
-  "item_id": "activity_101"
-}
-
----
-
-# WebSocket Collaboration
-
-Endpoint:
-
-/ws/trip/{trip_id}
-
-Supported Events:
-
-JOIN_TRIP
-
-UPDATE_ITINERARY
-
-VOTE_ACTIVITY
-
-SYNC_STATE
-
-Example Message
-
-{
-  "event": "UPDATE_ITINERARY",
-  "data": {...}
-}
-
----
-
-# Database Schema
-
-## Places
-
-id
-name
-location
-category
-rating
-
-## Hotels
-
-id
-name
-location
-price
-rating
-
-## Activities
-
-id
-name
-location
-category
-price
-
----
-
-# Route Optimization
-
-Uses **Google Maps Distance Matrix API**
-
-Steps:
-
-1. Collect itinerary locations
-2. Calculate travel distances
-3. Optimize order to minimize travel time
-4. Update itinerary schedule
+- CHAT_MESSAGE
+- ADD_ITEM
+- REMOVE_ITEM
+- MOVE_ITEM
+- UPDATE_ITEM
+- REORDER_DAY
+- LOCK_DAY
+- UNLOCK_DAY
+- ITINERARY_APPLIED
+- ITINERARY_REJECTED
+- DAY_LOCK_CHANGED
+- USER_PRESENCE

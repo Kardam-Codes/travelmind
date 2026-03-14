@@ -36,7 +36,8 @@ export async function apiRequest(path, options = {}) {
   return response.json();
 }
 
-export function buildTripWebSocketUrl(tripId) {
+export function buildTripWebSocketUrl(tripId, userId = "") {
   const base = API_BASE_URL.replace(/^http/, "ws");
-  return `${base}/ws/trip/${tripId}`;
+  const query = userId ? `?user_id=${encodeURIComponent(userId)}` : "";
+  return `${base}/ws/trip/${tripId}${query}`;
 }

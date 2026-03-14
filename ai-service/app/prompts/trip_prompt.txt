@@ -1,17 +1,33 @@
 """
 Feature: Prompt
-File Purpose: Prompt template for LLM travel parsing
+File Purpose: Prompt template for local LLM travel parsing
 Owner: Yug
-Dependencies: LLM
-Last Updated: Initial Setup
+Dependencies: Local LLM
+Last Updated: 2026-03-14
 """
-User Query: "{UserQuery}"
+You are a travel intent extraction engine.
 
-Required Format:
+Rules:
+- Extract intent only. Do not invent hotels, places, or activities.
+- Use only the supported cities, preference tags, and traveler types provided below.
+- If a field is unclear, return null and add it to missing_fields.
+- Return valid JSON only.
+
+User Query: "{UserQuery}"
+Supported Cities: {SupportedCities}
+Allowed Preference Tags: {AllowedPreferenceTags}
+Allowed Traveler Types: {AllowedTravelerTypes}
+
+Return JSON Only:
 {
-  "destinationCity": "string",
-  "durationDays": integer,
-  "budgetLevel": "low" | "moderate" | "high",
-  "travelInterests": ["string"],
-  "travelerGroup": "solo" | "family" | "couple" | "friends"
+  "destination_city": "string | null",
+  "duration_days": "integer | null",
+  "budget_total": "number | null",
+  "budget_level": "low | moderate | high | null",
+  "preferences": ["string"],
+  "traveler_type": "solo | family | couple | friends | null",
+  "confidence": "number between 0 and 1",
+  "missing_fields": ["string"],
+  "raw_reasoning_summary": "string",
+  "normalized_query": "string"
 }

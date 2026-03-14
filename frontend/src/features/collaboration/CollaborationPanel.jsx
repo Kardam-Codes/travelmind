@@ -5,10 +5,9 @@ Owner: Jay
 Dependencies: WebSockets
 Last Updated: 2026-03-13
 */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "../../components/Icon";
-import { apiRequest, buildTripWebSocketUrl } from "../../utils/apiClient";
-import { getStoredUser } from "../../utils/session";
+import { apiRequest } from "../../utils/apiClient";
 
 const suggestedPrompts = [
   "Suggest a quieter first evening",
@@ -16,99 +15,41 @@ const suggestedPrompts = [
   "Add a market stop before dinner",
 ];
 
-function CollaborationPanel({ trip, tripId }) {
-  const socketRef = useRef(null);
-  const [messages, setMessages] = useState([]);
+function CollaborationPanel({ messages, onSendMessage, trip, tripId, websocketReady }) {
   const [draft, setDraft] = useState("");
+  const [history, setHistory] = useState([]);
   const [error, setError] = useState("");
-  const [isSocketReady, setIsSocketReady] = useState(false);
 
   useEffect(() => {
     if (!tripId) {
-      setMessages([]);
-      return undefined;
+      setHistory([]);
+      return;
     }
-
-    let isMounted = true;
-    const user = getStoredUser();
 
     async function loadHistory() {
       try {
         const response = await apiRequest(`/collaboration/${tripId}/events`);
-        if (!isMounted) {
-          return;
-        }
-        setMessages(
-          response.map((event) => {
-            const payload = event.payload ? JSON.parse(event.payload) : {};
-            return {
-              id: event.id,
-              speaker: event.user_id === String(user?.user_id || "guest") ? "You" : event.user_id,
-              text: payload.message || payload.note || event.event_type,
-            };
-          }),
+        setHistory(
+          response
+            .filter((event) => event.event_type === "CHAT_MESSAGE")
+            .map((event) => {
+              const payload = event.payload ? JSON.parse(event.payload) : {};
+              return {
+                id: event.id,
+                speaker: event.user_id,
+                text: payload.message || "",
+              };
+            }),
         );
       } catch (requestError) {
-        if (isMounted) {
-          setError(requestError.message);
-        }
+        setError(requestError.message);
       }
     }
 
     loadHistory();
-
-    const socket = new WebSocket(buildTripWebSocketUrl(tripId));
-    socketRef.current = socket;
-    setIsSocketReady(false);
-
-    socket.addEventListener("open", () => {
-      if (isMounted) {
-        setIsSocketReady(true);
-      }
-    });
-
-    socket.addEventListener("message", (event) => {
-      const payload = JSON.parse(event.data);
-      setMessages((current) => [
-        ...current,
-        {
-          id: `${payload.user_id}-${Date.now()}`,
-          speaker: payload.user_id === String(user?.user_id || "guest") ? "You" : payload.user_id,
-          text: payload.payload?.message || payload.type,
-        },
-      ]);
-    });
-
-    socket.addEventListener("error", () => {
-      if (isMounted) {
-        setError("Live collaboration could not connect.");
-      }
-    });
-
-    return () => {
-      isMounted = false;
-      setIsSocketReady(false);
-      socket.close();
-      socketRef.current = null;
-    };
   }, [tripId]);
 
-  function sendMessage(messageText) {
-    if (!tripId || !messageText.trim() || !socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) {
-      return;
-    }
-
-    const user = getStoredUser();
-    socketRef.current.send(
-      JSON.stringify({
-        type: "CHAT_MESSAGE",
-        user_id: String(user?.user_id || "guest"),
-        payload: {
-          message: messageText.trim(),
-        },
-      }),
-    );
-  }
+  const mergedMessages = [...history, ...messages];
 
   return (
     <aside className="section-shell flex h-full min-h-[700px] flex-col gap-8 lg:w-[22rem]">
@@ -121,7 +62,7 @@ function CollaborationPanel({ trip, tripId }) {
       </div>
 
       <div className="space-y-5">
-        {messages.map((entry) => (
+        {mergedMessages.map((entry) => (
           <div key={`${entry.speaker}-${entry.id}`} className="space-y-2">
             <div className="flex items-center gap-2">
               <div
@@ -142,7 +83,7 @@ function CollaborationPanel({ trip, tripId }) {
             </div>
           </div>
         ))}
-        {!messages.length ? (
+        {!mergedMessages.length ? (
           <div className="rounded-[1.75rem] bg-surface-container-lowest/85 p-5 text-sm leading-7 text-text/70 shadow-ambient dark:bg-dark-card/80 dark:text-white/70">
             Start the collaboration feed with a prompt or send a message below.
           </div>
@@ -157,7 +98,7 @@ function CollaborationPanel({ trip, tripId }) {
             <button
               key={prompt}
               className="flex w-full items-center justify-between rounded-full bg-surface-container-lowest/80 px-5 py-4 text-left text-sm text-text/75 transition-transform hover:-translate-y-0.5 dark:bg-dark-card/80 dark:text-white/75"
-              onClick={() => sendMessage(prompt)}
+              onClick={() => onSendMessage?.(prompt)}
               type="button"
             >
               <span>{prompt}</span>
@@ -177,9 +118,9 @@ function CollaborationPanel({ trip, tripId }) {
         />
         <button
           className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white"
-          disabled={!isSocketReady}
+          disabled={!websocketReady}
           onClick={() => {
-            sendMessage(draft);
+            onSendMessage?.(draft);
             setDraft("");
           }}
           type="button"

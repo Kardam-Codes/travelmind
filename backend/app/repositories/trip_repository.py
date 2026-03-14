@@ -18,3 +18,10 @@ def get_trip_by_id(session: Session, trip_id: int) -> Optional[Trip]:
 def get_all_trips(session: Session) -> List[Trip]:
     statement = select(Trip).order_by(Trip.id.desc())
     return list(session.exec(statement).all())
+
+
+def save_trip(session: Session, trip: Trip) -> Trip:
+    session.add(trip)
+    session.commit()
+    session.refresh(trip)
+    return trip

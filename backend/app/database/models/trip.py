@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Optional
 from sqlmodel import Field, SQLModel
 
@@ -11,3 +12,7 @@ class Trip(SQLModel, table=True):
     preferences: Optional[str] = None
     traveler_type: Optional[str] = None
     status: str = Field(default="draft", nullable=False)
+    version: int = Field(default=1, nullable=False)
+    locked_by: Optional[str] = Field(default=None, index=True)
+    locked_day_number: Optional[int] = Field(default=None, index=True)
+    locked_at: Optional[datetime] = None

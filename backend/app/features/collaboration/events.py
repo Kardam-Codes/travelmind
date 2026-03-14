@@ -10,11 +10,17 @@ def save_collaboration_event(
     user_id: str,
     event_type: str,
     payload: dict | None = None,
+    operation_id: str | None = None,
+    base_version: int | None = None,
+    status: str = "applied",
 ) -> CollaborationEvent:
     event = CollaborationEvent(
         trip_id=trip_id,
         user_id=user_id,
+        operation_id=operation_id,
+        base_version=base_version,
         event_type=event_type,
+        status=status,
         payload=json.dumps(payload) if payload else None,
     )
     session.add(event)

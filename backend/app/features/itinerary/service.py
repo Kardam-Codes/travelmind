@@ -9,8 +9,9 @@ from app.repositories.itinerary_repository import (
     create_itinerary_item,
     delete_itinerary_by_trip_id,
     get_itinerary_by_trip_id,
+    persist_changes,
 )
-from app.repositories.trip_repository import get_trip_by_id
+from app.repositories.trip_repository import get_trip_by_id, save_trip
 from app.schemas.itinerary import ItineraryDay, ItineraryResponse
 from app.schemas.recommendation import RecommendationRequest
 
@@ -53,6 +54,13 @@ def generate_trip_itinerary(session: Session, trip_id: int) -> ItineraryResponse
             hotel_id=item.get("hotel_id"),
         )
         saved_items.append(create_itinerary_item(session, itinerary_item))
+
+    persist_changes(session)
+    for item in saved_items:
+        session.refresh(item)
+
+    trip.version += 1
+    save_trip(session, trip)
 
     return _build_itinerary_response(trip_id, saved_items)
 

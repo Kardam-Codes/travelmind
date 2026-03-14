@@ -3,50 +3,41 @@ Feature: FastAPI Server
 File Purpose: Main AI API service
 Owner: Yug
 Dependencies: FastAPI
-Last Updated: Initial Setup
+Last Updated: 2026-03-14
 """
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from features.intent_extraction.intent_parser import IntentParser
-from features.recommendation_engine.recommendation_engine import RecommendationEngine
-from features.itinerary_generator.itinerary_generator import ItineraryGenerator
+from fastapi import FastAPI
+from pydantic import BaseModel, Field
+
+from features.intent_extraction.intent_parser import ExtractIntentResponse, IntentParser
+
 
 app = FastAPI(title="TravelMind AI Service")
+intent_parser = IntentParser()
 
-# Initialize Service Classes
-intentParser = IntentParser(llmClient=None)
-recEngine = RecommendationEngine()
-itineraryGen = ItineraryGenerator()
 
-class TripRequest(BaseModel):
-    userQuery: str
+class ExtractIntentRequest(BaseModel):
+    query: str
+    supported_cities: list[str] = Field(default_factory=list)
+    allowed_preference_tags: list[str] = Field(default_factory=list)
+    allowed_traveler_types: list[str] = Field(default_factory=list)
 
-@app.post("/ai/generate-trip")
-async def generate_trip(request: TripRequest):
-    # Step 1: Extract Intent
-    extractedIntent = intentParser.parse_user_intent(request.userQuery)
-    
-    # Step 2: Get Verified Recommendations
-    filteredRecs = recEngine.get_filtered_recommendations(extractedIntent)
-    
-    if not filteredRecs["topPlaces"]:
-        raise HTTPException(status_code=404, detail="No matching travel data found for this request.")
 
-    # Step 3: Build the Daily Schedule
-    finalItinerary = itineraryGen.generate_itinerary(
-        filteredRecs, 
-        extractedIntent["durationDays"]
+@app.get("/health")
+async def health_check():
+    return {"status": "ok", "service": "ai-service"}
+
+
+@app.post("/ai/extract-intent", response_model=ExtractIntentResponse)
+async def extract_intent(request: ExtractIntentRequest):
+    return intent_parser.parse_user_intent(
+        user_query=request.query,
+        supported_cities=request.supported_cities,
+        allowed_preference_tags=request.allowed_preference_tags,
+        allowed_traveler_types=request.allowed_traveler_types,
     )
 
-    return {
-        "status": "Success",
-        "tripDetails": {
-            "destination": extractedIntent["destinationCity"],
-            "budget": extractedIntent["budgetLevel"],
-            "itinerary": finalItinerary
-        }
-    }
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+    uvicorn.run(app, host="0.0.0.0", port=8001)
