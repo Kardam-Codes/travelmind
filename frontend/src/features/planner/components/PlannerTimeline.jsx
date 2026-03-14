@@ -13,6 +13,9 @@ function PlannerTimeline({
   onUnlockDay,
   onUpdateItem,
   operationError,
+  places = [],
+  activities = [],
+  hotels = [],
   route,
   selectedDay,
   selectedStopId,
@@ -30,20 +33,29 @@ function PlannerTimeline({
     return route?.legs?.[stopIndex] || null;
   }
 
+  function findImageForItem(item) {
+    if (item.place_id) {
+      return places.find((place) => place.id === item.place_id)?.image_url || "";
+    }
+    if (item.activity_id) {
+      return activities.find((activity) => activity.id === item.activity_id)?.image_url || "";
+    }
+    if (item.hotel_id) {
+      return hotels.find((hotel) => hotel.id === item.hotel_id)?.image_url || "";
+    }
+    return "";
+  }
+
   const visibleDays = selectedDay == null ? days : days.filter((day) => day.day_number === selectedDay);
 
   return (
-    <section className="section-shell flex min-h-[48rem] flex-col">
-      <div className="mb-6 flex items-center justify-between gap-4">
+    <section className="flex min-h-[36rem] flex-col">
+      <div className="mb-4 flex items-center justify-between gap-4">
         <div>
-          <p className="label-md text-primary/65 dark:text-white/55">Timeline rail</p>
-          <h2 className="mt-2 text-2xl font-bold">{trip ? `${trip.destination_city} itinerary` : "Trip timeline"}</h2>
-          <p className="mt-2 text-sm text-text/60 dark:text-white/60">Structured day cards, route-aware stop selection, and confirmed editing controls.</p>
+          <p className="label-md text-primary/65 dark:text-white/55">Day-wise itinerary</p>
+          <h2 className="mt-2 text-2xl font-bold">{trip ? `${trip.destination_city} plan` : "Trip timeline"}</h2>
         </div>
-        <div className="rounded-[1.25rem] bg-surface-container-lowest px-4 py-3 text-sm dark:bg-dark-card">
-          <p className="label-md text-text/45 dark:text-white/45">Route status</p>
-          <p className="mt-1 font-semibold capitalize">{route?.provider_status?.replaceAll("_", " ") || "Pending"}</p>
-        </div>
+        <p className="text-xs text-text/55 dark:text-white/55">Route: {route?.provider_status?.replaceAll("_", " ") || "Pending"}</p>
       </div>
 
       <div className="hide-scrollbar flex-1 space-y-5 overflow-y-auto pr-2">
@@ -112,6 +124,7 @@ function PlannerTimeline({
                   {day.items.map((item, itemIndex) => {
                     const leg = findLegForItem(item);
                     const isSelected = selectedStopId === item.id;
+                    const imageUrl = findImageForItem(item);
 
                     return (
                       <button
@@ -125,20 +138,30 @@ function PlannerTimeline({
                         type="button"
                       >
                         <div className="flex flex-wrap items-start justify-between gap-4">
-                          <div>
-                            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-text/45 dark:text-white/45">
-                              <span>{item.item_type}</span>
-                              <span>•</span>
-                              <span>Stop {itemIndex + 1}</span>
-                            </div>
-                            <p className="mt-2 text-base font-semibold">{item.title}</p>
-                            <p className="mt-2 text-sm leading-7 text-text/70 dark:text-white/70">{item.description || "Scheduled stop"}</p>
-                            {leg ? (
-                              <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-surface-container-lowest px-3 py-2 text-xs font-semibold text-text/65 dark:bg-dark-card dark:text-white/70">
-                                <Icon className="h-4 w-4" name="route" />
-                                {leg.distance_text || "Distance pending"} • {leg.duration_text || "Duration pending"}
-                              </p>
+                          <div className="flex gap-4">
+                            {imageUrl ? (
+                              <img
+                                alt={item.title}
+                                className="h-20 w-20 rounded-[1.25rem] object-cover"
+                                loading="lazy"
+                                src={imageUrl}
+                              />
                             ) : null}
+                            <div>
+                              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-text/45 dark:text-white/45">
+                                <span>{item.item_type}</span>
+                                <span>-</span>
+                                <span>Stop {itemIndex + 1}</span>
+                              </div>
+                              <p className="mt-2 text-base font-semibold">{item.title}</p>
+                              <p className="mt-2 text-sm leading-7 text-text/70 dark:text-white/70">{item.description || "Scheduled stop"}</p>
+                              {leg ? (
+                                <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-surface-container-lowest px-3 py-2 text-xs font-semibold text-text/65 dark:bg-dark-card dark:text-white/70">
+                                  <Icon className="h-4 w-4" name="route" />
+                                  {leg.distance_text || "Distance pending"} - {leg.duration_text || "Duration pending"}
+                                </p>
+                              ) : null}
+                            </div>
                           </div>
                           <div className="flex flex-wrap gap-2">
                             <span className="rounded-full bg-surface-container-lowest px-3 py-2 text-xs font-semibold text-primary dark:bg-dark-card dark:text-white">

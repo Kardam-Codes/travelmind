@@ -88,6 +88,19 @@ function TripDetailsPage() {
     { label: "Activities", value: String(dashboard?.activities?.length || 0) },
   ];
 
+  function findImageForItem(item) {
+    if (item.place_id) {
+      return dashboard?.places?.find((place) => place.id === item.place_id)?.image_url || "";
+    }
+    if (item.activity_id) {
+      return dashboard?.activities?.find((activity) => activity.id === item.activity_id)?.image_url || "";
+    }
+    if (item.hotel_id) {
+      return dashboard?.hotels?.find((hotel) => hotel.id === item.hotel_id)?.image_url || "";
+    }
+    return "";
+  }
+
   return (
     <main className="mx-auto max-w-7xl px-4 pb-20 pt-10 md:px-6">
       <section className="relative overflow-hidden rounded-[2.5rem] shadow-float">
@@ -132,6 +145,9 @@ function TripDetailsPage() {
               <div className="grid gap-4 md:grid-cols-2">
                 {(dashboard?.places || []).slice(0, 4).map((place) => (
                   <div key={place.id} className="rounded-[1.5rem] bg-surface-container-low px-5 py-5 dark:bg-dark-low">
+                    {place.image_url ? (
+                      <img alt={place.name} className="mb-4 h-32 w-full rounded-[1.25rem] object-cover" loading="lazy" src={place.image_url} />
+                    ) : null}
                     <p className="label-md text-primary/70 dark:text-white/55">{place.category}</p>
                     <p className="mt-2 font-medium">{place.name}</p>
                     <button className="mt-4 text-sm font-semibold text-primary dark:text-white" onClick={() => addToWishlist(place.id, "place")} type="button">
@@ -146,6 +162,9 @@ function TripDetailsPage() {
               <div className="mt-5 grid gap-3">
                 {(dashboard?.hotels || []).slice(0, 3).map((hotel) => (
                   <div key={hotel.id} className="rounded-[1.5rem] bg-surface-container-lowest px-4 py-4 text-sm dark:bg-dark-card">
+                    {hotel.image_url ? (
+                      <img alt={hotel.name} className="mb-3 h-24 w-full rounded-[1.25rem] object-cover" loading="lazy" src={hotel.image_url} />
+                    ) : null}
                     <p className="font-semibold">{hotel.name}</p>
                     <p className="mt-2 text-text/60 dark:text-white/60">
                       {hotel.nearby_area || hotel.city} | {hotel.budget_category || "curated"} | Rs {hotel.price_per_night || "N/A"}
@@ -176,6 +195,9 @@ function TripDetailsPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   {day.items.map((item) => (
                     <div key={item.id} className="rounded-[1.5rem] bg-surface-container-low px-5 py-5 dark:bg-dark-low">
+                      {findImageForItem(item) ? (
+                        <img alt={item.title} className="mb-4 h-28 w-full rounded-[1.25rem] object-cover" loading="lazy" src={findImageForItem(item)} />
+                      ) : null}
                       <p className="label-md text-primary/70 dark:text-white/55">{item.item_type}</p>
                       <p className="mt-2 font-medium">{item.title}</p>
                       <p className="mt-3 text-sm text-text/55 dark:text-white/55">{item.description}</p>

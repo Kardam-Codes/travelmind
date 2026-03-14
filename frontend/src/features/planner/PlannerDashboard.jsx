@@ -11,8 +11,9 @@ import { apiRequest, buildTripWebSocketUrl } from "../../utils/apiClient";
 import { getActiveTripId, getStoredUser, setActiveTripId } from "../../utils/session";
 import PlannerHeader from "./components/PlannerHeader";
 import PlannerMapStage from "./components/PlannerMapStage";
-import PlannerSidebar from "./components/PlannerSidebar";
 import PlannerTimeline from "./components/PlannerTimeline";
+import PlannerChatPanel from "./components/PlannerChatPanel";
+import PlannerSummaryPanel from "./components/PlannerSummaryPanel";
 import { getDemoLabel, getDemoMode } from "../../utils/demo";
 
 function PlannerDashboard() {
@@ -36,6 +37,7 @@ function PlannerDashboard() {
   const [selectedStopId, setSelectedStopId] = useState(null);
   const [collapsedDays, setCollapsedDays] = useState({});
   const [websocketReady, setWebsocketReady] = useState(false);
+  const [shareNotice, setShareNotice] = useState("");
   const demoMode = getDemoMode();
   const tripId = searchParams.get("tripId") || getActiveTripId();
   const user = getStoredUser();
@@ -383,7 +385,21 @@ function PlannerDashboard() {
     }
     return mapRoute.legs?.[stopIndex] || null;
   }, [mapRoute, selectedStopId]);
-  const sidebarMessages = chatMessages.slice(-8);
+  const sidebarMessages = chatMessages.slice(-12);
+
+  function handleShare() {
+    if (!tripId) {
+      return;
+    }
+    navigator.clipboard
+      .writeText(window.location.href)
+      .then(() => setShareNotice("Share link copied."))
+      .catch(() => setShareNotice("Unable to copy link."));
+  }
+
+  function handleStartGroup() {
+    setInviteStatus("Invite collaborators to start a group plan.");
+  }
 
   return (
     <main className="mx-auto max-w-[1600px] px-4 pb-12 pt-8 md:px-6">
@@ -393,25 +409,17 @@ function PlannerDashboard() {
             {getDemoLabel()}
           </div>
         ) : null}
-        <PlannerHeader onConfirm={() => {}} route={mapRoute} trip={dashboard?.trip} tripRole={dashboard?.trip_role} websocketReady={websocketReady} />
+        <PlannerHeader onShare={handleShare} onStartGroup={handleStartGroup} trip={dashboard?.trip} />
+        {shareNotice ? <p className="text-sm text-primary">{shareNotice}</p> : null}
 
-        <section className="grid gap-6 xl:grid-cols-[23rem,minmax(0,1fr),27rem]">
-          <PlannerSidebar
-            chatError={chatError}
-            commentError={commentError}
-            comments={comments}
+        <section className="grid gap-6 xl:grid-cols-[20rem,minmax(0,1fr),22rem]">
+          <PlannerSummaryPanel
             inviteStatus={inviteStatus}
-            messages={sidebarMessages}
-            onAddComment={handleAddComment}
             onInvite={handleInvite}
-            onRequestBooking={handleRequestBooking}
-            onSendMessage={sendChatMessage}
-            route={mapRoute}
+            places={dashboard?.places || []}
             trip={dashboard?.trip}
             tripRole={dashboard?.trip_role}
-            websocketReady={websocketReady}
           />
-
           <div className="space-y-4">
             {isLoading ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-primary shadow-ambient">Loading planner...</p> : null}
             {error ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-tertiary shadow-ambient">{error}</p> : null}
@@ -426,7 +434,10 @@ function PlannerDashboard() {
               trip={dashboard?.trip}
             />
           </div>
+          <PlannerChatPanel messages={sidebarMessages} onSendMessage={sendChatMessage} websocketReady={websocketReady} />
+        </section>
 
+        <section className="section-shell">
           <PlannerTimeline
             collapsedDays={collapsedDays}
             currentUserId={userId}
@@ -440,6 +451,9 @@ function PlannerDashboard() {
             onUnlockDay={handleUnlockDay}
             onUpdateItem={handleUpdateItem}
             operationError={operationError}
+            places={dashboard?.places || []}
+            activities={dashboard?.activities || []}
+            hotels={dashboard?.hotels || []}
             route={mapRoute}
             selectedDay={selectedDay}
             selectedStopId={selectedStopId}

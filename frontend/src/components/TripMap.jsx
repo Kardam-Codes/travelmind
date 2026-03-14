@@ -25,7 +25,7 @@ function FitToData({ points }) {
       return;
     }
 
-    map.fitBounds(points, { padding: [48, 48], animate: true });
+    map.fitBounds(points, { padding: [64, 64], animate: true });
   }, [map, points]);
 
   return null;
