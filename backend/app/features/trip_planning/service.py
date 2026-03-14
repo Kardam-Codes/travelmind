@@ -1,11 +1,3 @@
-"""
-Feature: Trip Planning Service
-File Purpose: Handle trip creation workflow using normalization, validation, and persistence
-Owner: Misha
-Dependencies: app/database/models/trip.py, app/features/trip_planning/normalizer.py, app/features/trip_planning/validator.py, app/repositories/trip_repository.py
-Last Updated: 2026-03-14
-"""
-
 from sqlmodel import Session
 
 from app.database.models.trip import Trip

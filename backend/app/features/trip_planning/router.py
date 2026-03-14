@@ -1,13 +1,4 @@
-"""
-Feature: Trip Planning Router
-File Purpose: Expose API endpoints for creating and fetching trips
-Owner: Misha
-Dependencies: fastapi, app/api/deps.py, app/features/trip_planning/service.py, app/schemas/trip.py
-Last Updated: 2026-03-14
-"""
-
 from typing import List
-
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 

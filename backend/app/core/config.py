@@ -1,11 +1,3 @@
-"""
-Feature: Core Configuration
-File Purpose: Load application settings from environment variables
-Owner: Misha
-Dependencies: backend/.env
-Last Updated: 2026-03-14
-"""
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 

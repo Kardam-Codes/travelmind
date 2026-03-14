@@ -1,11 +1,3 @@
-"""
-Feature: Trip Planning Validator
-File Purpose: Validate trip inputs against basic planning rules and approved cities
-Owner: Misha
-Dependencies: app/repositories/city_repository.py, app/schemas/trip.py
-Last Updated: 2026-03-14
-"""
-
 from fastapi import HTTPException
 from sqlmodel import Session
 
