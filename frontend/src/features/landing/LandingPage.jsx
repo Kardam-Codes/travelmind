@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon";
 import TripInput from "../trip-input/TripInput";
 import { apiRequest } from "../../utils/apiClient";
-import { setActiveTripId } from "../../utils/session";
+import { getStoredUser, setActiveTripId } from "../../utils/session";
 
 const inspirationCards = [
   {
@@ -69,10 +69,15 @@ function LandingPage() {
   const [tripQuery, setTripQuery] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const user = getStoredUser();
 
   async function handlePlanTrip() {
     if (!tripQuery.trim()) {
       setError("Enter a trip request with a city, duration, or budget.");
+      return;
+    }
+    if (!user?.access_token) {
+      setError("Login required to generate a trip.");
       return;
     }
 

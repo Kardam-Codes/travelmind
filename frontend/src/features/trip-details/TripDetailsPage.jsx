@@ -19,6 +19,18 @@ function TripDetailsPage() {
   const [dashboard, setDashboard] = useState(null);
   const [mapRoute, setMapRoute] = useState(null);
   const [message, setMessage] = useState("");
+  const user = getStoredUser();
+
+  if (!user?.access_token) {
+    return (
+      <main className="mx-auto max-w-4xl px-4 pb-16 pt-10 md:px-6">
+        <div className="section-shell">
+          <h1 className="text-3xl font-bold">Login required</h1>
+          <p className="mt-4 text-sm text-text/60 dark:text-white/60">Login to view trip details and save items.</p>
+        </div>
+      </main>
+    );
+  }
 
   useEffect(() => {
     async function loadDashboard() {
@@ -49,7 +61,6 @@ function TripDetailsPage() {
   }, [tripId]);
 
   async function addToWishlist(itemId, itemType) {
-    const user = getStoredUser();
     if (!user) {
       setMessage("Login before saving items to the wishlist.");
       return;
@@ -59,7 +70,6 @@ function TripDetailsPage() {
       await apiRequest("/wishlist/", {
         method: "POST",
         body: JSON.stringify({
-          user_id: String(user.user_id),
           item_id: itemId,
           item_type: itemType,
         }),

@@ -26,6 +26,9 @@ function PlannerDashboard() {
   const [operationError, setOperationError] = useState("");
   const [chatError, setChatError] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [commentError, setCommentError] = useState("");
+  const [inviteStatus, setInviteStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [mapRoute, setMapRoute] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -35,6 +38,19 @@ function PlannerDashboard() {
   const tripId = searchParams.get("tripId") || getActiveTripId();
   const user = getStoredUser();
   const userId = String(user?.user_id || "guest");
+
+  if (!user?.access_token) {
+    return (
+      <main className="mx-auto max-w-3xl px-4 pb-12 pt-10 md:px-6">
+        <div className="section-shell">
+          <h1 className="text-3xl font-bold">Login required</h1>
+          <p className="mt-4 text-sm text-text/65 dark:text-white/65">
+            Please login to access collaborative planning, org features, and booking workflows.
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   async function loadDashboard() {
     if (!tripId) {
@@ -73,6 +89,19 @@ function PlannerDashboard() {
     }
   }
 
+  async function loadComments() {
+    if (!tripId) {
+      return;
+    }
+    try {
+      const response = await apiRequest(`/trips/${tripId}/comments`);
+      setComments(response);
+      setCommentError("");
+    } catch (requestError) {
+      setCommentError(requestError.message);
+    }
+  }
+
   useEffect(() => {
     const navigationDashboard = location.state?.dashboard;
     if (navigationDashboard?.trip && String(navigationDashboard.trip.id) === String(tripId)) {
@@ -91,6 +120,12 @@ function PlannerDashboard() {
       loadRoute();
     }
   }, [tripId, dashboard?.trip?.version]);
+
+  useEffect(() => {
+    if (tripId) {
+      loadComments();
+    }
+  }, [tripId]);
 
   useEffect(() => {
     const firstItem = dashboard?.itinerary?.days?.[0]?.items?.[0];
@@ -192,6 +227,67 @@ function PlannerDashboard() {
     setChatError("");
   }
 
+  async function handleInvite(email, role) {
+    if (!tripId) {
+      return;
+    }
+    try {
+      await apiRequest("/invites", {
+        method: "POST",
+        body: JSON.stringify({
+          scope: "trip",
+          trip_id: Number(tripId),
+          email,
+          role,
+        }),
+      });
+      setInviteStatus("Invite sent.");
+    } catch (requestError) {
+      setInviteStatus(requestError.message);
+    }
+  }
+
+  async function handleAddComment(body) {
+    if (!tripId) {
+      return;
+    }
+    try {
+      await apiRequest(`/trips/${tripId}/comments`, {
+        method: "POST",
+        body: JSON.stringify({ body }),
+      });
+      loadComments();
+    } catch (requestError) {
+      setCommentError(requestError.message);
+    }
+  }
+
+  async function handleRequestBooking() {
+    if (!tripId) {
+      return;
+    }
+    const travelerName = window.prompt("Traveler name");
+    if (!travelerName) {
+      return;
+    }
+    const travelerEmail = window.prompt("Traveler email");
+    if (!travelerEmail) {
+      return;
+    }
+    try {
+      await apiRequest("/bookings/requests", {
+        method: "POST",
+        body: JSON.stringify({
+          trip_id: Number(tripId),
+          traveler_name: travelerName,
+          traveler_email: travelerEmail,
+        }),
+      });
+    } catch (requestError) {
+      setOperationError(requestError.message);
+    }
+  }
+
   function sendOperation(type, payload) {
     if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN || !dashboard?.trip) {
       setOperationError("WebSocket connection is not ready.");
@@ -290,15 +386,22 @@ function PlannerDashboard() {
   return (
     <main className="mx-auto max-w-[1600px] px-4 pb-12 pt-8 md:px-6">
       <div className="space-y-6">
-        <PlannerHeader onConfirm={() => {}} route={mapRoute} trip={dashboard?.trip} websocketReady={websocketReady} />
+        <PlannerHeader onConfirm={() => {}} route={mapRoute} trip={dashboard?.trip} tripRole={dashboard?.trip_role} websocketReady={websocketReady} />
 
         <section className="grid gap-6 xl:grid-cols-[23rem,minmax(0,1fr),27rem]">
           <PlannerSidebar
             chatError={chatError}
+            commentError={commentError}
+            comments={comments}
+            inviteStatus={inviteStatus}
             messages={sidebarMessages}
+            onAddComment={handleAddComment}
+            onInvite={handleInvite}
+            onRequestBooking={handleRequestBooking}
             onSendMessage={sendChatMessage}
             route={mapRoute}
             trip={dashboard?.trip}
+            tripRole={dashboard?.trip_role}
             websocketReady={websocketReady}
           />
 
@@ -334,6 +437,7 @@ function PlannerDashboard() {
             selectedDay={selectedDay}
             selectedStopId={selectedStopId}
             trip={dashboard?.trip}
+            tripRole={dashboard?.trip_role}
           />
         </section>
       </div>

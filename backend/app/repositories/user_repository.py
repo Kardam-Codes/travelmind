@@ -18,6 +18,11 @@ def get_user_by_email(session: Session, email: str) -> Optional[User]:
     return session.exec(statement).first()
 
 
+def get_user_by_id(session: Session, user_id: int) -> Optional[User]:
+    statement = select(User).where(User.id == user_id)
+    return session.exec(statement).first()
+
+
 def create_user(session: Session, user: User) -> User:
     session.add(user)
     session.commit()

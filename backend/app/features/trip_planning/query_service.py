@@ -33,7 +33,7 @@ ALLOWED_PREFERENCE_TAGS = [
 ALLOWED_TRAVELER_TYPES = ["solo", "family", "couple", "friends"]
 
 
-def create_trip_from_query(session: Session, query: str) -> TripGenerationResponse:
+def create_trip_from_query(session: Session, query: str, organization_id: int, user_id: int) -> TripGenerationResponse:
     city_names = [city.city for city in get_all_cities(session)]
 
     try:
@@ -74,8 +74,8 @@ def create_trip_from_query(session: Session, query: str) -> TripGenerationRespon
             preferences=", ".join(ai_intent.preferences) if ai_intent.preferences else None,
             traveler_type=ai_intent.traveler_type,
         )
-        trip = create_trip_plan(session, trip_request)
-        dashboard = build_trip_dashboard(session, trip)
+        trip = create_trip_plan(session, trip_request, organization_id, user_id)
+        dashboard = build_trip_dashboard(session, trip, trip_role="owner")
         return TripGenerationResponse(
             status="ready",
             trip=dashboard.trip,
@@ -83,13 +83,14 @@ def create_trip_from_query(session: Session, query: str) -> TripGenerationRespon
             activities=dashboard.activities,
             hotels=dashboard.hotels,
             itinerary=dashboard.itinerary,
+            trip_role="owner",
             normalized_query=ai_intent.normalized_query,
             ai_provider=ai_intent.provider,
         )
     except AIServiceUnavailableError:
         trip_request = parse_trip_query_fallback(session, query)
-        trip = create_trip_plan(session, trip_request)
-        dashboard = build_trip_dashboard(session, trip)
+        trip = create_trip_plan(session, trip_request, organization_id, user_id)
+        dashboard = build_trip_dashboard(session, trip, trip_role="owner")
         return TripGenerationResponse(
             status="ready",
             trip=dashboard.trip,
@@ -97,12 +98,13 @@ def create_trip_from_query(session: Session, query: str) -> TripGenerationRespon
             activities=dashboard.activities,
             hotels=dashboard.hotels,
             itinerary=dashboard.itinerary,
+            trip_role="owner",
             normalized_query=query.strip(),
             ai_provider="fallback-rule-parser",
         )
 
 
-def build_trip_dashboard(session: Session, trip: Trip) -> TripDashboardResponse:
+def build_trip_dashboard(session: Session, trip: Trip, trip_role: str | None = None) -> TripDashboardResponse:
     recommendation_request = RecommendationRequest(
         destination_city=trip.destination_city,
         duration_days=trip.duration_days,
@@ -123,6 +125,7 @@ def build_trip_dashboard(session: Session, trip: Trip) -> TripDashboardResponse:
         activities=recommendations.activities,
         hotels=recommendations.hotels,
         itinerary=itinerary,
+        trip_role=trip_role,
     )
 
 

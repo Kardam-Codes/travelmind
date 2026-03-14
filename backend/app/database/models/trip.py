@@ -5,6 +5,8 @@ from sqlmodel import Field, SQLModel
 
 class Trip(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
+    organization_id: int = Field(nullable=False, index=True, foreign_key="organization.id")
+    created_by: Optional[int] = Field(default=None, index=True, foreign_key="user.id")
     destination_city: str = Field(nullable=False, index=True)
     state: Optional[str] = None
     duration_days: int = Field(nullable=False)

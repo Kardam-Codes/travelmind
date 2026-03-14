@@ -4,6 +4,8 @@ from fastapi import APIRouter, Depends, WebSocket
 from sqlmodel import Session
 
 from app.database.session import get_session
+from app.core.security import get_current_org_id, get_current_user_id
+from app.features.trips.permissions import ensure_org_member, ensure_trip_member_role
 from app.repositories.collaboration_repository import get_events_by_trip_id
 from app.features.collaboration.websocket import handle_trip_websocket
 from app.schemas.collaboration import CollaborationEventRead
@@ -13,7 +15,14 @@ router = APIRouter(tags=["Collaboration"])
 
 
 @router.get("/collaboration/{trip_id}/events", response_model=list[CollaborationEventRead])
-def get_trip_collaboration_events(trip_id: int, session: Session = Depends(get_session)):
+def get_trip_collaboration_events(
+    trip_id: int,
+    session: Session = Depends(get_session),
+    user_id: int = Depends(get_current_user_id),
+    org_id: int = Depends(get_current_org_id),
+):
+    ensure_org_member(session, org_id, user_id)
+    ensure_trip_member_role(session, trip_id, user_id, minimum_role="viewer")
     events = get_events_by_trip_id(session, trip_id)
     return [
         CollaborationEventRead(

@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon";
 import { apiRequest } from "../../utils/apiClient";
-import { setStoredUser } from "../../utils/session";
+import { setActiveOrgId, setStoredUser } from "../../utils/session";
 
 function AuthPage() {
   const navigate = useNavigate();
@@ -40,6 +40,9 @@ function AuthPage() {
             });
 
       setStoredUser(response);
+      if (response.default_org_id) {
+        setActiveOrgId(response.default_org_id);
+      }
       navigate("/my-trips");
     } catch (requestError) {
       setError(requestError.message);
@@ -61,6 +64,9 @@ function AuthPage() {
         }),
       });
       setStoredUser(response);
+      if (response.default_org_id) {
+        setActiveOrgId(response.default_org_id);
+      }
       navigate("/my-trips");
     } catch (requestError) {
       setError(requestError.message);

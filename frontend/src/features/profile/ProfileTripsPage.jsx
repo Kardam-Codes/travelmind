@@ -32,6 +32,9 @@ function ProfileTripsPage() {
   useEffect(() => {
     async function loadTrips() {
       try {
+        if (!user?.access_token) {
+          return;
+        }
         const response = await apiRequest("/trips/");
         setTrips(response);
       } catch (requestError) {
@@ -40,7 +43,7 @@ function ProfileTripsPage() {
     }
 
     loadTrips();
-  }, []);
+  }, [user]);
 
   const upcomingTrips = trips.filter((trip) => trip.status === "draft");
   const archivedTrips = trips.filter((trip) => trip.status !== "draft");

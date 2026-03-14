@@ -5,6 +5,7 @@ from sqlmodel import Session
 
 from app.database.models.itinerary import ItineraryItem
 from app.features.collaboration.events import save_collaboration_event
+from app.features.trips.permissions import ensure_trip_member_role
 from app.repositories.itinerary_repository import (
     create_itinerary_item,
     delete_itinerary_item,
@@ -33,6 +34,15 @@ def apply_itinerary_operation(session: Session, operation: ItineraryOperationReq
     trip = get_trip_by_id(session, operation.trip_id)
     if not trip:
         raise HTTPException(status_code=404, detail="Trip not found.")
+
+    if not str(operation.user_id).isdigit():
+        raise HTTPException(status_code=401, detail="Invalid user id.")
+    user_id = int(operation.user_id)
+
+    if operation.type in EDIT_EVENT_TYPES:
+        ensure_trip_member_role(session, operation.trip_id, user_id, minimum_role="editor")
+    if operation.type in LOCK_EVENT_TYPES:
+        ensure_trip_member_role(session, operation.trip_id, user_id, minimum_role="owner")
 
     if operation.type in EDIT_EVENT_TYPES and operation.base_version != trip.version:
         return ConflictResponse(
@@ -76,7 +86,7 @@ def apply_itinerary_operation(session: Session, operation: ItineraryOperationReq
     event = save_collaboration_event(
         session=session,
         trip_id=operation.trip_id,
-        user_id=operation.user_id,
+        user_id=str(operation.user_id),
         event_type=operation.type,
         payload=operation.payload.model_dump(exclude_none=True),
         operation_id=operation.operation_id,

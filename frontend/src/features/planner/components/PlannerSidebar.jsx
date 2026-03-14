@@ -8,9 +8,28 @@ const defaultPrompts = [
   "Prioritize heritage landmarks",
 ];
 
-function PlannerSidebar({ chatError, messages, onSendMessage, route, trip, websocketReady }) {
+function PlannerSidebar({
+  chatError,
+  messages,
+  onSendMessage,
+  onInvite,
+  onAddComment,
+  onRequestBooking,
+  comments = [],
+  commentError,
+  inviteStatus,
+  route,
+  trip,
+  tripRole,
+  websocketReady,
+}) {
   const [draft, setDraft] = useState("");
-  const canSend = websocketReady && draft.trim().length > 0;
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteRole, setInviteRole] = useState("viewer");
+  const [commentDraft, setCommentDraft] = useState("");
+  const canWrite = tripRole === "owner" || tripRole === "editor";
+  const canInvite = tripRole === "owner";
+  const canSend = websocketReady && draft.trim().length > 0 && canWrite;
   const routeInsight = useMemo(() => {
     const stopCount = route?.stops?.length || 0;
     const legCount = route?.legs?.length || 0;
@@ -29,6 +48,30 @@ function PlannerSidebar({ chatError, messages, onSendMessage, route, trip, webso
     }
     onSendMessage?.(draft.trim());
     setDraft("");
+  }
+
+  function handleInvite(event) {
+    event.preventDefault();
+    if (!inviteEmail.trim()) {
+      return;
+    }
+    if (!canInvite) {
+      return;
+    }
+    onInvite?.(inviteEmail.trim(), inviteRole);
+    setInviteEmail("");
+  }
+
+  function handleCommentSubmit(event) {
+    event.preventDefault();
+    if (!commentDraft.trim()) {
+      return;
+    }
+    if (!canWrite) {
+      return;
+    }
+    onAddComment?.(commentDraft.trim());
+    setCommentDraft("");
   }
 
   return (
@@ -96,6 +139,95 @@ function PlannerSidebar({ chatError, messages, onSendMessage, route, trip, webso
             <p className="mt-2 text-sm leading-6 text-text/70 dark:text-white/70">{routeInsight.durationPreview}</p>
           </div>
         </div>
+      </section>
+
+      <section className="section-shell space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="label-md text-tertiary">Team invites</p>
+            <h3 className="mt-2 text-xl font-semibold">Invite collaborators</h3>
+          </div>
+          <Icon className="h-5 w-5 text-primary" name="users" />
+        </div>
+        <form className="space-y-3" onSubmit={handleInvite}>
+          <input
+            className="soft-focus w-full rounded-[1.5rem] bg-surface-container-lowest px-4 py-3 text-sm text-text placeholder:text-text/35 dark:bg-dark-card dark:text-white dark:placeholder:text-white/35"
+            onChange={(event) => setInviteEmail(event.target.value)}
+            placeholder="Email address"
+            type="email"
+            disabled={!canInvite}
+            value={inviteEmail}
+          />
+          <div className="flex items-center gap-3">
+            <select
+              className="h-11 flex-1 rounded-full bg-surface-container-lowest px-4 text-sm font-medium text-text dark:bg-dark-card dark:text-white"
+              onChange={(event) => setInviteRole(event.target.value)}
+              disabled={!canInvite}
+              value={inviteRole}
+            >
+              <option value="viewer">Viewer</option>
+              <option value="editor">Editor</option>
+            </select>
+            <button className="secondary-pill" disabled={!canInvite} type="submit">
+              Send invite
+            </button>
+          </div>
+        </form>
+        {inviteStatus ? <p className="text-xs text-primary">{inviteStatus}</p> : null}
+        {!canInvite ? <p className="text-xs text-text/55 dark:text-white/55">Only owners can invite new members.</p> : null}
+      </section>
+
+      <section className="section-shell space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="label-md text-tertiary">Comments</p>
+            <h3 className="mt-2 text-xl font-semibold">Trip thread</h3>
+          </div>
+          <Icon className="h-5 w-5 text-primary" name="chat" />
+        </div>
+        <div className="hide-scrollbar max-h-52 space-y-3 overflow-y-auto pr-1">
+          {comments.length ? (
+            comments.map((comment) => (
+              <div key={comment.id} className="rounded-[1.2rem] bg-surface-container-lowest px-4 py-3 text-sm dark:bg-dark-card">
+                <p className="text-xs font-semibold text-text/45 dark:text-white/45">User {comment.author_id}</p>
+                <p className="mt-2 text-sm text-text/70 dark:text-white/70">{comment.body}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-sm text-text/60 dark:text-white/60">No comments yet.</p>
+          )}
+        </div>
+        <form className="space-y-3" onSubmit={handleCommentSubmit}>
+          <input
+            className="soft-focus w-full rounded-[1.5rem] bg-surface-container-lowest px-4 py-3 text-sm text-text placeholder:text-text/35 dark:bg-dark-card dark:text-white dark:placeholder:text-white/35"
+            onChange={(event) => setCommentDraft(event.target.value)}
+            placeholder="Add a comment"
+            type="text"
+            disabled={!canWrite}
+            value={commentDraft}
+          />
+          <button className="secondary-pill w-full" disabled={!canWrite} type="submit">
+            Add comment
+          </button>
+        </form>
+        {commentError ? <p className="text-xs text-tertiary">{commentError}</p> : null}
+      </section>
+
+      <section className="section-shell space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="label-md text-tertiary">Booking handoff</p>
+            <h3 className="mt-2 text-xl font-semibold">Request assistance</h3>
+          </div>
+          <Icon className="h-5 w-5 text-primary" name="sparkles" />
+        </div>
+        <p className="text-sm text-text/65 dark:text-white/65">
+          Submit this trip to your agency queue for affiliate offers and booking coordination.
+        </p>
+        <button className="primary-pill w-full" onClick={onRequestBooking} type="button">
+          Request booking support
+        </button>
+        {tripRole ? <p className="text-xs text-text/55 dark:text-white/55">Your role: {tripRole}</p> : null}
       </section>
 
       <section className="section-shell flex min-h-[18rem] flex-1 flex-col gap-4">

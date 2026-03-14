@@ -1,6 +1,6 @@
 import Icon from "../../../components/Icon";
 
-function PlannerHeader({ onConfirm, route, trip, websocketReady }) {
+function PlannerHeader({ onConfirm, route, trip, tripRole, websocketReady }) {
   const statusLabel = websocketReady ? "Live synced" : "Offline sync";
   const routeLabel =
     route?.provider_status === "ok"
@@ -20,6 +20,11 @@ function PlannerHeader({ onConfirm, route, trip, websocketReady }) {
           <span className="rounded-full bg-surface-container-lowest px-3 py-2 text-xs font-semibold text-text/65 dark:bg-dark-card dark:text-white/70">
             {routeLabel}
           </span>
+          {tripRole ? (
+            <span className="rounded-full bg-surface-container-lowest px-3 py-2 text-xs font-semibold uppercase text-text/65 dark:bg-dark-card dark:text-white/70">
+              {tripRole}
+            </span>
+          ) : null}
         </div>
         <div>
           <h1 className="text-4xl font-bold tracking-tight">{trip ? `${trip.destination_city}, ${trip.state || "Curated route"}` : "Planner"}</h1>

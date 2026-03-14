@@ -8,11 +8,13 @@ Last Updated: 2026-03-13
 import { NavLink } from "react-router-dom";
 import { useTheme } from "./ThemeProvider";
 import Icon from "./Icon";
+import OrgSwitcher from "./OrgSwitcher";
 
 const navItems = [
   { label: "Explore", to: "/explore" },
   { label: "Planner", to: "/planner" },
   { label: "My Trips", to: "/my-trips" },
+  { label: "Agency", to: "/agency" },
 ];
 
 function navClass({ isActive }) {
@@ -43,6 +45,7 @@ function TopNavBar() {
         </div>
 
         <div className="flex items-center gap-2 md:gap-3">
+          <OrgSwitcher />
           <button
             className="flex h-11 w-11 items-center justify-center rounded-full bg-white/65 text-text transition-colors hover:text-primary dark:bg-white/10 dark:text-white"
             type="button"

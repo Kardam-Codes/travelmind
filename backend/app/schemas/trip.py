@@ -8,6 +8,7 @@ from app.schemas.place import PlaceRead
 
 
 class TripCreate(SQLModel):
+    organization_id: Optional[int] = None
     destination_city: str
     duration_days: int
     budget_total: Optional[float] = None
@@ -17,6 +18,8 @@ class TripCreate(SQLModel):
 
 class TripRead(SQLModel):
     id: int
+    organization_id: int
+    created_by: Optional[int] = None
     destination_city: str
     state: Optional[str] = None
     duration_days: int
@@ -39,6 +42,7 @@ class TripDashboardResponse(SQLModel):
     activities: List[ActivityRead]
     hotels: List[HotelRead]
     itinerary: ItineraryResponse
+    trip_role: Optional[str] = None
 
 
 class TripGenerationResponse(SQLModel):
@@ -48,6 +52,7 @@ class TripGenerationResponse(SQLModel):
     activities: List[ActivityRead] = Field(default_factory=list)
     hotels: List[HotelRead] = Field(default_factory=list)
     itinerary: Optional[ItineraryResponse] = None
+    trip_role: Optional[str] = None
     missing_fields: List[str] = Field(default_factory=list)
     suggested_questions: List[str] = Field(default_factory=list)
     normalized_query: Optional[str] = None

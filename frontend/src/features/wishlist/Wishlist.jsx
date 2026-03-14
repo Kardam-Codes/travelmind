@@ -22,7 +22,7 @@ function Wishlist() {
       }
 
       try {
-        const response = await apiRequest(`/wishlist/${user.user_id}`);
+        const response = await apiRequest("/wishlist/");
         setItems(response);
       } catch (requestError) {
         setError(requestError.message);

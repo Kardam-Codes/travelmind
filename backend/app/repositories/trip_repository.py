@@ -15,8 +15,8 @@ def get_trip_by_id(session: Session, trip_id: int) -> Optional[Trip]:
     return session.exec(statement).first()
 
 
-def get_all_trips(session: Session) -> List[Trip]:
-    statement = select(Trip).order_by(Trip.id.desc())
+def get_all_trips(session: Session, organization_id: int) -> List[Trip]:
+    statement = select(Trip).where(Trip.organization_id == organization_id).order_by(Trip.id.desc())
     return list(session.exec(statement).all())
 
 

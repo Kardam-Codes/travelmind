@@ -17,8 +17,10 @@ function PlannerTimeline({
   selectedDay,
   selectedStopId,
   trip,
+  tripRole,
 }) {
   const days = itinerary?.days || [];
+  const canEdit = tripRole === "owner" || tripRole === "editor";
 
   function findLegForItem(item) {
     const stopIndex = route?.stops?.findIndex((stop) => stop.item_id === item.id) ?? -1;
@@ -59,7 +61,15 @@ function PlannerTimeline({
                   <p className="mt-2 text-sm text-text/55 dark:text-white/55">{day.items.length} stops planned</p>
                 </button>
                 <div className="flex flex-wrap gap-2">
-                  <button className="secondary-pill px-4 py-2 text-xs" onClick={() => onAddItem?.(day.day_number)} type="button">
+                  <button
+                    className={`secondary-pill px-4 py-2 text-xs ${!canEdit ? "cursor-not-allowed opacity-60" : ""}`}
+                    onClick={() => {
+                      if (canEdit) {
+                        onAddItem?.(day.day_number);
+                      }
+                    }}
+                    type="button"
+                  >
                     Add stop
                   </button>
                   {isLockedByCurrentUser ? (
@@ -69,7 +79,15 @@ function PlannerTimeline({
                   ) : isLocked ? (
                     <span className="secondary-pill px-4 py-2 text-xs opacity-70">Locked</span>
                   ) : (
-                    <button className="secondary-pill px-4 py-2 text-xs" onClick={() => onLockDay?.(day.day_number)} type="button">
+                    <button
+                      className={`secondary-pill px-4 py-2 text-xs ${!canEdit ? "cursor-not-allowed opacity-60" : ""}`}
+                      onClick={() => {
+                        if (canEdit) {
+                          onLockDay?.(day.day_number);
+                        }
+                      }}
+                      type="button"
+                    >
                       Lock day
                     </button>
                   )}
@@ -117,10 +135,10 @@ function PlannerTimeline({
                         </div>
                         <div className="mt-4 flex flex-wrap gap-2 text-xs">
                           <span
-                            className={`secondary-pill px-3 py-2 ${isLocked ? "cursor-not-allowed opacity-60" : ""}`}
+                            className={`secondary-pill px-3 py-2 ${isLocked || !canEdit ? "cursor-not-allowed opacity-60" : ""}`}
                             onClick={(event) => {
                               event.stopPropagation();
-                              if (!isLocked) {
+                              if (!isLocked && canEdit) {
                                 onUpdateItem?.(item);
                               }
                             }}
@@ -128,10 +146,12 @@ function PlannerTimeline({
                             Edit
                           </span>
                           <span
-                            className={`secondary-pill px-3 py-2 ${isLocked || itemIndex === 0 ? "cursor-not-allowed opacity-60" : ""}`}
+                            className={`secondary-pill px-3 py-2 ${
+                              isLocked || itemIndex === 0 || !canEdit ? "cursor-not-allowed opacity-60" : ""
+                            }`}
                             onClick={(event) => {
                               event.stopPropagation();
-                              if (!isLocked && itemIndex !== 0) {
+                              if (!isLocked && itemIndex !== 0 && canEdit) {
                                 onMoveItem?.(item.id, day.day_number, itemIndex);
                               }
                             }}
@@ -139,10 +159,12 @@ function PlannerTimeline({
                             Move up
                           </span>
                           <span
-                            className={`secondary-pill px-3 py-2 ${isLocked || itemIndex === day.items.length - 1 ? "cursor-not-allowed opacity-60" : ""}`}
+                            className={`secondary-pill px-3 py-2 ${
+                              isLocked || itemIndex === day.items.length - 1 || !canEdit ? "cursor-not-allowed opacity-60" : ""
+                            }`}
                             onClick={(event) => {
                               event.stopPropagation();
-                              if (!isLocked && itemIndex !== day.items.length - 1) {
+                              if (!isLocked && itemIndex !== day.items.length - 1 && canEdit) {
                                 onMoveItem?.(item.id, day.day_number, itemIndex + 2);
                               }
                             }}
@@ -150,10 +172,10 @@ function PlannerTimeline({
                             Move down
                           </span>
                           <span
-                            className={`secondary-pill px-3 py-2 ${isLocked ? "cursor-not-allowed opacity-60" : ""}`}
+                            className={`secondary-pill px-3 py-2 ${isLocked || !canEdit ? "cursor-not-allowed opacity-60" : ""}`}
                             onClick={(event) => {
                               event.stopPropagation();
-                              if (!isLocked) {
+                              if (!isLocked && canEdit) {
                                 onRemoveItem?.(item.id);
                               }
                             }}

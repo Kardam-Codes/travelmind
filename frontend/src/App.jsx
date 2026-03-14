@@ -13,6 +13,7 @@ import LandingPage from "./features/landing/LandingPage";
 import PlannerDashboard from "./features/planner/PlannerDashboard";
 import ProfileTripsPage from "./features/profile/ProfileTripsPage";
 import TripDetailsPage from "./features/trip-details/TripDetailsPage";
+import AgencyDashboard from "./features/agency/AgencyDashboard";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/planner" element={<PlannerDashboard />} />
+        <Route path="/agency" element={<AgencyDashboard />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/trip/:tripId" element={<TripDetailsPage />} />
         <Route path="/my-trips" element={<ProfileTripsPage />} />

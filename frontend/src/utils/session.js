@@ -1,5 +1,6 @@
 const USER_STORAGE_KEY = "travelmind-user";
 const ACTIVE_TRIP_STORAGE_KEY = "travelmind-active-trip";
+const ACTIVE_ORG_STORAGE_KEY = "travelmind-active-org";
 
 export function getStoredUser() {
   const rawValue = localStorage.getItem(USER_STORAGE_KEY);
@@ -29,4 +30,16 @@ export function getActiveTripId() {
 
 export function setActiveTripId(tripId) {
   localStorage.setItem(ACTIVE_TRIP_STORAGE_KEY, String(tripId));
+}
+
+export function getActiveOrgId() {
+  return localStorage.getItem(ACTIVE_ORG_STORAGE_KEY);
+}
+
+export function setActiveOrgId(orgId) {
+  if (orgId === null || orgId === undefined) {
+    localStorage.removeItem(ACTIVE_ORG_STORAGE_KEY);
+    return;
+  }
+  localStorage.setItem(ACTIVE_ORG_STORAGE_KEY, String(orgId));
 }

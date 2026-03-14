@@ -1,6 +1,7 @@
 from sqlalchemy import inspect, text
 from sqlmodel import SQLModel
 from app.database.session import engine
+from app.database import models  # noqa: F401
 
 
 def create_db_and_tables():
@@ -50,6 +51,8 @@ def _apply_runtime_migrations():
             "locked_by": "VARCHAR",
             "locked_day_number": "INTEGER",
             "locked_at": "TIMESTAMP",
+            "organization_id": "INTEGER",
+            "created_by": "INTEGER",
         },
         inspector=inspector,
     )
@@ -63,6 +66,7 @@ def _apply_runtime_migrations():
         },
         inspector=inspector,
     )
+    _ensure_default_organization(inspector)
 
 
 def _ensure_columns(table_name: str, expected_columns: dict[str, str], inspector):
@@ -75,3 +79,22 @@ def _ensure_columns(table_name: str, expected_columns: dict[str, str], inspector
             if column_name in existing_columns:
                 continue
             connection.execute(text(f"ALTER TABLE {table_name} ADD COLUMN {column_name} {column_type}"))
+
+
+def _ensure_default_organization(inspector):
+    if not inspector.has_table("organization") or not inspector.has_table("trip"):
+        return
+
+    with engine.begin() as connection:
+        org_row = connection.execute(text("SELECT id FROM organization ORDER BY id LIMIT 1")).first()
+        if org_row:
+            org_id = org_row[0]
+        else:
+            connection.execute(
+                text(
+                    "INSERT INTO organization (name, slug, created_at) VALUES ('Default Agency', 'default-agency', CURRENT_TIMESTAMP)"
+                )
+            )
+            org_id = connection.execute(text("SELECT id FROM organization WHERE slug = 'default-agency'")).first()[0]
+
+        connection.execute(text("UPDATE trip SET organization_id = :org_id WHERE organization_id IS NULL"), {"org_id": org_id})
