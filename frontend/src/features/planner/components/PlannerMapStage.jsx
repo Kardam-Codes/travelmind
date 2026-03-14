@@ -16,6 +16,8 @@ function PlannerMapStage({
     mapRoute?.provider_status === "ok"
       ? "Route synced to the confirmed itinerary."
       : mapRoute?.warning || "Marker view is active while the route is loading.";
+  const hasUnverified = (places || []).some((place) => place?.verified === false || place?.source === "ai");
+  const catalogLabel = hasUnverified ? "Catalog: mixed sources" : "Catalog: verified inventory";
 
   return (
     <section className="section-shell relative min-h-[48rem] overflow-hidden p-0">
@@ -60,9 +62,13 @@ function PlannerMapStage({
           <p className="mt-3 text-sm leading-7 text-text/75 dark:text-white/75">{routeMessage}</p>
           {routeLeg ? (
             <p className="mt-3 rounded-full bg-surface-container-lowest px-4 py-3 text-sm font-semibold text-text/70 dark:bg-dark-card dark:text-white/75">
-              Next leg: {routeLeg.distance_text || "Distance pending"} • {routeLeg.duration_text || "Duration pending"}
+              Next leg: {routeLeg.distance_text || "Distance pending"} - {routeLeg.duration_text || "Duration pending"}
             </p>
           ) : null}
+          <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-surface-container-lowest px-4 py-2 text-xs font-semibold text-text/60 dark:bg-dark-card dark:text-white/70">
+            <Icon className="h-4 w-4" name="shield" />
+            {catalogLabel}
+          </p>
         </div>
       </div>
 

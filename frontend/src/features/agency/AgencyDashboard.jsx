@@ -1,6 +1,28 @@
 import { useEffect, useState } from "react";
 import { apiRequest } from "../../utils/apiClient";
 import { getActiveOrgId, getStoredUser } from "../../utils/session";
+import { getDemoMode } from "../../utils/demo";
+
+const DEMO_REPORT = {
+  kpis: {
+    total_requests: 12,
+    total_offers: 8,
+    total_clicks: 21,
+    total_commission: 42500,
+  },
+};
+
+const DEMO_REQUESTS = [
+  { id: 1, traveler_name: "Aanya Mehta", traveler_email: "aanya@demo.com", status: "assigned", assigned_agent_id: 12 },
+  { id: 2, traveler_name: "Rishi Kulkarni", traveler_email: "rishi@demo.com", status: "quoted", assigned_agent_id: 9 },
+  { id: 3, traveler_name: "Leena Das", traveler_email: "leena@demo.com", status: "pending", assigned_agent_id: null },
+];
+
+const DEMO_MEMBERS = [
+  { id: 1, user_id: 12, role: "admin" },
+  { id: 2, user_id: 9, role: "agent" },
+  { id: 3, user_id: 7, role: "agent" },
+];
 
 function StatCard({ label, value }) {
   return (
@@ -18,6 +40,7 @@ function AgencyDashboard() {
   const [requests, setRequests] = useState([]);
   const [report, setReport] = useState(null);
   const [error, setError] = useState("");
+  const demoMode = getDemoMode();
 
   useEffect(() => {
     if (!activeOrgId) {
@@ -25,23 +48,41 @@ function AgencyDashboard() {
     }
 
     async function loadAgencyData() {
+      if (demoMode) {
+        setMembers(DEMO_MEMBERS);
+        setRequests(DEMO_REQUESTS);
+        setReport(DEMO_REPORT);
+        return;
+      }
       try {
         const [membersResponse, requestsResponse, reportResponse] = await Promise.all([
           apiRequest(`/orgs/${activeOrgId}/members`),
           apiRequest("/bookings/requests"),
           apiRequest("/reports/agency"),
         ]);
-        setMembers(membersResponse || []);
-        setRequests(requestsResponse || []);
-        setReport(reportResponse || null);
+        const resolvedMembers = membersResponse || [];
+        const resolvedRequests = requestsResponse || [];
+        const resolvedReport = reportResponse || null;
+        if (!resolvedRequests.length || !resolvedReport?.kpis) {
+          setMembers(resolvedMembers.length ? resolvedMembers : DEMO_MEMBERS);
+          setRequests(resolvedRequests.length ? resolvedRequests : DEMO_REQUESTS);
+          setReport(resolvedReport?.kpis ? resolvedReport : DEMO_REPORT);
+        } else {
+          setMembers(resolvedMembers);
+          setRequests(resolvedRequests);
+          setReport(resolvedReport);
+        }
         setError("");
       } catch (requestError) {
+        setMembers(DEMO_MEMBERS);
+        setRequests(DEMO_REQUESTS);
+        setReport(DEMO_REPORT);
         setError(requestError.message);
       }
     }
 
     loadAgencyData();
-  }, [activeOrgId]);
+  }, [activeOrgId, demoMode]);
 
   async function updateRequest(requestId, status, assignedAgentId) {
     try {

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon";
 import { apiRequest } from "../../utils/apiClient";
 import { setActiveOrgId, setStoredUser } from "../../utils/session";
+import heroImage from "../../assets/hero.svg";
 
 function AuthPage() {
   const navigate = useNavigate();
@@ -92,7 +93,10 @@ function AuthPage() {
             <img
               alt="Travel inspiration"
               className="h-[34rem] w-full object-cover"
-              src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Munnar%20%28Kerala%29%20Tea%20Gardens.jpg"
+              onError={(event) => {
+                event.currentTarget.src = heroImage;
+              }}
+              src={heroImage}
             />
           </div>
         </section>

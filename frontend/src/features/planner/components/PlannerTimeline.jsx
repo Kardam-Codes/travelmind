@@ -62,7 +62,10 @@ function PlannerTimeline({
                 </button>
                 <div className="flex flex-wrap gap-2">
                   <button
-                    className={`secondary-pill px-4 py-2 text-xs ${!canEdit ? "cursor-not-allowed opacity-60" : ""}`}
+                    aria-label="Add stop"
+                    className={`flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] transition dark:bg-white/10 dark:text-white ${
+                      !canEdit ? "cursor-not-allowed opacity-60" : ""
+                    }`}
                     onClick={() => {
                       if (canEdit) {
                         onAddItem?.(day.day_number);
@@ -70,17 +73,27 @@ function PlannerTimeline({
                     }}
                     type="button"
                   >
-                    Add stop
+                    <Icon className="h-4 w-4" name="plus" />
                   </button>
                   {isLockedByCurrentUser ? (
-                    <button className="secondary-pill px-4 py-2 text-xs" onClick={() => onUnlockDay?.(day.day_number)} type="button">
-                      Unlock day
+                    <button
+                      aria-label="Unlock day"
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
+                      onClick={() => onUnlockDay?.(day.day_number)}
+                      type="button"
+                    >
+                      <Icon className="h-4 w-4" name="unlock" />
                     </button>
                   ) : isLocked ? (
-                    <span className="secondary-pill px-4 py-2 text-xs opacity-70">Locked</span>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] opacity-70 dark:bg-white/10 dark:text-white">
+                      <Icon className="h-4 w-4" name="lock" />
+                    </span>
                   ) : (
                     <button
-                      className={`secondary-pill px-4 py-2 text-xs ${!canEdit ? "cursor-not-allowed opacity-60" : ""}`}
+                      aria-label="Lock day"
+                      className={`flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] transition dark:bg-white/10 dark:text-white ${
+                        !canEdit ? "cursor-not-allowed opacity-60" : ""
+                      }`}
                       onClick={() => {
                         if (canEdit) {
                           onLockDay?.(day.day_number);
@@ -88,7 +101,7 @@ function PlannerTimeline({
                       }}
                       type="button"
                     >
-                      Lock day
+                      <Icon className="h-4 w-4" name="lock" />
                     </button>
                   )}
                 </div>
@@ -134,19 +147,25 @@ function PlannerTimeline({
                           </div>
                         </div>
                         <div className="mt-4 flex flex-wrap gap-2 text-xs">
-                          <span
-                            className={`secondary-pill px-3 py-2 ${isLocked || !canEdit ? "cursor-not-allowed opacity-60" : ""}`}
+                          <button
+                            aria-label="Edit stop"
+                            className={`flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white ${
+                              isLocked || !canEdit ? "cursor-not-allowed opacity-60" : ""
+                            }`}
                             onClick={(event) => {
                               event.stopPropagation();
                               if (!isLocked && canEdit) {
                                 onUpdateItem?.(item);
                               }
                             }}
+                            title="Edit"
+                            type="button"
                           >
-                            Edit
-                          </span>
-                          <span
-                            className={`secondary-pill px-3 py-2 ${
+                            <Icon className="h-4 w-4" name="edit" />
+                          </button>
+                          <button
+                            aria-label="Move stop up"
+                            className={`flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white ${
                               isLocked || itemIndex === 0 || !canEdit ? "cursor-not-allowed opacity-60" : ""
                             }`}
                             onClick={(event) => {
@@ -155,11 +174,14 @@ function PlannerTimeline({
                                 onMoveItem?.(item.id, day.day_number, itemIndex);
                               }
                             }}
+                            title="Move up"
+                            type="button"
                           >
-                            Move up
-                          </span>
-                          <span
-                            className={`secondary-pill px-3 py-2 ${
+                            <Icon className="h-4 w-4" name="chevronUp" />
+                          </button>
+                          <button
+                            aria-label="Move stop down"
+                            className={`flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white ${
                               isLocked || itemIndex === day.items.length - 1 || !canEdit ? "cursor-not-allowed opacity-60" : ""
                             }`}
                             onClick={(event) => {
@@ -168,20 +190,27 @@ function PlannerTimeline({
                                 onMoveItem?.(item.id, day.day_number, itemIndex + 2);
                               }
                             }}
+                            title="Move down"
+                            type="button"
                           >
-                            Move down
-                          </span>
-                          <span
-                            className={`secondary-pill px-3 py-2 ${isLocked || !canEdit ? "cursor-not-allowed opacity-60" : ""}`}
+                            <Icon className="h-4 w-4" name="chevronDown" />
+                          </button>
+                          <button
+                            aria-label="Remove stop"
+                            className={`flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white ${
+                              isLocked || !canEdit ? "cursor-not-allowed opacity-60" : ""
+                            }`}
                             onClick={(event) => {
                               event.stopPropagation();
                               if (!isLocked && canEdit) {
                                 onRemoveItem?.(item.id);
                               }
                             }}
+                            title="Remove"
+                            type="button"
                           >
-                            Remove
-                          </span>
+                            <Icon className="h-4 w-4" name="trash" />
+                          </button>
                         </div>
                       </button>
                     );

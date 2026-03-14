@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1400" viewBox="0 0 1200 1400" fill="none">
+  <rect width="1200" height="1400" fill="#F2EFEA"/>
+  <rect y="700" width="1200" height="700" fill="#E9E1D7"/>
+  <path d="M100 520C280 380 520 340 760 420C960 490 1100 620 1180 760" stroke="#8C2500" stroke-width="28" stroke-linecap="round"/>
+  <path d="M80 960C260 860 460 840 660 880C860 920 1020 1020 1140 1160" stroke="#00535B" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="340" cy="360" r="130" fill="#F1C9A8"/>
+  <circle cx="820" cy="320" r="160" fill="#F1C9A8"/>
+  <rect x="200" y="880" width="780" height="260" rx="52" fill="#FFF8F2"/>
+  <text x="260" y="1020" fill="#8C2500" font-size="52" font-family="Arial" font-weight="700">TravelMind</text>
+  <text x="260" y="1090" fill="#5C4A3E" font-size="28" font-family="Arial">Concierge planning preview</text>
+</svg>

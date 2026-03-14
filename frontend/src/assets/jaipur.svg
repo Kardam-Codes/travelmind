@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" fill="none">
+  <rect width="900" height="1200" fill="#F6E7D8"/>
+  <rect y="600" width="900" height="600" fill="#F1D4B5"/>
+  <path d="M80 760C160 620 320 540 470 560C620 580 760 700 820 860" stroke="#8C2500" stroke-width="24" stroke-linecap="round"/>
+  <path d="M120 940C220 840 360 800 520 820C680 840 760 920 820 1020" stroke="#00535B" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="200" cy="520" r="90" fill="#E8B88A"/>
+  <circle cx="700" cy="360" r="120" fill="#E8B88A"/>
+  <rect x="200" y="730" width="500" height="180" rx="40" fill="#FFF2E4"/>
+  <text x="250" y="820" fill="#8C2500" font-size="44" font-family="Arial" font-weight="700">Jaipur</text>
+</svg>

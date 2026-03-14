@@ -30,7 +30,7 @@ function TopNavBar() {
 
   return (
     <div className="sticky top-0 z-50 px-4 pt-4 md:px-6">
-      <nav className="glass-panel mx-auto flex max-w-7xl items-center justify-between rounded-[2rem] px-5 py-4 shadow-float md:px-7">
+      <nav className="nav-panel mx-auto flex max-w-7xl items-center justify-between rounded-[2rem] px-5 py-3 md:px-7">
         <div className="flex items-center gap-3 md:gap-8">
           <NavLink className="font-headline text-xl font-extrabold tracking-tight text-primary dark:text-white" to="/">
             TravelMind

@@ -9,6 +9,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon";
 import TripInput from "../trip-input/TripInput";
+import heroImage from "../../assets/hero.svg";
+import jaipurImage from "../../assets/jaipur.svg";
+import goaImage from "../../assets/goa.svg";
+import munnarImage from "../../assets/munnar.svg";
+import nahargarhImage from "../../assets/nahargarh.svg";
 import { apiRequest } from "../../utils/apiClient";
 import { getStoredUser, setActiveTripId } from "../../utils/session";
 
@@ -17,21 +22,21 @@ const inspirationCards = [
     title: "Jaipur at First Light",
     eyebrow: "Royal heritage",
     summary: "Palace courtyards, old-city bazaars, and sunrise fort views shaped into a composed Rajasthan escape.",
-    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Hawa%20Mahal-Jaipur-Rajasthan.jpg",
+    image: jaipurImage,
     size: "large",
   },
   {
     title: "Goa by Monsoon Tide",
     eyebrow: "Coastal editorial",
     summary: "Beach clubs, Portuguese lanes, and late golden-hour drives along the Konkan edge.",
-    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Goa%20beautiful%20beach.JPG",
+    image: goaImage,
     size: "tall",
   },
   {
     title: "Munnar in Cloud Mist",
     eyebrow: "Highland calm",
     summary: "Tea hills, cool weather, and long scenic drives with a quieter, slower rhythm.",
-    image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Munnar%20%28Kerala%29%20Tea%20Gardens.jpg",
+    image: munnarImage,
     size: "square",
   },
 ];
@@ -149,7 +154,14 @@ function LandingPage() {
               key={card.title}
               className={`${imageShape(card.size)} group relative overflow-hidden rounded-[2rem] shadow-ambient`}
             >
-              <img alt={card.title} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" src={card.image} />
+              <img
+                alt={card.title}
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                onError={(event) => {
+                  event.currentTarget.src = heroImage;
+                }}
+                src={card.image}
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white md:p-8">
                 <p className="label-md text-white/70">{card.eyebrow}</p>
@@ -199,7 +211,10 @@ function LandingPage() {
           </div>
         </div>
         <div className="section-shell overflow-hidden">
-          <div className="relative min-h-[24rem] rounded-[2rem] bg-[url('https://commons.wikimedia.org/wiki/Special:Redirect/file/Nahargarh%20Fort%20Jaipur,%20Rajasthan.jpg')] bg-cover bg-center">
+          <div
+            className="relative min-h-[24rem] rounded-[2rem] bg-cover bg-center"
+            style={{ backgroundImage: `url(${nahargarhImage})` }}
+          >
             <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
             <div className="glass-panel absolute right-6 top-6 rounded-full px-4 py-3 text-sm font-medium text-text dark:text-white">
               Live planner

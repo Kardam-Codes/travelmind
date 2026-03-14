@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" fill="none">
+  <rect width="900" height="1200" fill="#EAF4E9"/>
+  <rect y="560" width="900" height="640" fill="#D4E9D1"/>
+  <path d="M0 720C120 620 260 600 420 640C560 680 700 780 900 880V1200H0V720Z" fill="#B8D9B2"/>
+  <path d="M60 760C200 680 360 680 520 740C680 800 780 900 860 1020" stroke="#2F6B3A" stroke-width="18" stroke-linecap="round"/>
+  <rect x="190" y="780" width="520" height="200" rx="42" fill="#F7FCF7"/>
+  <text x="240" y="880" fill="#2F6B3A" font-size="44" font-family="Arial" font-weight="700">Munnar</text>
+</svg>

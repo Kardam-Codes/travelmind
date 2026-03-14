@@ -109,9 +109,13 @@ function PlannerSidebar({
                 </button>
               ))}
             </div>
-            <button className="primary-pill inline-flex items-center gap-2" disabled={!canSend} type="submit">
+            <button
+              aria-label="Send refinement"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-tertiary text-white transition-transform duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={!canSend}
+              type="submit"
+            >
               <Icon className="h-4 w-4" name="send" />
-              Send
             </button>
           </div>
         </form>
@@ -168,8 +172,13 @@ function PlannerSidebar({
               <option value="viewer">Viewer</option>
               <option value="editor">Editor</option>
             </select>
-            <button className="secondary-pill" disabled={!canInvite} type="submit">
-              Send invite
+            <button
+              aria-label="Send invite"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white disabled:opacity-60"
+              disabled={!canInvite}
+              type="submit"
+            >
+              <Icon className="h-4 w-4" name="send" />
             </button>
           </div>
         </form>
@@ -206,8 +215,13 @@ function PlannerSidebar({
             disabled={!canWrite}
             value={commentDraft}
           />
-          <button className="secondary-pill w-full" disabled={!canWrite} type="submit">
-            Add comment
+          <button
+            aria-label="Add comment"
+            className="flex h-11 w-full items-center justify-center rounded-full bg-secondary-container text-sm font-semibold text-[#6d6356] dark:bg-white/10 dark:text-white disabled:opacity-60"
+            disabled={!canWrite}
+            type="submit"
+          >
+            <Icon className="h-4 w-4" name="send" />
           </button>
         </form>
         {commentError ? <p className="text-xs text-tertiary">{commentError}</p> : null}

@@ -31,18 +31,22 @@ function TripInput({
         </div>
         <div className="flex-1">
           <p className="label-md mb-1 text-primary/70 dark:text-white/60">AI travel request</p>
-          <input
-            className="w-full bg-transparent text-base text-text placeholder:text-text/40 focus:outline-none dark:text-white dark:placeholder:text-white/35 md:text-lg"
+          <textarea
+            className="min-h-[4.5rem] w-full resize-none bg-transparent text-base text-text placeholder:text-text/40 focus:outline-none dark:text-white dark:placeholder:text-white/35 md:text-lg"
             disabled={disabled}
             onChange={(event) => onChange?.(event.target.value)}
             placeholder={placeholder}
-            type="text"
+            rows={2}
             value={value}
           />
         </div>
-        <button className="primary-pill flex h-14 items-center gap-2 px-6 disabled:cursor-not-allowed disabled:opacity-70" disabled={disabled} type="submit">
-          <span className="hidden md:inline">{submitLabel}</span>
-          <Icon className="h-4 w-4" name="arrow" />
+        <button
+          aria-label={submitLabel}
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-tertiary text-white transition-transform duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
+          disabled={disabled}
+          type="submit"
+        >
+          <Icon className="h-5 w-5" name="arrow" />
         </button>
       </div>
       {error ? <p className="mt-3 px-4 text-sm text-tertiary">{error}</p> : null}

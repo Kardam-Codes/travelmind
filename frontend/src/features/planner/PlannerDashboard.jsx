@@ -13,6 +13,7 @@ import PlannerHeader from "./components/PlannerHeader";
 import PlannerMapStage from "./components/PlannerMapStage";
 import PlannerSidebar from "./components/PlannerSidebar";
 import PlannerTimeline from "./components/PlannerTimeline";
+import { getDemoLabel, getDemoMode } from "../../utils/demo";
 
 function PlannerDashboard() {
   const [searchParams] = useSearchParams();
@@ -35,6 +36,7 @@ function PlannerDashboard() {
   const [selectedStopId, setSelectedStopId] = useState(null);
   const [collapsedDays, setCollapsedDays] = useState({});
   const [websocketReady, setWebsocketReady] = useState(false);
+  const demoMode = getDemoMode();
   const tripId = searchParams.get("tripId") || getActiveTripId();
   const user = getStoredUser();
   const userId = String(user?.user_id || "guest");
@@ -386,6 +388,11 @@ function PlannerDashboard() {
   return (
     <main className="mx-auto max-w-[1600px] px-4 pb-12 pt-8 md:px-6">
       <div className="space-y-6">
+        {demoMode ? (
+          <div className="rounded-[1.25rem] bg-secondary-container/70 px-4 py-3 text-sm text-text/70 shadow-ambient dark:bg-white/10 dark:text-white/70">
+            {getDemoLabel()}
+          </div>
+        ) : null}
         <PlannerHeader onConfirm={() => {}} route={mapRoute} trip={dashboard?.trip} tripRole={dashboard?.trip_role} websocketReady={websocketReady} />
 
         <section className="grid gap-6 xl:grid-cols-[23rem,minmax(0,1fr),27rem]">
