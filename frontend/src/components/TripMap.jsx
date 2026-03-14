@@ -1,16 +1,32 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { CircleMarker, MapContainer, Polyline, TileLayer, Tooltip, useMap } from "react-leaflet";
 
 function normalizeLatLng(value) {
   return [Number(value.lat), Number(value.lng)];
 }
 
+const INDIA_CENTER = [22.9734, 78.6569];
+const INDIA_BOUNDS = [
+  [6.5, 68.0],
+  [35.9, 97.4],
+];
+
 function FitToData({ points }) {
   const map = useMap();
 
-  if (points.length) {
-    map.fitBounds(points, { padding: [48, 48] });
-  }
+  useEffect(() => {
+    if (!points.length) {
+      map.setView(INDIA_CENTER, 5.8, { animate: true });
+      return;
+    }
+
+    if (points.length === 1) {
+      map.setView(points[0], 11, { animate: true });
+      return;
+    }
+
+    map.fitBounds(points, { padding: [48, 48], animate: true });
+  }, [map, points]);
 
   return null;
 }
@@ -67,32 +83,42 @@ function TripMap({
 
   return (
     <div className={`relative overflow-hidden rounded-[2rem] bg-surface-container-lowest dark:bg-dark-card ${className}`}>
-      {markerPoints.length ? (
-        <MapContainer center={markerPoints[0].position} className="h-full min-h-[20rem] w-full" scrollWheelZoom zoom={11}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <FitToData points={fitPoints} />
-          {markerPoints.map((markerPoint) => (
-            <CircleMarker
-              key={markerPoint.id}
-              center={markerPoint.position}
-              eventHandlers={markerPoint.itemId && onSelectStop ? { click: () => onSelectStop(markerPoint.itemId) } : undefined}
-              pathOptions={{
-                color: markerPoint.itemId === selectedStopId ? "#8C2500" : "#00535B",
-                fillColor: markerPoint.itemId === selectedStopId ? "#8C2500" : "#D97706",
-                fillOpacity: 0.95,
-                weight: markerPoint.itemId === selectedStopId ? 3 : 2,
-              }}
-              radius={markerPoint.itemId === selectedStopId ? 10 : 8}
-            >
-              <Tooltip>{markerPoint.label}</Tooltip>
-            </CircleMarker>
-          ))}
-          {routePath.length >= 2 ? <Polyline pathOptions={{ color: "#00535B", opacity: 0.9, weight: 4 }} positions={routePath} /> : null}
-        </MapContainer>
-      ) : null}
+      <MapContainer
+        center={INDIA_CENTER}
+        className="h-full min-h-[20rem] w-full"
+        maxBounds={INDIA_BOUNDS}
+        maxBoundsViscosity={1}
+        minZoom={5}
+        maxZoom={16}
+        scrollWheelZoom
+        zoom={6}
+        zoomDelta={0.5}
+        zoomSnap={0.5}
+        wheelDebounceTime={40}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://carto.com/attributions">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        />
+        <FitToData points={fitPoints} />
+        {markerPoints.map((markerPoint) => (
+          <CircleMarker
+            key={markerPoint.id}
+            center={markerPoint.position}
+            eventHandlers={markerPoint.itemId && onSelectStop ? { click: () => onSelectStop(markerPoint.itemId) } : undefined}
+            pathOptions={{
+              color: markerPoint.itemId === selectedStopId ? "#8C2500" : "#00535B",
+              fillColor: markerPoint.itemId === selectedStopId ? "#8C2500" : "#D97706",
+              fillOpacity: 0.95,
+              weight: markerPoint.itemId === selectedStopId ? 3 : 2,
+            }}
+            radius={markerPoint.itemId === selectedStopId ? 10 : 8}
+          >
+            <Tooltip>{markerPoint.label}</Tooltip>
+          </CircleMarker>
+        ))}
+        {routePath.length >= 2 ? <Polyline pathOptions={{ color: "#00535B", opacity: 0.9, weight: 4 }} positions={routePath} /> : null}
+      </MapContainer>
       {!markerPoints.length ? (
         <div className="absolute inset-0 flex items-center justify-center bg-surface-container-lowest/95 px-6 text-center text-sm text-text/65 dark:bg-dark-card/95 dark:text-white/65">
           {emptyMessage}
