@@ -30,6 +30,11 @@ Last Updated: 2026-03-13
   h6 {
     @apply font-headline;
   }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 @layer components {

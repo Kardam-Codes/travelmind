@@ -24,6 +24,7 @@ function PlannerTimeline({
 }) {
   const days = itinerary?.days || [];
   const canEdit = tripRole === "owner" || tripRole === "editor";
+  const palette = ["#FFE8D6", "#E0F2FE", "#FDE68A", "#EBD8FF", "#DCFCE7", "#FFE4E6"];
 
   function findLegForItem(item) {
     const stopIndex = route?.stops?.findIndex((stop) => stop.item_id === item.id) ?? -1;
@@ -49,15 +50,13 @@ function PlannerTimeline({
   const visibleDays = selectedDay == null ? days : days.filter((day) => day.day_number === selectedDay);
 
   return (
-    <section className="flex min-h-[36rem] flex-col">
-      <div className="mb-4 flex items-center justify-between gap-4">
-        <div>
-          <p className="label-md text-primary/65 dark:text-white/55">Day-wise itinerary</p>
-          <h2 className="mt-2 text-2xl font-bold">{trip ? `${trip.destination_city} plan` : "Trip timeline"}</h2>
-        </div>
+    <section className="flex min-h-[30rem] flex-col">
+      <div className="mb-4">
+        <p className="label-md text-primary/65 dark:text-white/55">Day-wise itinerary</p>
+        <h2 className="mt-2 text-2xl font-bold">{trip ? `${trip.destination_city} plan` : "Trip timeline"}</h2>
       </div>
 
-      <div className="hide-scrollbar flex-1 space-y-5 overflow-y-auto pr-2">
+      <div className="space-y-6">
         {visibleDays.map((day) => {
           const isLocked = trip?.locked_day_number === day.day_number && trip?.locked_by && trip.locked_by !== currentUserId;
           const isLockedByCurrentUser = trip?.locked_day_number === day.day_number && trip?.locked_by === currentUserId;
@@ -119,124 +118,44 @@ function PlannerTimeline({
               </div>
 
               {!isCollapsed ? (
-                <div className="mt-5 space-y-4">
-                  {day.items.map((item, itemIndex) => {
-                    const leg = findLegForItem(item);
-                    const isSelected = selectedStopId === item.id;
-                    const imageUrl = findImageForItem(item);
+                <div className="mt-5">
+                  <div className="hide-scrollbar flex gap-4 overflow-x-auto pb-2">
+                    {day.items.map((item, itemIndex) => {
+                      const leg = findLegForItem(item);
+                      const isSelected = selectedStopId === item.id;
+                      const imageUrl = findImageForItem(item);
+                      const cardTone = palette[itemIndex % palette.length];
 
-                    return (
-                      <button
-                        key={`${day.day_number}-${item.id}`}
-                        className={`w-full rounded-[1.5rem] border px-4 py-4 text-left transition ${
-                          isSelected
-                            ? "border-tertiary bg-secondary-container/80 shadow-ambient dark:border-white/20 dark:bg-white/10"
-                            : "border-transparent bg-surface-container-low/80 hover:border-primary/20 dark:bg-dark-low/80"
-                        }`}
-                        onClick={() => onSelectStop?.(item.id)}
-                        type="button"
-                      >
-                        <div className="flex flex-wrap items-start justify-between gap-4">
-                          <div className="flex gap-4">
-                            {imageUrl ? (
-                              <img
-                                alt={item.title}
-                                className="h-20 w-20 rounded-[1.25rem] object-cover"
-                                loading="lazy"
-                                src={imageUrl}
-                              />
-                            ) : null}
-                            <div>
-                              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-label text-text/45 dark:text-white/45">
-                                <span>{item.item_type}</span>
-                                <span>-</span>
-                                <span>Stop {itemIndex + 1}</span>
-                              </div>
-                              <p className="mt-2 text-base font-semibold">{item.title}</p>
-                              <p className="mt-2 text-sm leading-7 text-text/70 dark:text-white/70">{item.description || "Scheduled stop"}</p>
-                              {leg ? (
-                                <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-surface-container-lowest px-3 py-2 text-xs font-semibold text-text/65 dark:bg-dark-card dark:text-white/70">
-                                  <Icon className="h-4 w-4" name="route" />
-                                  {leg.distance_text || "Distance pending"} - {leg.duration_text || "Duration pending"}
-                                </p>
-                              ) : null}
-                            </div>
+                      return (
+                        <button
+                          key={`${day.day_number}-${item.id}`}
+                          className={`relative flex w-64 flex-shrink-0 flex-col rounded-[1.5rem] border p-4 text-left transition ${
+                            isSelected
+                              ? "border-tertiary shadow-ambient dark:border-white/20"
+                              : "border-transparent hover:border-primary/20"
+                          }`}
+                          onClick={() => onSelectStop?.(item.id)}
+                          style={{ backgroundColor: cardTone }}
+                          type="button"
+                        >
+                          {imageUrl ? (
+                            <img alt={item.title} className="mb-3 h-28 w-full rounded-[1.25rem] object-cover" loading="lazy" src={imageUrl} />
+                          ) : null}
+                          <div className="text-xs font-semibold uppercase tracking-label text-text/55">
+                            {item.item_type} - Stop {itemIndex + 1}
                           </div>
-                          <div className="flex flex-wrap gap-2">
-                            <span className="rounded-full bg-surface-container-lowest px-3 py-2 text-xs font-semibold text-primary dark:bg-dark-card dark:text-white">
-                              {isSelected ? "Selected" : "View"}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="mt-4 flex flex-wrap gap-2 text-xs">
-                          <button
-                            aria-label="Edit stop"
-                            className={`flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white ${
-                              isLocked || !canEdit ? "cursor-not-allowed opacity-60" : ""
-                            }`}
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              if (!isLocked && canEdit) {
-                                onUpdateItem?.(item);
-                              }
-                            }}
-                            title="Edit"
-                            type="button"
-                          >
-                            <Icon className="h-4 w-4" name="edit" />
-                          </button>
-                          <button
-                            aria-label="Move stop up"
-                            className={`flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white ${
-                              isLocked || itemIndex === 0 || !canEdit ? "cursor-not-allowed opacity-60" : ""
-                            }`}
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              if (!isLocked && itemIndex !== 0 && canEdit) {
-                                onMoveItem?.(item.id, day.day_number, itemIndex);
-                              }
-                            }}
-                            title="Move up"
-                            type="button"
-                          >
-                            <Icon className="h-4 w-4" name="chevronUp" />
-                          </button>
-                          <button
-                            aria-label="Move stop down"
-                            className={`flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white ${
-                              isLocked || itemIndex === day.items.length - 1 || !canEdit ? "cursor-not-allowed opacity-60" : ""
-                            }`}
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              if (!isLocked && itemIndex !== day.items.length - 1 && canEdit) {
-                                onMoveItem?.(item.id, day.day_number, itemIndex + 2);
-                              }
-                            }}
-                            title="Move down"
-                            type="button"
-                          >
-                            <Icon className="h-4 w-4" name="chevronDown" />
-                          </button>
-                          <button
-                            aria-label="Remove stop"
-                            className={`flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white ${
-                              isLocked || !canEdit ? "cursor-not-allowed opacity-60" : ""
-                            }`}
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              if (!isLocked && canEdit) {
-                                onRemoveItem?.(item.id);
-                              }
-                            }}
-                            title="Remove"
-                            type="button"
-                          >
-                            <Icon className="h-4 w-4" name="trash" />
-                          </button>
-                        </div>
-                      </button>
-                    );
-                  })}
+                          <p className="mt-2 text-base font-semibold">{item.title}</p>
+                          <p className="mt-2 text-sm text-text/70">{item.description || "Scheduled stop"}</p>
+                          {leg ? (
+                            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-2 text-xs font-semibold text-text/65">
+                              <Icon className="h-4 w-4" name="route" />
+                              {leg.distance_text || "Distance pending"} - {leg.duration_text || "Duration pending"}
+                            </p>
+                          ) : null}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               ) : null}
             </article>

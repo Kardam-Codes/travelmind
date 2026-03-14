@@ -7,6 +7,7 @@ Last Updated: 2026-03-13
 */
 import { Navigate, Route, Routes } from "react-router-dom";
 import TopNavBar from "./components/TopNavBar";
+import ScrollToTop from "./components/ScrollToTop";
 import AuthPage from "./features/auth/AuthPage";
 import ExplorePage from "./features/explore/ExplorePage";
 import FirstTripPage from "./features/first-trip/FirstTripPage";
@@ -20,6 +21,7 @@ function App() {
   return (
     <div className="min-h-screen bg-surface text-text transition-colors duration-500 dark:bg-dark-base dark:text-white">
       <TopNavBar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/start" element={<FirstTripPage />} />

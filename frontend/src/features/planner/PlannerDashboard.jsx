@@ -13,7 +13,6 @@ import PlannerHeader from "./components/PlannerHeader";
 import PlannerMapStage from "./components/PlannerMapStage";
 import PlannerTimeline from "./components/PlannerTimeline";
 import PlannerChatPanel from "./components/PlannerChatPanel";
-import PlannerSummaryPanel from "./components/PlannerSummaryPanel";
 
 function PlannerDashboard() {
   const [searchParams] = useSearchParams();
@@ -395,8 +394,7 @@ function PlannerDashboard() {
         <PlannerHeader onShare={handleShare} onStartGroup={handleStartGroup} trip={dashboard?.trip} />
         {shareNotice ? <p className="text-sm text-primary">{shareNotice}</p> : null}
 
-        <section className="grid gap-6 xl:grid-cols-[20rem,minmax(0,1fr),22rem]">
-          <PlannerSummaryPanel inviteStatus={inviteStatus} onInvite={handleInvite} trip={dashboard?.trip} tripRole={dashboard?.trip_role} />
+        <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr),22rem]">
           <div className="space-y-4">
             {isLoading ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-primary shadow-ambient">Loading planner...</p> : null}
             {error ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-tertiary shadow-ambient">{error}</p> : null}
