@@ -1,5 +1,4 @@
 from sqlmodel import SQLModel
-
 from app.database.session import engine
 
 

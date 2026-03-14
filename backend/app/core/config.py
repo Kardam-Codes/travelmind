@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     google_maps_api_key: str = ""
     llm_api_key: str = ""
 
-    model_config = SettingsConfigDict(env_file="backend/.env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
 
 settings = Settings()
