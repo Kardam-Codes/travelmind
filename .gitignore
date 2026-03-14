@@ -14,3 +14,5 @@ __pycache__/
 full_project.py
 full_project.txt
 full_project.txt
+full_project_content.txt
+backend/travelmind.db

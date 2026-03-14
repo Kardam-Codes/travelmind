@@ -9,6 +9,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import TopNavBar from "./components/TopNavBar";
 import AuthPage from "./features/auth/AuthPage";
 import ExplorePage from "./features/explore/ExplorePage";
+import FirstTripPage from "./features/first-trip/FirstTripPage";
 import LandingPage from "./features/landing/LandingPage";
 import PlannerDashboard from "./features/planner/PlannerDashboard";
 import ProfileTripsPage from "./features/profile/ProfileTripsPage";
@@ -21,6 +22,7 @@ function App() {
       <TopNavBar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/start" element={<FirstTripPage />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/planner" element={<PlannerDashboard />} />
         <Route path="/agency" element={<AgencyDashboard />} />

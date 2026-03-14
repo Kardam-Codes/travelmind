@@ -220,8 +220,8 @@ function LandingPage() {
           <p className="label-md text-primary/70 dark:text-white/55">Start planning</p>
           <h2 className="mt-3 text-4xl font-bold">Ready to see the world differently?</h2>
         </div>
-        <Link className="primary-pill inline-flex items-center gap-2" to="/planner">
-          Start your journey
+        <Link className="primary-pill inline-flex items-center gap-2" to="/start">
+          Plan your first trip
           <Icon className="h-4 w-4" name="arrow" />
         </Link>
       </section>
