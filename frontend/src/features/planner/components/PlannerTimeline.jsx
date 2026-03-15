@@ -194,7 +194,7 @@ function PlannerTimeline({
                       );
                     })}
                     <div
-                      className={`flex h-28 w-20 items-center justify-center rounded-[1.25rem] border border-dashed border-primary/40 text-xs text-primary/70 ${
+                      className={`flex w-64 flex-shrink-0 items-center justify-center rounded-[1.5rem] border border-dashed border-primary/40 p-4 text-sm font-semibold text-primary/70 ${
                         !canEdit || isLocked ? "opacity-50" : ""
                       }`}
                       onDragOver={(event) => {
