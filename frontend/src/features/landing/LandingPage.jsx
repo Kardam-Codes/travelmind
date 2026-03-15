@@ -14,11 +14,7 @@ import nahargarhImage from "../../assets/nahargarh.svg";
 import { apiRequest } from "../../utils/apiClient";
 import { getStoredUser, setActiveTripId } from "../../utils/session";
 
-const inspirationLayout = [
-  { size: "large" },
-  { size: "tall" },
-  { size: "square" },
-];
+const inspirationLayout = [{ size: "large" }];
 
 const features = [
   {
