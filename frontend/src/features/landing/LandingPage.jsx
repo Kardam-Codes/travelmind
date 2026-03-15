@@ -5,40 +5,19 @@ Owner: Jay
 Dependencies: TripInput, Icon
 Last Updated: 2026-03-13
 */
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Icon from "../../components/Icon";
 import TripInput from "../trip-input/TripInput";
 import heroImage from "../../assets/hero.svg";
-import jaipurImage from "../../assets/jaipur.svg";
-import goaImage from "../../assets/goa.svg";
-import munnarImage from "../../assets/munnar.svg";
 import nahargarhImage from "../../assets/nahargarh.svg";
 import { apiRequest } from "../../utils/apiClient";
 import { getStoredUser, setActiveTripId } from "../../utils/session";
 
-const inspirationCards = [
-  {
-    title: "Jaipur at First Light",
-    eyebrow: "Royal heritage",
-    summary: "Palace courtyards, old-city bazaars, and sunrise fort views shaped into a composed Rajasthan escape.",
-    image: jaipurImage,
-    size: "large",
-  },
-  {
-    title: "Goa by Monsoon Tide",
-    eyebrow: "Coastal editorial",
-    summary: "Beach clubs, Portuguese lanes, and late golden-hour drives along the Konkan edge.",
-    image: goaImage,
-    size: "tall",
-  },
-  {
-    title: "Munnar in Cloud Mist",
-    eyebrow: "Highland calm",
-    summary: "Tea hills, cool weather, and long scenic drives with a quieter, slower rhythm.",
-    image: munnarImage,
-    size: "square",
-  },
+const inspirationLayout = [
+  { size: "large" },
+  { size: "tall" },
+  { size: "square" },
 ];
 
 const features = [
@@ -74,7 +53,42 @@ function LandingPage() {
   const [tripQuery, setTripQuery] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [cities, setCities] = useState([]);
   const user = getStoredUser();
+  const inspirationCards = useMemo(() => {
+    return inspirationLayout.map((layout, index) => {
+      const city = cities[index];
+      if (!city) {
+        return {
+          title: "Curated journeys",
+          eyebrow: "Signature destinations",
+          summary: "Distinct routes with a calm editorial rhythm built from verified inventory.",
+          image: heroImage,
+          size: layout.size,
+        };
+      }
+      return {
+        title: city.city,
+        eyebrow: city.tourism_type || "Curated travel",
+        summary: city.notes || `${city.city} stays rooted in verified catalog recommendations.`,
+        image: city.image_url || heroImage,
+        size: layout.size,
+      };
+    });
+  }, [cities]);
+
+  useEffect(() => {
+    async function loadCities() {
+      try {
+        const response = await apiRequest("/cities/");
+        setCities(response.slice(0, 3));
+      } catch (requestError) {
+        setError(requestError.message);
+      }
+    }
+
+    loadCities();
+  }, []);
 
   async function handlePlanTrip() {
     if (!tripQuery.trim()) {
