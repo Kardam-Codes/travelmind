@@ -9,6 +9,7 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import OrgSwitcher from "./OrgSwitcher";
+import Icon from "./Icon";
 
 const navItems = [
   { label: "Planner", to: "/planner" },
