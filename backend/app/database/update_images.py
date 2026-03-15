@@ -18,7 +18,7 @@ from app.database.models.city import City
 from app.database.models.place import Place
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 DATASETS = ROOT / "datasets"
 CITY_CSV = DATASETS / "city_master_list.csv"
 ACTIVITY_CSV = DATASETS / "activities.csv"
