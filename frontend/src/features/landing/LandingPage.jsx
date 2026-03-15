@@ -50,10 +50,12 @@ function LandingPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [cities, setCities] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
   const user = getStoredUser();
   const inspirationCards = useMemo(() => {
-    return inspirationLayout.map((layout, index) => {
-      const city = cities[index];
+    return inspirationLayout.map((layout) => {
+      const city = cities[activeIndex];
       if (!city) {
         return {
           title: "Curated journeys",
@@ -71,16 +73,14 @@ function LandingPage() {
         size: layout.size,
       };
     });
-  }, [cities]);
+  }, [cities, activeIndex]);
 
   useEffect(() => {
     async function loadCities() {
       try {
         const response = await apiRequest("/cities/");
-        const ahmedabad = response.find(
-          (city) => String(city.city || "").toLowerCase() === "ahmedabad",
-        );
-        setCities(ahmedabad ? [ahmedabad] : response.slice(0, 1));
+        const carouselCities = response.slice(0, 8);
+        setCities(carouselCities);
       } catch (requestError) {
         setError(requestError.message);
       }
@@ -88,6 +88,20 @@ function LandingPage() {
 
     loadCities();
   }, []);
+
+  useEffect(() => {
+    if (cities.length <= 1) {
+      return undefined;
+    }
+    const intervalId = window.setInterval(() => {
+      setIsFading(true);
+      window.setTimeout(() => {
+        setActiveIndex((current) => (current + 1) % cities.length);
+        setIsFading(false);
+      }, 450);
+    }, 4200);
+    return () => window.clearInterval(intervalId);
+  }, [cities.length]);
 
   async function handlePlanTrip() {
     if (!tripQuery.trim()) {
@@ -164,8 +178,10 @@ function LandingPage() {
         <div className="grid gap-8 md:col-span-8 md:grid-cols-12">
           {inspirationCards.map((card) => (
             <article
-              key={card.title}
-              className={`${imageShape(card.size)} group relative overflow-hidden rounded-[2rem] shadow-ambient`}
+              key={`${card.title}-${activeIndex}`}
+              className={`${imageShape(card.size)} group relative overflow-hidden rounded-[2rem] shadow-ambient transition-opacity duration-500 ${
+                isFading ? "opacity-0" : "opacity-100"
+              }`}
             >
               <img
                 alt={card.title}
@@ -175,11 +191,11 @@ function LandingPage() {
                 }}
                 src={card.image}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white md:p-8">
-                <p className="label-md text-white/70">{card.eyebrow}</p>
-                <h3 className="mt-3 text-2xl font-bold">{card.title}</h3>
-                <p className="mt-3 max-w-md text-sm leading-7 text-white/80">{card.summary}</p>
+                <p className="label-md text-white/80">{card.eyebrow}</p>
+                <h3 className="mt-3 text-3xl font-bold">{card.title}</h3>
+                <p className="mt-3 max-w-md text-base font-medium leading-7 text-white/85">{card.summary}</p>
               </div>
             </article>
           ))}
