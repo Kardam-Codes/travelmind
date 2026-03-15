@@ -331,7 +331,7 @@ function PlannerDashboard() {
 
         <section className="grid gap-6 xl:grid-cols-[auto,minmax(0,1fr),22rem]">
           <aside
-            className={`section-shell flex h-full flex-col items-center gap-3 transition-all duration-300 ${sidebarOpen ? "w-24" : "w-9"}`}
+            className={`section-shell flex h-full flex-col items-center gap-3 transition-all duration-300 ${sidebarOpen ? "w-44" : "w-9"}`}
           >
             <button
               aria-label="Toggle sidebar"
@@ -339,12 +339,12 @@ function PlannerDashboard() {
               onClick={() => setSidebarOpen((current) => !current)}
               type="button"
             >
-              <Icon className="h-4 w-4" name={sidebarOpen ? "chevronLeft" : "chevronRight"} />
+              <Icon className="h-4 w-4" name="sidebar" />
             </button>
             <button className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary text-white" onClick={handleStartGroup} type="button">
               <Icon className="h-4 w-4" name="users" />
             </button>
-            {sidebarOpen ? <span className="text-xs font-semibold">Start Group Chat</span> : null}
+            {sidebarOpen ? <span className="text-xs font-semibold whitespace-nowrap">Start Group Chat</span> : null}
             <button
               className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
               onClick={handleShare}
@@ -352,7 +352,7 @@ function PlannerDashboard() {
             >
               <Icon className="h-4 w-4" name="arrow" />
             </button>
-            {sidebarOpen ? <span className="text-xs font-semibold">Share</span> : null}
+            {sidebarOpen ? <span className="text-xs font-semibold whitespace-nowrap">Share</span> : null}
             <button
               className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
               onClick={() => window.location.assign("/agency")}
@@ -360,7 +360,7 @@ function PlannerDashboard() {
             >
               <Icon className="h-4 w-4" name="briefcase" />
             </button>
-            {sidebarOpen ? <span className="text-xs font-semibold">Agency</span> : null}
+            {sidebarOpen ? <span className="text-xs font-semibold whitespace-nowrap">Agency</span> : null}
             <div className="mt-auto flex flex-col items-center gap-3">
               <button
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-lowest text-text dark:bg-dark-card dark:text-white"
@@ -369,7 +369,7 @@ function PlannerDashboard() {
               >
                 <Icon className="h-4 w-4" name="users" />
               </button>
-              {sidebarOpen ? <span className="text-xs font-semibold">Login</span> : null}
+              {sidebarOpen ? <span className="text-xs font-semibold whitespace-nowrap">Login</span> : null}
             </div>
           </aside>
 

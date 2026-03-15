@@ -5,7 +5,7 @@ Owner: Jay
 Dependencies: React, Icon, Fetch
 Last Updated: 2026-03-13
 */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Icon from "../../components/Icon";
 import heroImage from "../../assets/hero.svg";
 import { apiRequest } from "../../utils/apiClient";
@@ -20,6 +20,8 @@ function ExplorePage() {
   const [cities, setCities] = useState([]);
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
     async function loadCities() {
@@ -34,10 +36,43 @@ function ExplorePage() {
     loadCities();
   }, []);
 
-  const filteredCities = cities.filter((city) => {
-    const haystack = `${city.city} ${city.state} ${city.tourism_type || ""}`.toLowerCase();
-    return haystack.includes(query.toLowerCase());
-  });
+  const filteredCities = useMemo(() => {
+    return cities.filter((city) => {
+      const haystack = `${city.city} ${city.state} ${city.tourism_type || ""}`.toLowerCase();
+      return haystack.includes(query.toLowerCase());
+    });
+  }, [cities, query]);
+
+  useEffect(() => {
+    setCarouselIndex(0);
+  }, [query]);
+
+  useEffect(() => {
+    if (filteredCities.length <= 2) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setIsFading(true);
+      window.setTimeout(() => {
+        setCarouselIndex((current) => (current + 1) % filteredCities.length);
+        setIsFading(false);
+      }, 500);
+    }, 4200);
+
+    return () => window.clearInterval(intervalId);
+  }, [filteredCities.length]);
+
+  const visibleCities = useMemo(() => {
+    if (!filteredCities.length) {
+      return [];
+    }
+    if (filteredCities.length === 1) {
+      return filteredCities;
+    }
+    const secondIndex = (carouselIndex + 1) % filteredCities.length;
+    return [filteredCities[carouselIndex], filteredCities[secondIndex]];
+  }, [filteredCities, carouselIndex]);
 
   return (
     <main className="mx-auto max-w-7xl px-4 pb-20 pt-10 md:px-6">
@@ -68,10 +103,12 @@ function ExplorePage() {
 
       <section className="mt-16 space-y-12">
         {error ? <p className="text-sm text-tertiary">{error}</p> : null}
-        {filteredCities.map((destination, index) => (
+        {visibleCities.map((destination, index) => (
           <article
             key={destination.id}
-            className={`grid gap-8 ${index % 2 === 0 ? "lg:grid-cols-[1.1fr,0.9fr]" : "lg:grid-cols-[0.9fr,1.1fr]"}`}
+            className={`grid gap-8 transition-opacity duration-500 ${
+              isFading ? "opacity-0" : "opacity-100"
+            } ${index % 2 === 0 ? "lg:grid-cols-[1.1fr,0.9fr]" : "lg:grid-cols-[0.9fr,1.1fr]"}`}
           >
             <div className={`${index % 2 === 1 ? "lg:order-2" : ""} overflow-hidden rounded-[2.5rem] shadow-float`}>
               <div className="relative h-[24rem] w-full overflow-hidden">

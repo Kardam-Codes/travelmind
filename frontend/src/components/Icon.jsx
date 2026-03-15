@@ -39,6 +39,7 @@ const paths = {
   chevronLeft: "m15 6-6 6 6 6",
   chevronRight: "m9 6 6 6-6 6",
   briefcase: "M10 4h4a2 2 0 0 1 2 2v2h4a2 2 0 0 1 2 2v2H2V10a2 2 0 0 1 2-2h4V6a2 2 0 0 1 2-2Zm0 4h4V6h-4v2Zm-8 8h20v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2Z",
+  sidebar: "M4 6h16M4 12h16M4 18h10",
 };
 
 function Icon({ name, className = "h-5 w-5", strokeWidth = 1.8 }) {
