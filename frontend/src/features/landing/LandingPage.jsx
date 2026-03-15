@@ -77,7 +77,10 @@ function LandingPage() {
     async function loadCities() {
       try {
         const response = await apiRequest("/cities/");
-        setCities(response.slice(0, 3));
+        const ahmedabad = response.find(
+          (city) => String(city.city || "").toLowerCase() === "ahmedabad",
+        );
+        setCities(ahmedabad ? [ahmedabad] : response.slice(0, 1));
       } catch (requestError) {
         setError(requestError.message);
       }
