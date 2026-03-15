@@ -18,3 +18,4 @@ class PlaceRead(SQLModel):
     best_time: Optional[str] = None
     family_friendly: bool = False
     foreign_tourist_friendly: bool = False
+    image_url: Optional[str] = None

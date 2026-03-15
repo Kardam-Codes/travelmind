@@ -54,6 +54,9 @@ function PlannerTimeline({
       <div className="mb-4">
         <p className="label-md text-primary/65 dark:text-white/55">Day-wise itinerary</p>
         <h2 className="mt-2 text-2xl font-bold">{trip ? `${trip.destination_city} plan` : "Trip timeline"}</h2>
+        <p className="mt-3 text-center text-lg font-semibold text-text/70 dark:text-white/70">
+          Drag to Drop the Places to Customize
+        </p>
       </div>
 
       <div className="space-y-6">

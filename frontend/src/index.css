@@ -5,6 +5,8 @@ Owner: Jay
 Dependencies: Tailwind CSS
 Last Updated: 2026-03-13
 */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -64,6 +66,8 @@ Last Updated: 2026-03-13
 
   .nav-compact {
     background: rgba(255, 255, 255, 0.78);
+    padding-top: 2px;
+    padding-bottom: 2px;
   }
 
   .dark .nav-compact {

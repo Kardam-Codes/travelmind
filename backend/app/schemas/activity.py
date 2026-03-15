@@ -17,3 +17,4 @@ class ActivityRead(SQLModel):
     linked_place_id: Optional[int] = None
     near_place_name: Optional[str] = None
     popularity_score: Optional[int] = None
+    image_url: Optional[str] = None

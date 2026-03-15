@@ -27,8 +27,8 @@ export default {
         "dark-muted": "#8fa0a4"
       },
       fontFamily: {
-        headline: ['"Plus Jakarta Sans"', "sans-serif"],
-        body: ["Inter", "sans-serif"]
+        headline: ['"Playfair Display"', "serif"],
+        body: ["Manrope", "sans-serif"]
       },
       borderRadius: {
         DEFAULT: "1rem",

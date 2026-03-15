@@ -26,6 +26,7 @@ def _apply_runtime_migrations():
         expected_columns={
             "source": "VARCHAR NOT NULL DEFAULT 'seed'",
             "verified": "BOOLEAN NOT NULL DEFAULT 1",
+            "image_url": "VARCHAR",
         },
         inspector=inspector,
     )
@@ -34,6 +35,7 @@ def _apply_runtime_migrations():
         expected_columns={
             "source": "VARCHAR NOT NULL DEFAULT 'seed'",
             "verified": "BOOLEAN NOT NULL DEFAULT 1",
+            "image_url": "VARCHAR",
         },
         inspector=inspector,
     )
@@ -42,6 +44,7 @@ def _apply_runtime_migrations():
         expected_columns={
             "source": "VARCHAR NOT NULL DEFAULT 'seed'",
             "verified": "BOOLEAN NOT NULL DEFAULT 1",
+            "image_url": "VARCHAR",
         },
         inspector=inspector,
     )

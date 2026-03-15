@@ -15,3 +15,4 @@ class HotelRead(SQLModel):
     budget_category: Optional[str] = None
     nearby_area: Optional[str] = None
     popularity_score: Optional[int] = None
+    image_url: Optional[str] = None

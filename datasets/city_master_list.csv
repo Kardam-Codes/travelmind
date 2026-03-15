@@ -1,4 +1,4 @@
-city,state,tier,tourism_type,latitude,longitude,best_season,popularity_score,notes
+city,state,tier,tourism_type,latitude,longitude,best_season,popularity_score,notes,image_url
 Goa,Goa,Tier 1,beaches nightlife adventure,15.2993,74.1240,winter,10,High tourist demand with strong domestic and foreign traveler interest
 Jaipur,Rajasthan,Tier 1,heritage culture palace market,26.9124,75.7873,winter,9,Core Rajasthan destination with dense sightseeing clusters
 Delhi,Delhi,Tier 1,heritage food market museum,28.6139,77.2090,winter,9,Major entry point with strong historical and cultural coverage

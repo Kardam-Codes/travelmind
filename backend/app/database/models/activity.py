@@ -17,5 +17,6 @@ class Activity(SQLModel, table=True):
     linked_place_id: Optional[int] = Field(default=None, index=True)
     near_place_name: Optional[str] = None
     popularity_score: Optional[int] = None
+    image_url: Optional[str] = None
     source: str = Field(default="seed", nullable=False)
     verified: bool = Field(default=True, nullable=False)

@@ -330,27 +330,47 @@ function PlannerDashboard() {
         ) : null}
 
         <section className="grid gap-6 xl:grid-cols-[auto,minmax(0,1fr),22rem]">
-          <aside className={`section-shell flex flex-col items-center gap-3 transition-all duration-300 ${sidebarOpen ? "w-40" : "w-12"}`}>
+          <aside
+            className={`section-shell flex h-full flex-col items-center gap-3 transition-all duration-300 ${sidebarOpen ? "w-24" : "w-9"}`}
+          >
             <button
               aria-label="Toggle sidebar"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
               onClick={() => setSidebarOpen((current) => !current)}
               type="button"
             >
               <Icon className="h-4 w-4" name={sidebarOpen ? "chevronLeft" : "chevronRight"} />
             </button>
-            <button className="flex h-11 w-11 items-center justify-center rounded-full bg-tertiary text-white" onClick={handleStartGroup} type="button">
+            <button className="flex h-10 w-10 items-center justify-center rounded-full bg-tertiary text-white" onClick={handleStartGroup} type="button">
               <Icon className="h-4 w-4" name="users" />
             </button>
             {sidebarOpen ? <span className="text-xs font-semibold">Start Group Chat</span> : null}
             <button
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
               onClick={handleShare}
               type="button"
             >
               <Icon className="h-4 w-4" name="arrow" />
             </button>
             {sidebarOpen ? <span className="text-xs font-semibold">Share</span> : null}
+            <button
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
+              onClick={() => window.location.assign("/agency")}
+              type="button"
+            >
+              <Icon className="h-4 w-4" name="briefcase" />
+            </button>
+            {sidebarOpen ? <span className="text-xs font-semibold">Agency</span> : null}
+            <div className="mt-auto flex flex-col items-center gap-3">
+              <button
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-surface-container-lowest text-text dark:bg-dark-card dark:text-white"
+                onClick={() => window.location.assign("/login")}
+                type="button"
+              >
+                <Icon className="h-4 w-4" name="users" />
+              </button>
+              {sidebarOpen ? <span className="text-xs font-semibold">Login</span> : null}
+            </div>
           </aside>
 
           <div className="space-y-4">

@@ -1,4 +1,4 @@
-id,name,city,state,category,tags,price,duration_hours,rating,latitude,longitude,linked_place_id,near_place_name,popularity_score
+id,name,city,state,category,tags,price,duration_hours,rating,latitude,longitude,linked_place_id,near_place_name,popularity_score,image_url
 A001,Baga Beach Water Sports,Goa,Goa,adventure,"water-sports,jet-ski,parasailing,beach",1800,2.5,4.6,15.5560,73.7525,P001,Baga Beach,94
 A002,Calangute Sunset Beach Walk,Goa,Goa,sightseeing,"beach,sunset,walks,family",0,1.5,4.5,15.5445,73.7560,P002,Calangute Beach,82
 A003,Anjuna Flea Market Browse,Goa,Goa,shopping,"market,shopping,local,bohemian",0,2,4.4,15.5769,73.7403,P003,Anjuna Beach,84
