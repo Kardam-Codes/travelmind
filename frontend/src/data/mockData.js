@@ -188,5 +188,4 @@ export const profileTrips = {
     },
   ],
   savedPlaces: ["Johari Bazaar", "Mehrangarh Fort", "Varkala Cliff"],
-  wishlist: ["Ladakh monastery loop", "Kerala backwaters", "Hampi heritage trail"],
 };

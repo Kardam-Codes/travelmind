@@ -60,26 +60,6 @@ function TripDetailsPage() {
     loadMapRoute();
   }, [tripId]);
 
-  async function addToWishlist(itemId, itemType) {
-    if (!user) {
-      setMessage("Login before saving items to the wishlist.");
-      return;
-    }
-
-    try {
-      await apiRequest("/wishlist/", {
-        method: "POST",
-        body: JSON.stringify({
-          item_id: itemId,
-          item_type: itemType,
-        }),
-      });
-      setMessage("Saved to wishlist.");
-    } catch (requestError) {
-      setMessage(requestError.message);
-    }
-  }
-
   const trip = dashboard?.trip;
   const budgetBreakdown = [
     { label: "Budget", value: trip?.budget_total ? `Rs ${trip.budget_total}` : "Flexible" },
@@ -144,15 +124,12 @@ function TripDetailsPage() {
               </p>
               <div className="grid gap-4 md:grid-cols-2">
                 {(dashboard?.places || []).slice(0, 4).map((place) => (
-                  <div key={place.id} className="rounded-[1.5rem] bg-surface-container-low px-5 py-5 dark:bg-dark-low">
+                  <div key={place.id} className="rounded-[1.5rem] bg-surface-container-low px-5 py-5 dark:bg-dark-low overflow-hidden">
                     {place.image_url ? (
                       <img alt={place.name} className="mb-4 h-32 w-full rounded-[1.25rem] object-cover" loading="lazy" src={place.image_url} />
                     ) : null}
                     <p className="label-md text-primary/70 dark:text-white/55">{place.category}</p>
                     <p className="mt-2 font-medium">{place.name}</p>
-                    <button className="mt-4 text-sm font-semibold text-primary dark:text-white" onClick={() => addToWishlist(place.id, "place")} type="button">
-                      Save to wishlist
-                    </button>
                   </div>
                 ))}
               </div>
@@ -161,7 +138,7 @@ function TripDetailsPage() {
               <p className="label-md text-primary/70 dark:text-white/55">Recommended stays</p>
               <div className="mt-5 grid gap-3">
                 {(dashboard?.hotels || []).slice(0, 3).map((hotel) => (
-                  <div key={hotel.id} className="rounded-[1.5rem] bg-surface-container-lowest px-4 py-4 text-sm dark:bg-dark-card">
+                  <div key={hotel.id} className="rounded-[1.5rem] bg-surface-container-lowest px-4 py-4 text-sm dark:bg-dark-card overflow-hidden">
                     {hotel.image_url ? (
                       <img alt={hotel.name} className="mb-3 h-24 w-full rounded-[1.25rem] object-cover" loading="lazy" src={hotel.image_url} />
                     ) : null}
@@ -169,9 +146,6 @@ function TripDetailsPage() {
                     <p className="mt-2 text-text/60 dark:text-white/60">
                       {hotel.nearby_area || hotel.city} | {hotel.budget_category || "curated"} | Rs {hotel.price_per_night || "N/A"}
                     </p>
-                    <button className="mt-3 text-sm font-semibold text-primary dark:text-white" onClick={() => addToWishlist(hotel.id, "hotel")} type="button">
-                      Save to wishlist
-                    </button>
                   </div>
                 ))}
               </div>
@@ -194,7 +168,7 @@ function TripDetailsPage() {
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
                   {day.items.map((item) => (
-                    <div key={item.id} className="rounded-[1.5rem] bg-surface-container-low px-5 py-5 dark:bg-dark-low">
+                    <div key={item.id} className="rounded-[1.5rem] bg-surface-container-low px-5 py-5 dark:bg-dark-low overflow-hidden">
                       {findImageForItem(item) ? (
                         <img alt={item.title} className="mb-4 h-28 w-full rounded-[1.25rem] object-cover" loading="lazy" src={findImageForItem(item)} />
                       ) : null}

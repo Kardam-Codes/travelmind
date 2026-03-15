@@ -119,7 +119,7 @@ function PlannerTimeline({
 
               {!isCollapsed ? (
                 <div className="mt-5">
-                  <div className="hide-scrollbar flex gap-4 overflow-x-auto pb-2">
+                  <div className="hide-scrollbar flex items-stretch gap-4 overflow-x-auto pb-2">
                     {day.items.map((item, itemIndex) => {
                       const leg = findLegForItem(item);
                       const isSelected = selectedStopId === item.id;
@@ -127,32 +127,39 @@ function PlannerTimeline({
                       const cardTone = palette[itemIndex % palette.length];
 
                       return (
-                        <button
-                          key={`${day.day_number}-${item.id}`}
-                          className={`relative flex w-64 flex-shrink-0 flex-col rounded-[1.5rem] border p-4 text-left transition ${
-                            isSelected
-                              ? "border-tertiary shadow-ambient dark:border-white/20"
-                              : "border-transparent hover:border-primary/20"
-                          }`}
-                          onClick={() => onSelectStop?.(item.id)}
-                          style={{ backgroundColor: cardTone }}
-                          type="button"
-                        >
-                          {imageUrl ? (
-                            <img alt={item.title} className="mb-3 h-28 w-full rounded-[1.25rem] object-cover" loading="lazy" src={imageUrl} />
+                        <div key={`${day.day_number}-${item.id}`} className="flex items-center gap-3">
+                          <button
+                            className={`relative flex w-64 flex-shrink-0 flex-col rounded-[1.5rem] border p-4 text-left transition ${
+                              isSelected
+                                ? "border-tertiary shadow-ambient dark:border-white/20"
+                                : "border-transparent hover:border-primary/20"
+                            }`}
+                            onClick={() => onSelectStop?.(item.id)}
+                            style={{ backgroundColor: cardTone }}
+                            type="button"
+                          >
+                            {imageUrl ? (
+                              <img alt={item.title} className="mb-3 h-28 w-full rounded-[1.25rem] object-cover" loading="lazy" src={imageUrl} />
+                            ) : null}
+                            <div className="text-xs font-semibold uppercase tracking-label text-text/55">
+                              {item.item_type} - Stop {itemIndex + 1}
+                            </div>
+                            <p className="mt-2 text-base font-semibold">{item.title}</p>
+                            <p className="mt-2 text-sm text-text/70">{item.description || "Scheduled stop"}</p>
+                            {leg ? (
+                              <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-2 text-xs font-semibold text-text/65">
+                                <Icon className="h-4 w-4" name="route" />
+                                {leg.distance_text || "Distance pending"} - {leg.duration_text || "Duration pending"}
+                              </p>
+                            ) : null}
+                          </button>
+                          {itemIndex < day.items.length - 1 ? (
+                            <div className="flex items-center">
+                              <div className="h-[2px] w-8 bg-primary/60" />
+                              <div className="ml-[-2px] h-0 w-0 border-y-[5px] border-l-[8px] border-y-transparent border-l-primary/60" />
+                            </div>
                           ) : null}
-                          <div className="text-xs font-semibold uppercase tracking-label text-text/55">
-                            {item.item_type} - Stop {itemIndex + 1}
-                          </div>
-                          <p className="mt-2 text-base font-semibold">{item.title}</p>
-                          <p className="mt-2 text-sm text-text/70">{item.description || "Scheduled stop"}</p>
-                          {leg ? (
-                            <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-2 text-xs font-semibold text-text/65">
-                              <Icon className="h-4 w-4" name="route" />
-                              {leg.distance_text || "Distance pending"} - {leg.duration_text || "Duration pending"}
-                            </p>
-                          ) : null}
-                        </button>
+                        </div>
                       );
                     })}
                   </div>

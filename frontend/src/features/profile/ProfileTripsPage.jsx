@@ -2,12 +2,11 @@
 Feature: Profile
 File Purpose: Render the user's trip portfolio without planner or chat tools
 Owner: Jay
-Dependencies: React, Wishlist, Fetch
+Dependencies: React, Fetch
 Last Updated: 2026-03-13
 */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Wishlist from "../wishlist/Wishlist";
 import { apiRequest } from "../../utils/apiClient";
 import { getStoredUser } from "../../utils/session";
 
@@ -61,7 +60,7 @@ function ProfileTripsPage() {
           <p className="label-md text-primary/70 dark:text-white/55">Profile snapshot</p>
           <h2 className="mt-3 text-3xl font-bold">{user?.email || "Guest traveler"}</h2>
           <p className="mt-4 max-w-md leading-8 text-text/65 dark:text-white/65">
-            {user ? "Your saved trips and wishlist stay synced with the backend." : "Login to save wishlist items and keep your trip history in one place."}
+            {user ? "Your saved trips stay synced with the backend." : "Login to keep your trip history in one place."}
           </p>
         </div>
       </section>
@@ -111,7 +110,6 @@ function ProfileTripsPage() {
       </section>
 
       <section className="mt-16">
-        <Wishlist />
       </section>
       {error ? <p className="mt-8 text-sm text-tertiary">{error}</p> : null}
     </main>

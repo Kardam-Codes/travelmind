@@ -2,17 +2,17 @@
 Feature: Planner Dashboard
 File Purpose: Render the premium map-first planner studio with live route and itinerary editing
 Owner: Jay
-Dependencies: PlannerHeader, PlannerSidebar, PlannerMapStage, PlannerTimeline, Fetch
+Dependencies: PlannerMapStage, PlannerTimeline, Fetch
 Last Updated: 2026-03-14
 */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { apiRequest, buildTripWebSocketUrl } from "../../utils/apiClient";
 import { getActiveTripId, getStoredUser, setActiveTripId } from "../../utils/session";
-import PlannerHeader from "./components/PlannerHeader";
 import PlannerMapStage from "./components/PlannerMapStage";
 import PlannerTimeline from "./components/PlannerTimeline";
 import PlannerChatPanel from "./components/PlannerChatPanel";
+import Icon from "../../components/Icon";
 
 function PlannerDashboard() {
   const [searchParams] = useSearchParams();
@@ -24,10 +24,7 @@ function PlannerDashboard() {
   });
   const [error, setError] = useState("");
   const [operationError, setOperationError] = useState("");
-  const [chatError, setChatError] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [commentError, setCommentError] = useState("");
   const [inviteStatus, setInviteStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [mapRoute, setMapRoute] = useState(null);
@@ -36,6 +33,9 @@ function PlannerDashboard() {
   const [collapsedDays, setCollapsedDays] = useState({});
   const [websocketReady, setWebsocketReady] = useState(false);
   const [shareNotice, setShareNotice] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
+  const [modalForm, setModalForm] = useState({ title: "", description: "", email: "", role: "viewer", link: "" });
   const tripId = searchParams.get("tripId") || getActiveTripId();
   const user = getStoredUser();
   const userId = String(user?.user_id || "guest");
@@ -90,19 +90,6 @@ function PlannerDashboard() {
     }
   }
 
-  async function loadComments() {
-    if (!tripId) {
-      return;
-    }
-    try {
-      const response = await apiRequest(`/trips/${tripId}/comments`);
-      setComments(response);
-      setCommentError("");
-    } catch (requestError) {
-      setCommentError(requestError.message);
-    }
-  }
-
   useEffect(() => {
     const navigationDashboard = location.state?.dashboard;
     if (navigationDashboard?.trip && String(navigationDashboard.trip.id) === String(tripId)) {
@@ -123,12 +110,6 @@ function PlannerDashboard() {
   }, [tripId, dashboard?.trip?.version]);
 
   useEffect(() => {
-    if (tripId) {
-      loadComments();
-    }
-  }, [tripId]);
-
-  useEffect(() => {
     const firstItem = dashboard?.itinerary?.days?.[0]?.items?.[0];
     if (firstItem && !selectedStopId) {
       setSelectedStopId(firstItem.id);
@@ -145,7 +126,6 @@ function PlannerDashboard() {
 
     socket.addEventListener("open", () => {
       setWebsocketReady(true);
-      setChatError("");
     });
 
     socket.addEventListener("message", (event) => {
@@ -195,12 +175,10 @@ function PlannerDashboard() {
     socket.addEventListener("error", () => {
       setWebsocketReady(false);
       setOperationError("Live collaboration is unavailable.");
-      setChatError("Chat is temporarily unavailable.");
     });
 
     socket.addEventListener("close", () => {
       setWebsocketReady(false);
-      setChatError("Live collaboration disconnected.");
     });
 
     return () => {
@@ -215,7 +193,6 @@ function PlannerDashboard() {
     }
 
     if (!socketRef.current || socketRef.current.readyState !== WebSocket.OPEN) {
-      setChatError("Live collaboration is still connecting. Try again in a moment.");
       return;
     }
 
@@ -225,7 +202,6 @@ function PlannerDashboard() {
         payload: { message: text.trim() },
       }),
     );
-    setChatError("");
   }
 
   async function handleInvite(email, role) {
@@ -248,45 +224,11 @@ function PlannerDashboard() {
     }
   }
 
-  async function handleAddComment(body) {
-    if (!tripId) {
-      return;
-    }
-    try {
-      await apiRequest(`/trips/${tripId}/comments`, {
-        method: "POST",
-        body: JSON.stringify({ body }),
-      });
-      loadComments();
-    } catch (requestError) {
-      setCommentError(requestError.message);
-    }
-  }
-
   async function handleRequestBooking() {
     if (!tripId) {
       return;
     }
-    const travelerName = window.prompt("Traveler name");
-    if (!travelerName) {
-      return;
-    }
-    const travelerEmail = window.prompt("Traveler email");
-    if (!travelerEmail) {
-      return;
-    }
-    try {
-      await apiRequest("/bookings/requests", {
-        method: "POST",
-        body: JSON.stringify({
-          trip_id: Number(tripId),
-          traveler_name: travelerName,
-          traveler_email: travelerEmail,
-        }),
-      });
-    } catch (requestError) {
-      setOperationError(requestError.message);
-    }
+    setActiveModal({ type: "booking" });
   }
 
   function sendOperation(type, payload) {
@@ -306,33 +248,13 @@ function PlannerDashboard() {
   }
 
   function handleAddItem(dayNumber) {
-    const title = window.prompt("Title for the new itinerary item");
-    if (!title) {
-      return;
-    }
-    const description = window.prompt("Optional description") || "";
-    sendOperation("ADD_ITEM", {
-      day_number: dayNumber,
-      item_type: "note",
-      title,
-      description,
-    });
+    setModalForm({ title: "", description: "", email: "", role: "viewer", link: "" });
+    setActiveModal({ type: "add-item", dayNumber });
   }
 
   function handleUpdateItem(item) {
-    const title = window.prompt("Edit title", item.title);
-    if (title === null) {
-      return;
-    }
-    const description = window.prompt("Edit description", item.description || "");
-    if (description === null) {
-      return;
-    }
-    sendOperation("UPDATE_ITEM", {
-      item_id: item.id,
-      title,
-      description,
-    });
+    setModalForm({ title: item.title || "", description: item.description || "", email: "", role: "viewer", link: "" });
+    setActiveModal({ type: "edit-item", item });
   }
 
   function handleMoveItem(itemId, dayNumber, targetOrder) {
@@ -378,23 +300,50 @@ function PlannerDashboard() {
     if (!tripId) {
       return;
     }
-    navigator.clipboard
-      .writeText(window.location.href)
-      .then(() => setShareNotice("Share link copied."))
-      .catch(() => setShareNotice("Unable to copy link."));
+    const shareLink = window.location.href;
+    setModalForm((current) => ({ ...current, link: shareLink }));
+    setActiveModal({ type: "share" });
   }
 
   function handleStartGroup() {
-    setInviteStatus("Invite collaborators to start a group plan.");
+    setActiveModal({ type: "invite" });
   }
 
   return (
     <main className="mx-auto max-w-[1600px] px-4 pb-12 pt-8 md:px-6">
       <div className="space-y-6">
-        <PlannerHeader onShare={handleShare} onStartGroup={handleStartGroup} trip={dashboard?.trip} />
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="label-md text-tertiary">Planner</p>
+            <h1 className="mt-2 text-3xl font-bold">{dashboard?.trip ? `${dashboard.trip.destination_city} plan` : "Planner"}</h1>
+          </div>
+        </div>
         {shareNotice ? <p className="text-sm text-primary">{shareNotice}</p> : null}
 
-        <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr),22rem]">
+        <section className="grid gap-6 xl:grid-cols-[auto,minmax(0,1fr),22rem]">
+          <aside className={`section-shell flex flex-col items-center gap-4 transition-all duration-300 ${sidebarOpen ? "w-48" : "w-14"}`}>
+            <button
+              aria-label="Toggle sidebar"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
+              onClick={() => setSidebarOpen((current) => !current)}
+              type="button"
+            >
+              {sidebarOpen ? "<" : ">"}
+            </button>
+            <button className="flex h-11 w-11 items-center justify-center rounded-full bg-tertiary text-white" onClick={handleStartGroup} type="button">
+              <Icon className="h-4 w-4" name="users" />
+            </button>
+            {sidebarOpen ? <span className="text-xs font-semibold">Start Group Chat</span> : null}
+            <button
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
+              onClick={handleShare}
+              type="button"
+            >
+              <Icon className="h-4 w-4" name="arrow" />
+            </button>
+            {sidebarOpen ? <span className="text-xs font-semibold">Share</span> : null}
+          </aside>
+
           <div className="space-y-4">
             {isLoading ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-primary shadow-ambient">Loading planner...</p> : null}
             {error ? <p className="rounded-[1.25rem] bg-white/80 px-4 py-3 text-sm text-tertiary shadow-ambient">{error}</p> : null}
@@ -436,6 +385,209 @@ function PlannerDashboard() {
           />
         </section>
       </div>
+      {activeModal?.type ? (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="w-full max-w-lg rounded-[2rem] bg-surface-container-lowest p-6 shadow-float dark:bg-dark-card">
+            {activeModal.type === "add-item" ? (
+              <>
+                <h2 className="text-xl font-semibold">Add stop</h2>
+                <div className="mt-4 space-y-3">
+                  <input
+                    className="soft-focus w-full rounded-[1.2rem] bg-surface-container-low px-4 py-3 text-sm dark:bg-dark-low"
+                    placeholder="Title"
+                    value={modalForm.title}
+                    onChange={(event) => setModalForm((current) => ({ ...current, title: event.target.value }))}
+                  />
+                  <textarea
+                    className="soft-focus w-full rounded-[1.2rem] bg-surface-container-low px-4 py-3 text-sm dark:bg-dark-low"
+                    placeholder="Description"
+                    value={modalForm.description}
+                    onChange={(event) => setModalForm((current) => ({ ...current, description: event.target.value }))}
+                  />
+                </div>
+                <div className="mt-5 flex justify-end gap-2">
+                  <button className="secondary-pill" onClick={() => setActiveModal(null)} type="button">
+                    Cancel
+                  </button>
+                  <button
+                    className="primary-pill"
+                    onClick={() => {
+                      if (!modalForm.title.trim()) {
+                        return;
+                      }
+                      sendOperation("ADD_ITEM", {
+                        day_number: activeModal.dayNumber,
+                        item_type: "note",
+                        title: modalForm.title.trim(),
+                        description: modalForm.description.trim(),
+                      });
+                      setActiveModal(null);
+                    }}
+                    type="button"
+                  >
+                    Add
+                  </button>
+                </div>
+              </>
+            ) : null}
+            {activeModal.type === "edit-item" ? (
+              <>
+                <h2 className="text-xl font-semibold">Edit stop</h2>
+                <div className="mt-4 space-y-3">
+                  <input
+                    className="soft-focus w-full rounded-[1.2rem] bg-surface-container-low px-4 py-3 text-sm dark:bg-dark-low"
+                    placeholder="Title"
+                    value={modalForm.title}
+                    onChange={(event) => setModalForm((current) => ({ ...current, title: event.target.value }))}
+                  />
+                  <textarea
+                    className="soft-focus w-full rounded-[1.2rem] bg-surface-container-low px-4 py-3 text-sm dark:bg-dark-low"
+                    placeholder="Description"
+                    value={modalForm.description}
+                    onChange={(event) => setModalForm((current) => ({ ...current, description: event.target.value }))}
+                  />
+                </div>
+                <div className="mt-5 flex justify-end gap-2">
+                  <button className="secondary-pill" onClick={() => setActiveModal(null)} type="button">
+                    Cancel
+                  </button>
+                  <button
+                    className="primary-pill"
+                    onClick={() => {
+                      sendOperation("UPDATE_ITEM", {
+                        item_id: activeModal.item?.id,
+                        title: modalForm.title.trim(),
+                        description: modalForm.description.trim(),
+                      });
+                      setActiveModal(null);
+                    }}
+                    type="button"
+                  >
+                    Save
+                  </button>
+                </div>
+              </>
+            ) : null}
+            {activeModal.type === "booking" ? (
+              <>
+                <h2 className="text-xl font-semibold">Request booking</h2>
+                <div className="mt-4 space-y-3">
+                  <input
+                    className="soft-focus w-full rounded-[1.2rem] bg-surface-container-low px-4 py-3 text-sm dark:bg-dark-low"
+                    placeholder="Traveler name"
+                    value={modalForm.title}
+                    onChange={(event) => setModalForm((current) => ({ ...current, title: event.target.value }))}
+                  />
+                  <input
+                    className="soft-focus w-full rounded-[1.2rem] bg-surface-container-low px-4 py-3 text-sm dark:bg-dark-low"
+                    placeholder="Traveler email"
+                    value={modalForm.email}
+                    onChange={(event) => setModalForm((current) => ({ ...current, email: event.target.value }))}
+                  />
+                </div>
+                <div className="mt-5 flex justify-end gap-2">
+                  <button className="secondary-pill" onClick={() => setActiveModal(null)} type="button">
+                    Cancel
+                  </button>
+                  <button
+                    className="primary-pill"
+                    onClick={async () => {
+                      if (!modalForm.title.trim() || !modalForm.email.trim()) {
+                        return;
+                      }
+                      try {
+                        await apiRequest("/bookings/requests", {
+                          method: "POST",
+                          body: JSON.stringify({
+                            trip_id: Number(tripId),
+                            traveler_name: modalForm.title.trim(),
+                            traveler_email: modalForm.email.trim(),
+                          }),
+                        });
+                        setActiveModal(null);
+                      } catch (requestError) {
+                        setOperationError(requestError.message);
+                      }
+                    }}
+                    type="button"
+                  >
+                    Send
+                  </button>
+                </div>
+              </>
+            ) : null}
+            {activeModal.type === "invite" ? (
+              <>
+                <h2 className="text-xl font-semibold">Start group chat</h2>
+                <div className="mt-4 space-y-3">
+                  <input
+                    className="soft-focus w-full rounded-[1.2rem] bg-surface-container-low px-4 py-3 text-sm dark:bg-dark-low"
+                    placeholder="Email address"
+                    value={modalForm.email}
+                    onChange={(event) => setModalForm((current) => ({ ...current, email: event.target.value }))}
+                  />
+                  <select
+                    className="h-11 w-full rounded-[1.2rem] bg-surface-container-low px-4 text-sm dark:bg-dark-low"
+                    value={modalForm.role}
+                    onChange={(event) => setModalForm((current) => ({ ...current, role: event.target.value }))}
+                  >
+                    <option value="viewer">Viewer</option>
+                    <option value="editor">Editor</option>
+                  </select>
+                </div>
+                <div className="mt-5 flex justify-end gap-2">
+                  <button className="secondary-pill" onClick={() => setActiveModal(null)} type="button">
+                    Cancel
+                  </button>
+                  <button
+                    className="primary-pill"
+                    onClick={() => {
+                      if (!modalForm.email.trim()) {
+                        return;
+                      }
+                      handleInvite(modalForm.email.trim(), modalForm.role);
+                      setActiveModal(null);
+                    }}
+                    type="button"
+                  >
+                    Invite
+                  </button>
+                </div>
+              </>
+            ) : null}
+            {activeModal.type === "share" ? (
+              <>
+                <h2 className="text-xl font-semibold">Share trip</h2>
+                <div className="mt-4 space-y-3">
+                  <input
+                    className="soft-focus w-full rounded-[1.2rem] bg-surface-container-low px-4 py-3 text-sm dark:bg-dark-low"
+                    readOnly
+                    value={modalForm.link}
+                  />
+                </div>
+                <div className="mt-5 flex justify-end gap-2">
+                  <button className="secondary-pill" onClick={() => setActiveModal(null)} type="button">
+                    Close
+                  </button>
+                  <button
+                    className="primary-pill"
+                    onClick={() => {
+                      navigator.clipboard
+                        .writeText(modalForm.link)
+                        .then(() => setShareNotice("Link copied."))
+                        .catch(() => setShareNotice("Unable to copy link."));
+                      setActiveModal(null);
+                    }}
+                    type="button"
+                  >
+                    Copy link
+                  </button>
+                </div>
+              </>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
