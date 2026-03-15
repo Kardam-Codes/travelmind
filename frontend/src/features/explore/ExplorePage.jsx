@@ -7,6 +7,7 @@ Last Updated: 2026-03-13
 */
 import { useEffect, useState } from "react";
 import Icon from "../../components/Icon";
+import heroImage from "../../assets/hero.svg";
 import { apiRequest } from "../../utils/apiClient";
 
 function cityAccent(index) {
@@ -73,10 +74,24 @@ function ExplorePage() {
             className={`grid gap-8 ${index % 2 === 0 ? "lg:grid-cols-[1.1fr,0.9fr]" : "lg:grid-cols-[0.9fr,1.1fr]"}`}
           >
             <div className={`${index % 2 === 1 ? "lg:order-2" : ""} overflow-hidden rounded-[2.5rem] shadow-float`}>
-              <div className={`flex h-[24rem] w-full items-end bg-gradient-to-br ${cityAccent(index)} p-8`}>
-                <div className="glass-panel rounded-[1.75rem] px-5 py-4">
-                  <p className="label-md text-primary/70 dark:text-white/55">{destination.state}</p>
-                  <h3 className="mt-2 text-2xl font-bold">{destination.city}</h3>
+              <div className="relative h-[24rem] w-full overflow-hidden">
+                {destination.image_url ? (
+                  <img
+                    alt={destination.city}
+                    className="h-full w-full object-cover"
+                    onError={(event) => {
+                      event.currentTarget.src = heroImage;
+                    }}
+                    src={destination.image_url}
+                  />
+                ) : (
+                  <div className={`flex h-full w-full items-end bg-gradient-to-br ${cityAccent(index)} p-8`} />
+                )}
+                <div className="absolute inset-0 flex items-end p-8">
+                  <div className="glass-panel rounded-[1.75rem] px-5 py-4">
+                    <p className="label-md text-primary/70 dark:text-white/55">{destination.state}</p>
+                    <h3 className="mt-2 text-2xl font-bold">{destination.city}</h3>
+                  </div>
                 </div>
               </div>
             </div>

@@ -13,5 +13,6 @@ class City(SQLModel, table=True):
     best_season: Optional[str] = None
     popularity_score: Optional[int] = None
     notes: Optional[str] = None
+    image_url: Optional[str] = None
     source: str = Field(default="seed", nullable=False)
     verified: bool = Field(default=True, nullable=False)

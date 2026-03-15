@@ -36,6 +36,8 @@ const paths = {
   unlock: "M7 11V9a5 5 0 0 1 9.5-2M6 11h12a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2Z",
   shield: "M12 3 20 7v5c0 5-3.6 9.3-8 10-4.4-.7-8-5-8-10V7l8-4Z",
   info: "M12 8h.01M11 12h2v6h-2m1-14a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z",
+  chevronLeft: "m15 6-6 6 6 6",
+  chevronRight: "m9 6 6 6-6 6",
 };
 
 function Icon({ name, className = "h-5 w-5", strokeWidth = 1.8 }) {

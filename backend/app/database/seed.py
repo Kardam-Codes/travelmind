@@ -62,6 +62,7 @@ def seed_reference_data() -> None:
                         best_season=row.get("best_season"),
                         popularity_score=_parse_int(row.get("popularity_score")),
                         notes=row.get("notes"),
+                        image_url=row.get("image_url"),
                         source="seed",
                         verified=True,
                     )

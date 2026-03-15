@@ -25,8 +25,10 @@ function PlannerChatPanel({ messages = [], onSendMessage, websocketReady }) {
             </div>
           ))
         ) : (
-          <div className="rounded-[1.25rem] bg-surface-container-lowest px-4 py-4 text-sm leading-7 text-text/70 dark:bg-dark-card dark:text-white/70">
-            Tell what changes do you want to make.
+          <div className="flex h-full items-center justify-center">
+            <div className="rounded-[1.5rem] bg-surface-container-lowest px-6 py-6 text-center text-lg font-semibold text-text/75 shadow-ambient dark:bg-dark-card dark:text-white/80">
+              Tell what changes do you want to make.
+            </div>
           </div>
         )}
       </div>

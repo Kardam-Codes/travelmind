@@ -13,3 +13,4 @@ class CityRead(SQLModel):
     best_season: Optional[str] = None
     popularity_score: Optional[int] = None
     notes: Optional[str] = None
+    image_url: Optional[str] = None

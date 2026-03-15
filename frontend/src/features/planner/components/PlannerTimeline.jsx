@@ -136,6 +136,34 @@ function PlannerTimeline({
                             }`}
                             onClick={() => onSelectStop?.(item.id)}
                             style={{ backgroundColor: cardTone }}
+                            draggable={!isLocked && canEdit}
+                            onDragStart={(event) => {
+                              if (!canEdit || isLocked) {
+                                return;
+                              }
+                              event.dataTransfer.setData(
+                                "application/json",
+                                JSON.stringify({ itemId: item.id, dayNumber: day.day_number }),
+                              );
+                            }}
+                            onDragOver={(event) => {
+                              if (!canEdit || isLocked) {
+                                return;
+                              }
+                              event.preventDefault();
+                            }}
+                            onDrop={(event) => {
+                              if (!canEdit || isLocked) {
+                                return;
+                              }
+                              event.preventDefault();
+                              const data = event.dataTransfer.getData("application/json");
+                              if (!data) {
+                                return;
+                              }
+                              const payload = JSON.parse(data);
+                              onMoveItem?.(payload.itemId, day.day_number, itemIndex + 1);
+                            }}
                             type="button"
                           >
                             {imageUrl ? (
@@ -162,6 +190,31 @@ function PlannerTimeline({
                         </div>
                       );
                     })}
+                    <div
+                      className={`flex h-28 w-20 items-center justify-center rounded-[1.25rem] border border-dashed border-primary/40 text-xs text-primary/70 ${
+                        !canEdit || isLocked ? "opacity-50" : ""
+                      }`}
+                      onDragOver={(event) => {
+                        if (!canEdit || isLocked) {
+                          return;
+                        }
+                        event.preventDefault();
+                      }}
+                      onDrop={(event) => {
+                        if (!canEdit || isLocked) {
+                          return;
+                        }
+                        event.preventDefault();
+                        const data = event.dataTransfer.getData("application/json");
+                        if (!data) {
+                          return;
+                        }
+                        const payload = JSON.parse(data);
+                        onMoveItem?.(payload.itemId, day.day_number, day.items.length + 1);
+                      }}
+                    >
+                      Drop
+                    </div>
                   </div>
                 </div>
               ) : null}

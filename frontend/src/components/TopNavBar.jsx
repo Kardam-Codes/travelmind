@@ -6,7 +6,7 @@ Dependencies: React Router, ThemeProvider, Icon
 Last Updated: 2026-03-13
 */
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "./ThemeProvider";
 import Icon from "./Icon";
 import OrgSwitcher from "./OrgSwitcher";
@@ -29,10 +29,26 @@ function navClass({ isActive }) {
 function TopNavBar() {
   const { theme, toggleTheme } = useTheme();
   const [showTour, setShowTour] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    function handleScroll() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = docHeight > 0 ? Math.min(1, scrollTop / docHeight) : 0;
+      setScrollProgress(progress);
+      setIsCompact(scrollTop > 12);
+    }
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="sticky top-0 z-50">
-      <nav className="nav-panel w-full">
+      <nav className={`nav-panel w-full ${isCompact ? "nav-compact" : ""}`}>
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 md:px-6">
           <div className="flex items-center gap-3 md:gap-8">
             <NavLink className="font-headline text-xl font-extrabold tracking-tight text-primary dark:text-white" to="/">
@@ -78,6 +94,9 @@ function TopNavBar() {
               J
             </NavLink>
           </div>
+        </div>
+        <div className="h-[3px] w-full bg-primary/10">
+          <div className="h-full bg-primary transition-[width] duration-150" style={{ width: `${scrollProgress * 100}%` }} />
         </div>
       </nav>
       {showTour ? (

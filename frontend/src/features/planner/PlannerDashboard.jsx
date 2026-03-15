@@ -25,14 +25,13 @@ function PlannerDashboard() {
   const [error, setError] = useState("");
   const [operationError, setOperationError] = useState("");
   const [chatMessages, setChatMessages] = useState([]);
-  const [inviteStatus, setInviteStatus] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [mapRoute, setMapRoute] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedStopId, setSelectedStopId] = useState(null);
   const [collapsedDays, setCollapsedDays] = useState({});
   const [websocketReady, setWebsocketReady] = useState(false);
-  const [shareNotice, setShareNotice] = useState("");
+  const [toast, setToast] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeModal, setActiveModal] = useState(null);
   const [modalForm, setModalForm] = useState({ title: "", description: "", email: "", role: "viewer", link: "" });
@@ -204,6 +203,12 @@ function PlannerDashboard() {
     );
   }
 
+  function showToast(message) {
+    setToast(message);
+    window.clearTimeout(showToast.timeoutId);
+    showToast.timeoutId = window.setTimeout(() => setToast(null), 2200);
+  }
+
   async function handleInvite(email, role) {
     if (!tripId) {
       return;
@@ -218,9 +223,9 @@ function PlannerDashboard() {
           role,
         }),
       });
-      setInviteStatus("Invite sent.");
+      showToast("Invite sent.");
     } catch (requestError) {
-      setInviteStatus(requestError.message);
+      showToast(requestError.message);
     }
   }
 
@@ -318,17 +323,21 @@ function PlannerDashboard() {
             <h1 className="mt-2 text-3xl font-bold">{dashboard?.trip ? `${dashboard.trip.destination_city} plan` : "Planner"}</h1>
           </div>
         </div>
-        {shareNotice ? <p className="text-sm text-primary">{shareNotice}</p> : null}
+        {toast ? (
+          <div className="fixed right-6 top-24 z-50 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-float">
+            {toast}
+          </div>
+        ) : null}
 
         <section className="grid gap-6 xl:grid-cols-[auto,minmax(0,1fr),22rem]">
-          <aside className={`section-shell flex flex-col items-center gap-4 transition-all duration-300 ${sidebarOpen ? "w-48" : "w-14"}`}>
+          <aside className={`section-shell flex flex-col items-center gap-3 transition-all duration-300 ${sidebarOpen ? "w-40" : "w-12"}`}>
             <button
               aria-label="Toggle sidebar"
               className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-container text-[#6d6356] dark:bg-white/10 dark:text-white"
               onClick={() => setSidebarOpen((current) => !current)}
               type="button"
             >
-              {sidebarOpen ? "<" : ">"}
+              <Icon className="h-4 w-4" name={sidebarOpen ? "chevronLeft" : "chevronRight"} />
             </button>
             <button className="flex h-11 w-11 items-center justify-center rounded-full bg-tertiary text-white" onClick={handleStartGroup} type="button">
               <Icon className="h-4 w-4" name="users" />
@@ -489,13 +498,13 @@ function PlannerDashboard() {
                   <button className="secondary-pill" onClick={() => setActiveModal(null)} type="button">
                     Cancel
                   </button>
-                  <button
-                    className="primary-pill"
-                    onClick={async () => {
-                      if (!modalForm.title.trim() || !modalForm.email.trim()) {
-                        return;
-                      }
-                      try {
+                    <button
+                      className="primary-pill"
+                      onClick={async () => {
+                        if (!modalForm.title.trim() || !modalForm.email.trim()) {
+                          return;
+                        }
+                        try {
                         await apiRequest("/bookings/requests", {
                           method: "POST",
                           body: JSON.stringify({
@@ -504,9 +513,11 @@ function PlannerDashboard() {
                             traveler_email: modalForm.email.trim(),
                           }),
                         });
+                        showToast("Booking request sent.");
                         setActiveModal(null);
                       } catch (requestError) {
                         setOperationError(requestError.message);
+                        showToast(requestError.message);
                       }
                     }}
                     type="button"
@@ -569,17 +580,17 @@ function PlannerDashboard() {
                   <button className="secondary-pill" onClick={() => setActiveModal(null)} type="button">
                     Close
                   </button>
-                  <button
-                    className="primary-pill"
-                    onClick={() => {
-                      navigator.clipboard
+                    <button
+                      className="primary-pill"
+                      onClick={() => {
+                        navigator.clipboard
                         .writeText(modalForm.link)
-                        .then(() => setShareNotice("Link copied."))
-                        .catch(() => setShareNotice("Unable to copy link."));
-                      setActiveModal(null);
-                    }}
-                    type="button"
-                  >
+                        .then(() => showToast("Link copied."))
+                        .catch(() => showToast("Unable to copy link."));
+                        setActiveModal(null);
+                      }}
+                      type="button"
+                    >
                     Copy link
                   </button>
                 </div>

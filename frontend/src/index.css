@@ -54,11 +54,20 @@ Last Updated: 2026-03-13
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
     border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+    transition: padding 200ms ease, background-color 200ms ease;
   }
 
   .dark .nav-panel {
     background: rgba(24, 33, 37, 0.68);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-compact {
+    background: rgba(255, 255, 255, 0.78);
+  }
+
+  .dark .nav-compact {
+    background: rgba(24, 33, 37, 0.78);
   }
 
   .section-shell {
