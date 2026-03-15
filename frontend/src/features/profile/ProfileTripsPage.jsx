@@ -5,15 +5,19 @@ Owner: Jay
 Dependencies: React, Fetch
 Last Updated: 2026-03-13
 */
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiRequest } from "../../utils/apiClient";
 import { getStoredUser } from "../../utils/session";
 
-function TripCard({ trip }) {
+function TripCard({ trip, imageUrl }) {
   return (
     <article className="overflow-hidden rounded-[2rem] bg-surface-container-lowest shadow-ambient dark:bg-dark-card">
-      <div className="h-56 w-full bg-[radial-gradient(circle_at_top_left,rgba(0,109,119,0.22),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(140,37,0,0.18),transparent_24%),linear-gradient(135deg,rgba(241,233,223,0.95),rgba(223,236,238,0.9))]" />
+      {imageUrl ? (
+        <img alt={trip.name} className="h-56 w-full object-cover" loading="lazy" src={imageUrl} />
+      ) : (
+        <div className="h-56 w-full bg-[radial-gradient(circle_at_top_left,rgba(0,109,119,0.22),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(140,37,0,0.18),transparent_24%),linear-gradient(135deg,rgba(241,233,223,0.95),rgba(223,236,238,0.9))]" />
+      )}
       <div className="p-6">
         <p className="label-md text-primary/70 dark:text-white/55">{trip.dates}</p>
         <h3 className="mt-3 text-2xl font-bold">{trip.name}</h3>
@@ -25,6 +29,7 @@ function TripCard({ trip }) {
 
 function ProfileTripsPage() {
   const [trips, setTrips] = useState([]);
+  const [cities, setCities] = useState([]);
   const [error, setError] = useState("");
   const user = getStoredUser();
 
@@ -43,6 +48,29 @@ function ProfileTripsPage() {
 
     loadTrips();
   }, [user]);
+
+  useEffect(() => {
+    async function loadCities() {
+      try {
+        const response = await apiRequest("/cities/");
+        setCities(response);
+      } catch (requestError) {
+        setError(requestError.message);
+      }
+    }
+
+    loadCities();
+  }, []);
+
+  const cityImageMap = useMemo(() => {
+    const map = new Map();
+    cities.forEach((city) => {
+      if (city?.city) {
+        map.set(city.city.toLowerCase(), city.image_url || "");
+      }
+    });
+    return map;
+  }, [cities]);
 
   const upcomingTrips = trips.filter((trip) => trip.status === "draft");
   const archivedTrips = trips.filter((trip) => trip.status !== "draft");
@@ -81,6 +109,7 @@ function ProfileTripsPage() {
                   dates: `${trip.duration_days} days`,
                   people: trip.preferences || "Curated preferences",
                 }}
+                imageUrl={cityImageMap.get((trip.destination_city || "").toLowerCase())}
               />
             </Link>
           ))}
@@ -102,6 +131,7 @@ function ProfileTripsPage() {
                   dates: `${trip.duration_days} days`,
                   people: trip.preferences || "Saved trip",
                 }}
+                imageUrl={cityImageMap.get((trip.destination_city || "").toLowerCase())}
               />
             </Link>
           ))}
