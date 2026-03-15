@@ -24,7 +24,7 @@ function PlannerTimeline({
 }) {
   const days = itinerary?.days || [];
   const canEdit = tripRole === "owner" || tripRole === "editor";
-  const palette = ["#FFE8D6", "#E0F2FE", "#FDE68A", "#EBD8FF", "#DCFCE7", "#FFE4E6"];
+  const palette = ["#FFB88C", "#7DD3FC", "#FDE047", "#C4B5FD", "#86EFAC", "#FDA4AF"];
 
   function findLegForItem(item) {
     const stopIndex = route?.stops?.findIndex((stop) => stop.item_id === item.id) ?? -1;
