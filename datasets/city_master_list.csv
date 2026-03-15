@@ -1,56 +1,56 @@
 city,state,tier,tourism_type,latitude,longitude,best_season,popularity_score,notes,image_url
-Goa,Goa,Tier 1,beaches nightlife adventure,15.2993,74.1240,winter,10,High tourist demand with strong domestic and foreign traveler interest
-Jaipur,Rajasthan,Tier 1,heritage culture palace market,26.9124,75.7873,winter,9,Core Rajasthan destination with dense sightseeing clusters
-Delhi,Delhi,Tier 1,heritage food market museum,28.6139,77.2090,winter,9,Major entry point with strong historical and cultural coverage
-Udaipur,Rajasthan,Tier 1,lakes heritage palace romance,24.5854,73.7125,winter,9,Ideal for multi-day itinerary clustering
-Manali,Himachal Pradesh,Tier 1,mountains adventure nature,32.2432,77.1892,summer,9,High demand hill destination for domestic travelers
-Rishikesh,Uttarakhand,Tier 1,adventure wellness spiritual,30.0869,78.2676,all,8,Good mix of rafting yoga cafes and temples
-Mumbai,Maharashtra,Tier 1,urban entertainment coastal food,19.0760,72.8777,winter,10,Strong city tourism and premium hotel coverage
-Varanasi,Uttar Pradesh,Tier 1,spiritual heritage culture,25.3176,82.9739,winter,9,Internationally recognized religious tourism city
-Kochi,Kerala,Tier 1,heritage coastal culture,9.9312,76.2673,winter,8,Gateway city for Kerala tourism circuits
-Agra,Uttar Pradesh,Tier 2,heritage monument culture,27.1767,78.0081,winter,9,Global tourist draw anchored by Taj Mahal
-Jodhpur,Rajasthan,Tier 2,heritage fort market,26.2389,73.0243,winter,8,Strong fort and old city tourism appeal
-Pushkar,Rajasthan,Tier 2,spiritual culture market,26.4898,74.5511,winter,7,Popular among both backpackers and festival visitors
-Amritsar,Punjab,Tier 2,spiritual heritage food,31.6340,74.8723,winter,8,Golden Temple creates strong year-round appeal
-Mysuru,Karnataka,Tier 2,palace culture heritage,12.2958,76.6394,winter,7,Good South India heritage city for itineraries
-Shimla,Himachal Pradesh,Tier 2,hill station heritage nature,31.1048,77.1734,summer,8,Classic hill destination with broad tourist interest
-Darjeeling,West Bengal,Tier 2,hills tea nature,27.0410,88.2663,summer,8,Strong domestic and foreign interest in Himalayan tourism
-Puducherry,Puducherry,Tier 2,coastal culture cafes,11.9416,79.8083,winter,7,Compact city well suited for walking itineraries
-Hampi,Karnataka,Tier 2,heritage ruins culture,15.3350,76.4600,winter,8,High uniqueness for foreign and domestic travelers
-Srinagar,Jammu and Kashmir,Tier 2,lakes mountains nature,34.0837,74.7973,summer,9,Premium scenic destination with seasonal strength
-Jaisalmer,Rajasthan,Tier 2,desert fort culture,26.9157,70.9083,winter,8,Distinct desert tourism profile
-Leh,Ladakh,Tier 2,adventure mountains landscape,34.1526,77.5770,summer,9,Strong aspirational destination with route planning relevance
-Chennai,Tamil Nadu,Tier 2,urban temple coastal,13.0827,80.2707,winter,7,Useful metro destination with coastal and temple mix
-Bengaluru,Karnataka,Tier 2,urban food garden nightlife,12.9716,77.5946,winter,7,Useful base city with surrounding excursion potential
-Alappuzha,Kerala,Tier 2,backwaters nature wellness,9.4981,76.3388,winter,8,Useful anchor for backwater-focused Kerala itineraries
-Ahmedabad,Gujarat,Tier 3,heritage food culture,23.0225,72.5714,winter,7,Strong domestic tourism and access to Gujarat circuits
-Dwarka,Gujarat,Tier 3,spiritual coastal,22.2442,68.9685,winter,7,Important pilgrimage destination
-Somnath,Gujarat,Tier 3,spiritual coastal heritage,20.8880,70.4012,winter,7,High religious tourism importance
-Madurai,Tamil Nadu,Tier 3,temple heritage culture,9.9252,78.1198,winter,7,Temple-led tourism with dense local attractions
-Ooty,Tamil Nadu,Tier 3,hill station nature,11.4064,76.6932,summer,8,Popular domestic hill destination
-Kodaikanal,Tamil Nadu,Tier 3,hill station lake nature,10.2381,77.4892,summer,7,Good for compact family itineraries
-Hyderabad,Telangana,Tier 3,heritage food urban,17.3850,78.4867,winter,8,Strong city tourism and culinary appeal
-Aurangabad,Maharashtra,Tier 3,heritage caves monument,19.8762,75.3433,winter,7,Ajanta and Ellora access point
-Nashik,Maharashtra,Tier 3,spiritual vineyards culture,19.9975,73.7898,winter,6,Blend of pilgrimage and leisure tourism
-Bhopal,Madhya Pradesh,Tier 3,lakes heritage museum,23.2599,77.4126,winter,6,Useful hub for central India circuits
-Khajuraho,Madhya Pradesh,Tier 3,heritage temple culture,24.8318,79.9199,winter,7,Internationally recognized temple complex
-Gwalior,Madhya Pradesh,Tier 3,fort heritage music,26.2183,78.1828,winter,6,Strong fort-led tourism city
-Bhubaneswar,Odisha,Tier 3,temple heritage culture,20.2961,85.8245,winter,6,Gateway to Odisha tourism
-Puri,Odisha,Tier 3,spiritual beach culture,19.8135,85.8312,winter,8,Unique temple plus beach demand
-Konark,Odisha,Tier 3,heritage monument culture,19.8876,86.0945,winter,6,Pairs well with Puri and Bhubaneswar
-Gangtok,Sikkim,Tier 3,mountains nature culture,27.3389,88.6065,summer,7,Popular eastern Himalayan city
-Shillong,Meghalaya,Tier 3,nature hills waterfalls,25.5788,91.8933,summer,7,Gateway for northeast tourism
-Tawang,Arunachal Pradesh,Tier 3,monastery mountains landscape,27.5866,91.8633,summer,6,High-value scenic and spiritual destination
-Port Blair,Andaman and Nicobar Islands,Tier 3,island beach adventure,11.6234,92.7265,winter,8,Useful for premium island itineraries
-Panaji,Goa,Tier 3,heritage coastal market,15.4909,73.8278,winter,7,Good city-level anchor for North and South Goa splits
-Tirupati,Andhra Pradesh,Tier 3,spiritual temple culture,13.6288,79.4192,winter,8,High-volume pilgrimage destination with steady year-round demand
-Varkala,Kerala,Tier 3,beach cliff wellness,8.7379,76.7163,winter,7,Popular coastal destination for domestic and foreign travelers
-Mahabalipuram,Tamil Nadu,Tier 3,heritage coastal culture,12.6269,80.1927,winter,7,Strong heritage plus coastal tourism near Chennai
-Mount Abu,Rajasthan,Tier 3,hill station lake nature,24.5926,72.7156,winter,6,Only major hill station in Rajasthan with family tourism appeal
-Ajmer,Rajasthan,Tier 3,spiritual heritage culture,26.4499,74.6399,winter,7,Important pilgrimage and heritage stop often paired with Pushkar
-Orchha,Madhya Pradesh,Tier 3,heritage palace fort,25.3510,78.6400,winter,6,Compact heritage destination suited for curated cultural itineraries
-McLeod Ganj,Himachal Pradesh,Tier 3,mountains spiritual culture,32.2426,76.3219,summer,7,Popular among foreign travelers for Tibetan culture and hill views
-Kanyakumari,Tamil Nadu,Tier 3,coastal spiritual viewpoint,8.0883,77.5385,winter,7,Distinct southern tip destination with sunrise and cultural appeal
-Ujjain,Madhya Pradesh,Tier 3,spiritual heritage culture,23.1765,75.7885,winter,7,Strong religious tourism city with festival significance
-Kozhikode,Kerala,Tier 3,coastal food heritage,11.2588,75.7804,winter,6,Useful North Kerala city anchor with food and beach tourism value
-Vadodara,Generated Region,Tier 3,culture food relaxed,32.4000,77.7500,winter,68,Generated city pack for Vadodara based on user query and fallback heuristics.
+Goa,Goa,Tier 1,beaches nightlife adventure,15.2993,74.1240,winter,10,High tourist demand with strong domestic and foreign traveler interest,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Jaipur,Rajasthan,Tier 1,heritage culture palace market,26.9124,75.7873,winter,9,Core Rajasthan destination with dense sightseeing clusters,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Delhi,Delhi,Tier 1,heritage food market museum,28.6139,77.2090,winter,9,Major entry point with strong historical and cultural coverage,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Udaipur,Rajasthan,Tier 1,lakes heritage palace romance,24.5854,73.7125,winter,9,Ideal for multi-day itinerary clustering,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Manali,Himachal Pradesh,Tier 1,mountains adventure nature,32.2432,77.1892,summer,9,High demand hill destination for domestic travelers,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Rishikesh,Uttarakhand,Tier 1,adventure wellness spiritual,30.0869,78.2676,all,8,Good mix of rafting yoga cafes and temples,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Mumbai,Maharashtra,Tier 1,urban entertainment coastal food,19.0760,72.8777,winter,10,Strong city tourism and premium hotel coverage,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Varanasi,Uttar Pradesh,Tier 1,spiritual heritage culture,25.3176,82.9739,winter,9,Internationally recognized religious tourism city,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Kochi,Kerala,Tier 1,heritage coastal culture,9.9312,76.2673,winter,8,Gateway city for Kerala tourism circuits,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Agra,Uttar Pradesh,Tier 2,heritage monument culture,27.1767,78.0081,winter,9,Global tourist draw anchored by Taj Mahal,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Jodhpur,Rajasthan,Tier 2,heritage fort market,26.2389,73.0243,winter,8,Strong fort and old city tourism appeal,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Pushkar,Rajasthan,Tier 2,spiritual culture market,26.4898,74.5511,winter,7,Popular among both backpackers and festival visitors,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Amritsar,Punjab,Tier 2,spiritual heritage food,31.6340,74.8723,winter,8,Golden Temple creates strong year-round appeal,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Mysuru,Karnataka,Tier 2,palace culture heritage,12.2958,76.6394,winter,7,Good South India heritage city for itineraries,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Shimla,Himachal Pradesh,Tier 2,hill station heritage nature,31.1048,77.1734,summer,8,Classic hill destination with broad tourist interest,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Darjeeling,West Bengal,Tier 2,hills tea nature,27.0410,88.2663,summer,8,Strong domestic and foreign interest in Himalayan tourism,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Puducherry,Puducherry,Tier 2,coastal culture cafes,11.9416,79.8083,winter,7,Compact city well suited for walking itineraries,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Hampi,Karnataka,Tier 2,heritage ruins culture,15.3350,76.4600,winter,8,High uniqueness for foreign and domestic travelers,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Srinagar,Jammu and Kashmir,Tier 2,lakes mountains nature,34.0837,74.7973,summer,9,Premium scenic destination with seasonal strength,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Jaisalmer,Rajasthan,Tier 2,desert fort culture,26.9157,70.9083,winter,8,Distinct desert tourism profile,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Leh,Ladakh,Tier 2,adventure mountains landscape,34.1526,77.5770,summer,9,Strong aspirational destination with route planning relevance,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Chennai,Tamil Nadu,Tier 2,urban temple coastal,13.0827,80.2707,winter,7,Useful metro destination with coastal and temple mix,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Bengaluru,Karnataka,Tier 2,urban food garden nightlife,12.9716,77.5946,winter,7,Useful base city with surrounding excursion potential,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Alappuzha,Kerala,Tier 2,backwaters nature wellness,9.4981,76.3388,winter,8,Useful anchor for backwater-focused Kerala itineraries,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Ahmedabad,Gujarat,Tier 3,heritage food culture,23.0225,72.5714,winter,7,Strong domestic tourism and access to Gujarat circuits,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Dwarka,Gujarat,Tier 3,spiritual coastal,22.2442,68.9685,winter,7,Important pilgrimage destination,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Somnath,Gujarat,Tier 3,spiritual coastal heritage,20.8880,70.4012,winter,7,High religious tourism importance,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Madurai,Tamil Nadu,Tier 3,temple heritage culture,9.9252,78.1198,winter,7,Temple-led tourism with dense local attractions,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Ooty,Tamil Nadu,Tier 3,hill station nature,11.4064,76.6932,summer,8,Popular domestic hill destination,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Kodaikanal,Tamil Nadu,Tier 3,hill station lake nature,10.2381,77.4892,summer,7,Good for compact family itineraries,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Hyderabad,Telangana,Tier 3,heritage food urban,17.3850,78.4867,winter,8,Strong city tourism and culinary appeal,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Aurangabad,Maharashtra,Tier 3,heritage caves monument,19.8762,75.3433,winter,7,Ajanta and Ellora access point,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Nashik,Maharashtra,Tier 3,spiritual vineyards culture,19.9975,73.7898,winter,6,Blend of pilgrimage and leisure tourism,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Bhopal,Madhya Pradesh,Tier 3,lakes heritage museum,23.2599,77.4126,winter,6,Useful hub for central India circuits,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Khajuraho,Madhya Pradesh,Tier 3,heritage temple culture,24.8318,79.9199,winter,7,Internationally recognized temple complex,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Gwalior,Madhya Pradesh,Tier 3,fort heritage music,26.2183,78.1828,winter,6,Strong fort-led tourism city,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Bhubaneswar,Odisha,Tier 3,temple heritage culture,20.2961,85.8245,winter,6,Gateway to Odisha tourism,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Puri,Odisha,Tier 3,spiritual beach culture,19.8135,85.8312,winter,8,Unique temple plus beach demand,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Konark,Odisha,Tier 3,heritage monument culture,19.8876,86.0945,winter,6,Pairs well with Puri and Bhubaneswar,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Gangtok,Sikkim,Tier 3,mountains nature culture,27.3389,88.6065,summer,7,Popular eastern Himalayan city,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Shillong,Meghalaya,Tier 3,nature hills waterfalls,25.5788,91.8933,summer,7,Gateway for northeast tourism,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Tawang,Arunachal Pradesh,Tier 3,monastery mountains landscape,27.5866,91.8633,summer,6,High-value scenic and spiritual destination,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Port Blair,Andaman and Nicobar Islands,Tier 3,island beach adventure,11.6234,92.7265,winter,8,Useful for premium island itineraries,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Panaji,Goa,Tier 3,heritage coastal market,15.4909,73.8278,winter,7,Good city-level anchor for North and South Goa splits,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Tirupati,Andhra Pradesh,Tier 3,spiritual temple culture,13.6288,79.4192,winter,8,High-volume pilgrimage destination with steady year-round demand,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Varkala,Kerala,Tier 3,beach cliff wellness,8.7379,76.7163,winter,7,Popular coastal destination for domestic and foreign travelers,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Mahabalipuram,Tamil Nadu,Tier 3,heritage coastal culture,12.6269,80.1927,winter,7,Strong heritage plus coastal tourism near Chennai,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Mount Abu,Rajasthan,Tier 3,hill station lake nature,24.5926,72.7156,winter,6,Only major hill station in Rajasthan with family tourism appeal,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Ajmer,Rajasthan,Tier 3,spiritual heritage culture,26.4499,74.6399,winter,7,Important pilgrimage and heritage stop often paired with Pushkar,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Orchha,Madhya Pradesh,Tier 3,heritage palace fort,25.3510,78.6400,winter,6,Compact heritage destination suited for curated cultural itineraries,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+McLeod Ganj,Himachal Pradesh,Tier 3,mountains spiritual culture,32.2426,76.3219,summer,7,Popular among foreign travelers for Tibetan culture and hill views,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Kanyakumari,Tamil Nadu,Tier 3,coastal spiritual viewpoint,8.0883,77.5385,winter,7,Distinct southern tip destination with sunrise and cultural appeal,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Ujjain,Madhya Pradesh,Tier 3,spiritual heritage culture,23.1765,75.7885,winter,7,Strong religious tourism city with festival significance,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Kozhikode,Kerala,Tier 3,coastal food heritage,11.2588,75.7804,winter,6,Useful North Kerala city anchor with food and beach tourism value,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
+Vadodara,Generated Region,Tier 3,culture food relaxed,32.4000,77.7500,winter,68,Generated city pack for Vadodara based on user query and fallback heuristics.,https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80
