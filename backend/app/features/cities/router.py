@@ -13,4 +13,5 @@ router = APIRouter(prefix="/cities", tags=["Cities"])
 
 @router.get("/", response_model=List[CityRead])
 def list_cities_endpoint(session: Session = Depends(get_session)):
-    return get_all_cities(session)
+    cities = get_all_cities(session)
+    return [CityRead(**city.model_dump(), image_url=city.image_url or "") for city in cities]
